@@ -20,6 +20,8 @@ problems with maintainability and performance in your apps.
 - Simple Shared Counter
 - Cache `useAsync` result
 
+TODO: Make sure to write tests that ensure there are no unnecessary rerenders
+
 ## `useLayoutEffect`
 
 - Scrolling
@@ -39,7 +41,8 @@ actually make performance worse. There are literally only three situations where
 it's useful:
 
 1. When you're passing the function in the dependencies array for `useEffect` or
-   `useLayoutEffect`
+   `useLayoutEffect` (which you would need to do if you plan to use the function
+   in the `useEffect` callback.)
 2. When you're passing the function to a component that implements
    `React.memo`/`shouldComponentUpdate`/`PureComponent`
 3. Debounce (leading)/Throttle...
@@ -51,6 +54,7 @@ will be used.
 
 ## `useImperativeHandle`
 
+- Quickie to basically tell you never use it...
 - Input focus
 
 ## `useDebugValue`

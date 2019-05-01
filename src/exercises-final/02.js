@@ -9,7 +9,7 @@ function pokemonReducer(state, action) {
     case 'LOADED': {
       return {loading: false, pokemon: action.pokemon, error: null}
     }
-    case 'FAILED': {
+    case 'ERROR': {
       return {loading: false, pokemon: null, error: action.error}
     }
     default: {

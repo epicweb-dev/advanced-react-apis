@@ -1,6 +1,6 @@
-// Making HTTP requests with useEffect and useReducer
-// http://localhost:3000/isolated/exercises-final/02-extra.1
+// useContext: Cache data response
 import React from 'react'
+import deepEqual from 'dequal'
 
 function asyncReducer(state, action) {
   switch (action.type) {
@@ -39,23 +39,36 @@ function useAsync(asyncCallback) {
   return state
 }
 
-function PokemonInfo({pokemonName}) {
-  const asyncCallback = React.useCallback(() => fetchPokemon(pokemonName), [
-    pokemonName,
-  ])
-  const state = useAsync(asyncCallback)
-  const {data: pokemon, loading, error} = state
+function useDeepCompareMemoize(value) {
+  const ref = React.useRef()
 
-  return loading ? (
-    '...'
-  ) : error ? (
-    'ERROR (check your developer tools network tab)'
-  ) : (
-    <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
-  )
+  if (!deepEqual(value, ref.current)) {
+    ref.current = value
+  }
+
+  return ref.current
 }
 
-function fetchPokemon(name) {
+function useFetch(url, config = {}) {
+  const asyncCallback = React.useCallback(
+    () =>
+      window
+        .fetch(url, {
+          ...config,
+          headers: {
+            'content-type': 'application/json;charset=UTF-8',
+            ...config.headers,
+          },
+        })
+        .then(r => r.json())
+        .then(response => response.data),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useDeepCompareMemoize([url, config]),
+  )
+  return useAsync(asyncCallback)
+}
+
+function useFetchPokemon({name}) {
   const pokemonQuery = `
     query ($name: String) {
       pokemon(name: $name) {
@@ -73,20 +86,27 @@ function fetchPokemon(name) {
     }
   `
 
-  return window
-    .fetch('https://graphql-pokemon.now.sh', {
-      // learn more about this API here: https://graphql-pokemon.now.sh/
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-      },
-      body: JSON.stringify({
-        query: pokemonQuery,
-        variables: {name},
-      }),
-    })
-    .then(r => r.json())
-    .then(response => response.data.pokemon)
+  const state = useFetch('https://graphql-pokemon.now.sh', {
+    // learn more about this API here: https://graphql-pokemon.now.sh/
+    method: 'POST',
+    body: JSON.stringify({
+      query: pokemonQuery,
+      variables: {name},
+    }),
+  })
+  return {...state, pokemon: state.data ? state.data.pokemon : null}
+}
+
+function PokemonInfo({pokemonName}) {
+  const {pokemon, loading, error} = useFetchPokemon({name: pokemonName})
+
+  return loading ? (
+    '...'
+  ) : error ? (
+    'ERROR (check your developer tools network tab)'
+  ) : (
+    <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
+  )
 }
 
 function Usage() {
@@ -108,6 +128,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Making HTTP requests with useEffect and useReducer'
+Usage.title = 'useContext: Cache data response'
 
 export default Usage

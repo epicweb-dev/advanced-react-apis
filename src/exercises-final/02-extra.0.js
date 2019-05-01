@@ -10,7 +10,7 @@ function asyncReducer(state, action) {
     case 'LOADED': {
       return {loading: false, data: action.data, error: null}
     }
-    case 'FAILED': {
+    case 'ERROR': {
       return {loading: false, data: null, error: action.error}
     }
     default: {
