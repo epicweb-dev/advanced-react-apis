@@ -1,7 +1,7 @@
 import React from 'react'
 import {Router, Link} from '@reach/router'
 
-const files = ['01', '02', '03']
+const files = ['01', '02', '03', '04', '05']
 
 const pages = files.reduce((p, filename, index, fullArray) => {
   const final = require(`./exercises-final/${filename}`)
