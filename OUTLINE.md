@@ -57,6 +57,29 @@ will be used.
 - Quickie to basically tell you never use it...
 - Input focus
 
+One way to think about refs/imperative handles:
+
+```javascript
+function Counter({counterRef}) {
+  const [count, setCount] = React.useState(0)
+  const increment = () => setCount(c => c + 1)
+  counterRef.increment = increment
+  return <button onClick={increment}>{count}</button>
+}
+
+function App() {
+  const counterRef = {}
+  return (
+    <>
+      <button onClick={() => counterRef.increment())}>
+        Increment from the outside
+      </button>
+      <Counter counterRef={counterRef} />
+    </>
+  )
+}
+```
+
 ## `useDebugValue`
 
 - Quickie with React DevTools.
