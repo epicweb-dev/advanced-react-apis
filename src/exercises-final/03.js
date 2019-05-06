@@ -32,10 +32,12 @@ function Counter() {
 
 function Usage() {
   return (
-    <CountProvider>
-      <CountDisplay />
-      <Counter />
-    </CountProvider>
+    <div>
+      <CountProvider>
+        <CountDisplay />
+        <Counter />
+      </CountProvider>
+    </div>
   )
 }
 Usage.title = 'useContext: simple Counter'
