@@ -1,4 +1,4 @@
-// Making HTTP requests with useEffect and useReducer
+// useReducer: HTTP requests
 // http://localhost:3000/isolated/exercises-final/02-extra.0
 import React from 'react'
 
@@ -107,6 +107,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Making HTTP requests with useEffect and useReducer'
+Usage.title = 'useReducer: HTTP requests'
 
 export default Usage

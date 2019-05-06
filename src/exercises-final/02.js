@@ -1,4 +1,4 @@
-// Making HTTP requests with useEffect and useReducer
+// useReducer: HTTP requests
 import React from 'react'
 
 function pokemonReducer(state, action) {
@@ -100,6 +100,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Making HTTP requests with useEffect and useReducer'
+Usage.title = 'useReducer: HTTP requests'
 
 export default Usage

@@ -1,4 +1,4 @@
-// Counter: useReducer
+// useReducer: simple Counter
 import React from 'react'
 
 const countReducer = (state, newState) => newState(state)
