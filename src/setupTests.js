@@ -18,6 +18,7 @@ afterAll(() => {
   console.error = originalError
 })
 
+// Needed for codesandbox: https://github.com/codesandbox/codesandbox-client/issues/1861
 if (!window.fetch) {
   window.fetch = fetch
 }
