@@ -116,9 +116,8 @@ exercise version in the import, and make the tests pass**
 
 ## Helpful Emoji 🐨 💰 💯 🦉 📜 💣 🚨
 
-Each exercise has comments in it to help you get through the exercise. **Kody
-the Koala Bear**, **Marty the Money Bag**, **Hannah the Hundred**, **Olivia the
-Owl**, **Dominic the Document** are here to help you.
+Each exercise has comments in it to help you get through the exercise. These fun
+emoji characters are here to help you.
 
 - **Kody the Koala Bear** 🐨 will tell you when there's something specific you
   should do
