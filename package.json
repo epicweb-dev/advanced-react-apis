@@ -26,6 +26,7 @@
     "husky": "^2.2.0",
     "inquirer": "^6.3.1",
     "is-ci": "^2.0.0",
+    "mq-polyfill": "^1.1.8",
     "node": "^12.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.17.0",

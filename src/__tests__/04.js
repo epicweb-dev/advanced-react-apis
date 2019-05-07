@@ -1,8 +1,8 @@
 import React from 'react'
 import chalk from 'chalk'
 import {render, fireEvent, waitForDomChange} from 'react-testing-library'
-import Usage from '../exercises-final/02'
-// import Usage from '../exercises/02'
+import Usage from '../exercises-final/04'
+// import Usage from '../exercises/04'
 
 beforeAll(() => {
   jest
@@ -23,7 +23,7 @@ beforeEach(() => {
 test('displays the pokemon', async () => {
   window.fetch.mockImplementationOnce(() =>
     Promise.resolve({
-      json: () => Promise.resolve({data: {pokemon: {id: 'fake-id'}}}),
+      json: () => Promise.resolve({data: {pokemon: {id: 'jeffry-id'}}}),
     }),
   )
   const {getByLabelText, getByText, getByTestId} = render(<Usage />)
@@ -34,7 +34,7 @@ test('displays the pokemon', async () => {
   fireEvent.change(input, {target: {value: 'jeffry'}})
   fireEvent.click(submit)
   await waitForDomChange(
-    () => expect(getByTestId('pokemon-display')).toHaveTextContent('fake-id'),
+    () => expect(getByTestId('pokemon-display')).toHaveTextContent('jeffry-id'),
     {timeout: 100},
   )
   expect(window.fetch).toHaveBeenCalledTimes(1)
@@ -75,14 +75,42 @@ test('displays the pokemon', async () => {
   try {
     expect(window.fetch).not.toHaveBeenCalled()
   } catch (error) {
+    //
+    //
+    //
+    // these comment lines are just here to keep the next line out of the codeframe
+    // so it doesn't confuse people when they see the error message twice.
     error.message = [
       chalk.red(
-        `🚨  Make certain that you are providing a dependencies list in useEffect! 🚨`,
+        `🚨  Make certain that you are providing a dependencies list in useEffect!`,
       ),
       error.message,
     ].join('\n')
     throw error
   }
+
+  // verify that a previously requested pokemon is cached
+  fireEvent.change(input, {target: {value: 'jeffry'}})
+  fireEvent.click(submit)
+  await waitForDomChange(
+    () => expect(getByTestId('pokemon-display')).toHaveTextContent('jeffry-id'),
+    {timeout: 100},
+  )
+  try {
+    expect(window.fetch).toHaveBeenCalledTimes(0)
+  } catch (error) {
+    //
+    //
+    //
+    // these comment lines are just here to keep the next line out of the codeframe
+    // so it doesn't confuse people when they see the error message twice.
+    error.message = `🚨  ${chalk.red(
+      `Make sure the pokemon data is being cached by calling \`addToCache(pokemonData)\`.`,
+    )}\n\n${error.message}`
+
+    throw error
+  }
+  window.fetch.mockClear()
 
   // verify that an error renders an error
   window.fetch.mockImplementationOnce(() =>
@@ -93,8 +121,9 @@ test('displays the pokemon', async () => {
 
   fireEvent.change(input, {target: {value: 'george'}})
   fireEvent.click(submit)
-  await waitForDomChange(
-    () => expect(getByTestId('pokemon-display')).toHaveTextContent(/error/i),
-    {timeout: 100},
+  await waitForDomChange(() =>
+    expect(getByTestId('pokemon-display')).toHaveTextContent(/error/i),
   )
 })
+
+// TODO: add a test that grabs the reducer (mock React.useReducer) and calls it directly

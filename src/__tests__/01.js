@@ -34,5 +34,3 @@ test('using useReducer', () => {
     )
   }
 })
-
-// TODO: add a test that grabs the reducer (mock React.useReducer) and calls it directly

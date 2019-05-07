@@ -26,6 +26,7 @@ function MessagesDisplay({messages}) {
   return (
     <div
       ref={containerRef}
+      role="log"
       style={{
         height: 300,
         overflowY: 'scroll',
