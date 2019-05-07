@@ -4,31 +4,25 @@ import React from 'react'
 const RECORDS = 20
 const TIME_LIMIT = 3000
 
-throttleEffectHook('useEffect')
-throttleEffectHook('useLayoutEffect')
+if (process.env.NODE_ENV !== 'production') {
+  throttleEffectHook('useEffect')
+  throttleEffectHook('useLayoutEffect')
+}
 
 function throttleEffectHook(hookName) {
   const originalHook = React[hookName]
-  let useEffectCalls = {}
   React[hookName] = function useThrottledHook(...args) {
-    const [fn] = args
-    const fnDef = fn.toString()
-    useEffectCalls[fnDef] = useEffectCalls[fnDef] || {calls: []}
-    const oldestCall = useEffectCalls[fnDef].calls.slice(-1)[0]
-    const currentCall = {time: Date.now(), args}
-    const pastTime = Date.now() - TIME_LIMIT
-    if (
-      useEffectCalls[fnDef].calls.length >= RECORDS - 1 &&
-      oldestCall.time > pastTime
-    ) {
-      const allRecentCallDependencies = [
-        currentCall,
-        ...useEffectCalls[fnDef].calls,
-      ].map(c => c.args[1])
+    const ref = React.useRef([])
+    const calls = ref.current
+    const oldestCall = calls.slice(-1)[0]
+    const now = Date.now()
+    calls.push({time: now, args})
+    if (calls.length >= RECORDS && oldestCall.time > now - TIME_LIMIT) {
+      const allRecentCallDependencies = calls.map(c => c.args[1])
       const messages = [
         `The following effect callback was invoked ${RECORDS} times in ${TIME_LIMIT}ms`,
         '\n',
-        fnDef,
+        args[0].toString(),
       ]
       if (allRecentCallDependencies.some(Boolean)) {
         messages.push(
@@ -53,8 +47,7 @@ function throttleEffectHook(hookName) {
         `Uh oh... Looks like we've got a runaway ${hookName}. Check the console for more info. Make sure the ${hookName} is being passed the right dependencies. (Note, this error message is from Kent, not React 👋)`,
       )
     }
-    useEffectCalls[fnDef].calls = useEffectCalls[fnDef].calls.slice(0, RECORDS)
-    useEffectCalls[fnDef].calls.push(currentCall)
+    ref.current = calls.slice(0, RECORDS)
     return originalHook.apply(React, args)
   }
 }
