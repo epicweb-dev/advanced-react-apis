@@ -25,27 +25,32 @@ function throttleEffectHook(hookName) {
         currentCall,
         ...useEffectCalls[fnDef].calls,
       ].map(c => c.args[1])
-      console.warn(
+      const messages = [
         `The following effect callback was invoked ${RECORDS} times in ${TIME_LIMIT}ms`,
-      )
-      console.warn(fnDef)
+        '\n',
+        fnDef,
+      ]
       if (allRecentCallDependencies.some(Boolean)) {
-        console.warn(
-          `Here are the arguments this effect was called with recently`,
+        messages.push(
+          '\n',
+          `Here are the arguments this effect was called with recently:`,
           allRecentCallDependencies,
         )
         if (allRecentCallDependencies.some(deps => !deps.every(isPrimitive))) {
-          console.warn(
+          messages.push(
+            '\n',
             `It looks like some of these values are not primitive values. If those objects/arrays/functions are initialized during rendering, you need to memoize them using React.useMemo or React.useCallback`,
           )
         }
       } else {
-        console.warn(
+        messages.push(
+          '\n',
           `This effect is not called with a dependencies argument and probably should. Start by adding \`[]\` as a second argument to the ${hookName} call, then add any other dependencies as elements to that array.`,
         )
       }
+      console.warn(...messages)
       throw new Error(
-        `Uh oh... Looks like we've got a runaway ${hookName}. Check the console for more info. Make sure the ${hookName} is being passed the right dependencies.`,
+        `Uh oh... Looks like we've got a runaway ${hookName}. Check the console for more info. Make sure the ${hookName} is being passed the right dependencies. (Note, this error message is from Kent, not React 👋)`,
       )
     }
     useEffectCalls[fnDef].calls = useEffectCalls[fnDef].calls.slice(0, RECORDS)

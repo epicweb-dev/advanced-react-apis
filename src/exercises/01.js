@@ -2,6 +2,12 @@
 import React from 'react'
 
 function Counter({step = 1, initialCount = 0}) {
+  const [, forceUpdate] = React.useState({})
+  React.useEffect(() => {
+    setTimeout(() => {
+      forceUpdate({})
+    })
+  }, [() => {}])
   // 🐨 replace React.useState with React.useReducer.
   const [count, setCount] = React.useState(initialCount)
   // 🦉 you can inline your reducer function as the first argument to
