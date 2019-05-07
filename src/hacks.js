@@ -1,6 +1,6 @@
 import React from 'react'
 
-// if there have been 20 calls of a given effect in 1 second then that's probably a runaway
+// if there have been 20 calls of a given effect in 3 seconds then that's probably a runaway
 const RECORDS = 20
 const TIME_LIMIT = 3000
 
