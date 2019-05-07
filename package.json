@@ -15,6 +15,7 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "dequal": "^1.0.0",
+    "history": "^4.9.0",
     "jest-dom": "^3.1.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
