@@ -1,4 +1,4 @@
-// useMedia: useDebugValue
+// useDebugValue: useMedia
 import React from 'react'
 
 function useMedia(query, initialState = false) {
@@ -39,6 +39,6 @@ function Box() {
 function Usage() {
   return <Box />
 }
-Usage.title = 'useMedia: useDebugValue'
+Usage.title = 'useDebugValue: useMedia'
 
 export default Usage

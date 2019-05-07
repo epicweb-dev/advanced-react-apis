@@ -1,23 +1,13 @@
 // useReducer: simple Counter
+// 💯 accept the step as the action
 import React from 'react'
 
-function countReducer(state, action) {
-  switch (action.type) {
-    case 'INCREMENT': {
-      return {count: state.count + 1}
-    }
-    default: {
-      throw new Error(`Unsupported action type: ${action.type}`)
-    }
-  }
-}
+const countReducer = (count, change) => count + change
 
 function Counter({initialCount = 0, step = 1}) {
-  const [state, dispatch] = React.useReducer(countReducer, {
-    count: initialCount,
-  })
-  const increment = () => dispatch({type: 'INCREMENT'})
-  return <button onClick={increment}>{state.count}</button>
+  const [count, changeCount] = React.useReducer(countReducer, initialCount)
+  const increment = () => changeCount(step)
+  return <button onClick={increment}>{count}</button>
 }
 
 function Usage() {

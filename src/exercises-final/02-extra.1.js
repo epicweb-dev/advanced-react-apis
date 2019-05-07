@@ -1,5 +1,5 @@
 // useReducer: HTTP requests
-// http://localhost:3000/isolated/exercises-final/02-extra.1
+// 💯 generic useAsync custom hook
 import React from 'react'
 
 function asyncReducer(state, action) {
@@ -19,7 +19,7 @@ function asyncReducer(state, action) {
   }
 }
 
-function useAsync(asyncCallback) {
+function useAsync(asyncCallback, dependencies) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     data: null,
     loading: false,
@@ -35,15 +35,14 @@ function useAsync(asyncCallback) {
         dispatch({type: 'ERROR', error})
       },
     )
-  }, [asyncCallback])
+    // too bad the eslint plugin can't statically analyze this :-(
+    // eslint-disable-next-line
+  }, dependencies)
   return state
 }
 
 function PokemonInfo({pokemonName}) {
-  const asyncCallback = React.useCallback(() => fetchPokemon(pokemonName), [
-    pokemonName,
-  ])
-  const state = useAsync(asyncCallback)
+  const state = useAsync(() => fetchPokemon(pokemonName), [pokemonName])
   const {data: pokemon, loading, error} = state
 
   return loading ? (

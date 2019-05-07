@@ -1,4 +1,5 @@
 // useReducer: simple Counter
+// 💯 simulate setState with an object
 import React from 'react'
 
 const countReducer = (state, action) => ({...state, ...action})
@@ -7,8 +8,9 @@ function Counter({initialCount = 0, step = 1}) {
   const [state, setState] = React.useReducer(countReducer, {
     count: initialCount,
   })
-  const increment = () => setState({count: state.count + 1})
-  return <button onClick={increment}>{state.count}</button>
+  const {count} = state
+  const increment = () => setState({count: count + 1})
+  return <button onClick={increment}>{count}</button>
 }
 
 function Usage() {

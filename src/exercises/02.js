@@ -1,22 +1,41 @@
-// Making HTTP requests with useEffect and useReducer
+// useReducer: HTTP requests
 import React from 'react'
 
+// 🐨 define your pokemonReducer here.
+// 💰 Might I suggest the following action types:
+//   LOADING
+//   LOADED
+//   ERROR
+// 🦉 it's a good idea to add a default case handler that throws an error if
+// an unsupported action type is supplied. That way you avoid typo issues!
+
 function PokemonInfo({pokemonName}) {
+  // 🐨 add a React.useReducer right here.
+  // 💰 your initial state could be something like: {pokemon: null, loading: false, error: null}
+
+  // 💣 destroy all three of these useStates
   const [pokemon, setPokemon] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
+    // 🐨 dispatch a LOADING action here
+    // 💣 remove all these sets
     setLoading(true)
     setError(null)
     setPokemon(null)
     fetchPokemon(pokemonName).then(
       pokemon => {
+        // 🐨 dispatch a LOADED action here
+        // 💰 you can pass the pokemon as part of the action you dispatch: dispatch({type: 'LOADED', pokemon})
+        // 💣 remove all these sets
         setLoading(false)
         setError(null)
         setPokemon(pokemon)
       },
       error => {
+        // 🐨 dispatch an ERROR action here
+        // 💣 remove all these sets
         setLoading(false)
         setError(error)
         setPokemon(null)
@@ -32,6 +51,19 @@ function PokemonInfo({pokemonName}) {
     <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
   )
 }
+
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=advanced%20react%20hooks&e=02&em=
+*/
+
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//                 Don't make changes below here.                 //
+// But do look at it to see how your code is intended to be used. //
+//                                                                //
+////////////////////////////////////////////////////////////////////
 
 function fetchPokemon(name) {
   const pokemonQuery = `
@@ -86,6 +118,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'Making HTTP requests with useEffect and useReducer'
+Usage.title = 'useReducer: HTTP requests'
 
 export default Usage

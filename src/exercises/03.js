@@ -1,4 +1,4 @@
-// Counter: useReducer
+// useContext: simple Counter
 import React from 'react'
 
 function CountProvider({children}) {

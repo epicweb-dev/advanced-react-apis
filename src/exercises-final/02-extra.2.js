@@ -1,5 +1,5 @@
 // useReducer: HTTP requests
-// http://localhost:3000/isolated/exercises-final/02-extra.0
+// 💯 using useCallback to empower the user to customize memoization
 import React from 'react'
 
 function asyncReducer(state, action) {
@@ -19,7 +19,7 @@ function asyncReducer(state, action) {
   }
 }
 
-function useAsync(asyncCallback, inputs) {
+function useAsync(asyncCallback) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     data: null,
     loading: false,
@@ -35,14 +35,15 @@ function useAsync(asyncCallback, inputs) {
         dispatch({type: 'ERROR', error})
       },
     )
-    // too bad the eslint plugin can't statically analyze this :-(
-    // eslint-disable-next-line
-  }, inputs)
+  }, [asyncCallback])
   return state
 }
 
 function PokemonInfo({pokemonName}) {
-  const state = useAsync(() => fetchPokemon(pokemonName), [pokemonName])
+  const asyncCallback = React.useCallback(() => fetchPokemon(pokemonName), [
+    pokemonName,
+  ])
+  const state = useAsync(asyncCallback)
   const {data: pokemon, loading, error} = state
 
   return loading ? (

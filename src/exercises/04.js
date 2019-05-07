@@ -1,4 +1,4 @@
-// useContext: Cache data response
+// useContext: Caching response data in context
 import React from 'react'
 import deepEqual from 'dequal'
 
@@ -128,6 +128,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useContext: Cache data response'
+Usage.title = 'useContext: Caching response data in context'
 
 export default Usage
