@@ -26,9 +26,25 @@ following:
       (35 minutes)
 - [ ] Go through my
       [Learn React Hooks Workshop](https://kentcdodds.com/workshops/hooks), or
-      have the equivalent basic experience of using hooks.
+      have the equivalent basic experience of using hooks. You should be
+      experienced with `useState`, `useEffect`, and `useRef`.
 
 The more prepared you are for the workshop, the better it will go for you.
+
+## Workshop Outline
+
+You will be learning and using the following hooks: `useReducer`, `useContext`,
+`useMemo`, `useCallback`, `useLayoutEffect`, `useImperativeHandle`, and
+`useDebugValue`.
+
+1. `useReducer`: simple Counter
+2. `useReducer`: HTTP requests
+3. `useContext`: simple Counter (covers `useMemo` and `useCallback` as well)
+4. `useContext`: Caching response data in context (covers `useMemo` and
+   `useCallback` as well)
+5. `useLayoutEffect`: auto-growing textarea
+6. `useImperativeHandle`: scroll to top/bottom
+7. `useDebugValue`: useMedia
 
 ## System Requirements
 
@@ -51,9 +67,13 @@ variable and how to fix it here for [windows][win-path] or
 
 ## Setup
 
-You may be able to work through the entire workshop in the browser. Go to
+You should be able to work through the entire workshop in the browser. This is
+actually the recommended approach as it requires absolutely no setup whatsoever.
+Go to
 [this codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-hooks)
 and you should be good to go.
+
+[![Edit advanced-react-hooks](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/kentcdodds/advanced-react-hooks)
 
 If you'd rather be able to work through the workshop on your own computer, then
 follow the following instructions.
@@ -204,6 +224,7 @@ at kent@doddsfamily.us
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
+[yarn]: https://yarnpkg.com/
 [build-badge]:
   https://img.shields.io/travis/kentcdodds/advanced-react-hooks.svg?style=flat-square&logo=travis
 [build]: https://travis-ci.org/kentcdodds/advanced-react-hooks
