@@ -2,7 +2,7 @@
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com) and this is the
 source material for
-[Advanced React Hooks](https://kentcdodds.com/workshops/hooks)!
+[Advanced React Hooks](https://kentcdodds.com/workshops/advanced-react-hooks)!
 
 [![Travis Build Status][build-badge]][build]
 [![AppVeyor Build Status][win-build-badge]][win-build]
