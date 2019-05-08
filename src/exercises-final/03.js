@@ -1,32 +1,23 @@
 // useContext: simple Counter
-// src/count-context.js
+//
 import React from 'react'
 
 const CountContext = React.createContext()
 
 function CountProvider(props) {
   const [count, setCount] = React.useState(0)
-  const increment = () => setCount(c => c + 1)
-  const value = {count, increment}
+  const value = {count, setCount}
   return <CountContext.Provider value={value} {...props} />
 }
 
-function useCount() {
-  return React.useContext(CountContext)
-}
-
-// export {CountProvider, useCount}
-
-// some-other-file.js
-// import {CountProvider, useCount} from './count-context'
-
 function CountDisplay() {
-  const {count} = useCount()
+  const {count} = React.useContext(CountContext)
   return <div>{`The current count is ${count}`}</div>
 }
 
 function Counter() {
-  const {increment} = useCount()
+  const {setCount} = React.useContext(CountContext)
+  const increment = () => setCount(c => c + 1)
   return <button onClick={increment}>Increment count</button>
 }
 

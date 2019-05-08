@@ -20,27 +20,42 @@ test('clicking the button increments the count', () => {
 // I'm just making sure that you're using useReducer
 // but your apps should not have tests like this.
 // That's an implementation detail... Read more: https://kcd.im/imp-deets
-test('If CountDisplay is rendered outside of CountProvider a useful error is thrown', () => {
+test('CountProvider is rendering a context provider with the right value', () => {
   const createElement = React.createElement
 
-  let CountDisplay
+  const providerProps = {}
   React.createElement = (...args) => {
-    if (args[0].name === 'CountDisplay') {
-      CountDisplay = args[0]
+    if (args[0].$$typeof === Symbol.for('react.provider')) {
+      Object.assign(providerProps, args[1])
+      if (args.length > 2) {
+        providerProps.children = args.slice(2)
+      }
     }
     return createElement(...args)
   }
 
-  render(<Usage />)
+  const {rerender} = render(<Usage />)
 
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  expect(providerProps.value).toEqual({
+    count: 0,
+    setCount: expect.any(Function),
+  })
 
-  expect(() => render(<CountDisplay />)).toThrow()
+  providerProps.value.setCount(1) // lol
+
+  // assert that calling setCount directly updates the count state
+  expect(providerProps.value).toEqual({
+    count: 1,
+    setCount: expect.any(Function),
+  })
+
+  const currentValue = providerProps.value
+
+  // rerender with no changes to test whether the value is memoized
+  rerender(<Usage />)
 
   try {
-    expect(() => render(<CountDisplay />)).not.toThrow(
-      /property.*count.*undefined/,
-    )
+    expect(providerProps.value).toBe(currentValue)
   } catch (error) {
     //
     //
@@ -48,12 +63,11 @@ test('If CountDisplay is rendered outside of CountProvider a useful error is thr
     // these comment lines are just here to keep the next line out of the codeframe
     // so it doesn't confuse people when they see the error message twice.
     error.message = `🚨  ${chalk.red(
-      `Rending <CountDisplay /> by itself is throwing a non-helpful error message. Throw a custom error message.`,
+      `The Provider's value prop should be memoized via React.useMemo to avoid triggering unnecessary re-renders.`,
     )}\n\n${error.message}`
 
     throw error
   }
 
   React.createElement = createElement
-  console.error.mockRestore()
 })
