@@ -1,11 +1,14 @@
 // useImperativeHandle: scroll to top/bottom
 import React from 'react'
 
-function MessagesDisplay({messages}, ref) {
+// 🐨 wrap this in a React.forwardRef and accept `ref` as the second argument
+function MessagesDisplay({messages}) {
   const containerRef = React.useRef()
   React.useLayoutEffect(() => {
     scrollToBottom()
   })
+
+  // 💰 you're gonna want this as part of your imperative methods
   // function scrollToTop() {
   //   containerRef.current.scrollTop = 0
   // }
@@ -13,9 +16,13 @@ function MessagesDisplay({messages}, ref) {
     containerRef.current.scrollTop = containerRef.current.scrollHeight
   }
 
+  // 🐨 call useImperativeHandle here with your ref and a callback function
+  // that returns an object with scrollToTop and scrollToBottom
+
   return (
     <div
       ref={containerRef}
+      role="log"
       style={{
         height: 300,
         overflowY: 'scroll',
@@ -34,6 +41,19 @@ function MessagesDisplay({messages}, ref) {
     </div>
   )
 }
+
+/*
+🦉 Elaboration & Feedback
+After the instruction, copy the URL below into your browser and fill out the form:
+http://ws.kcd.im/?ws=advanced%20react%20hooks&e=06&em=
+*/
+
+////////////////////////////////////////////////////////////////////
+//                                                                //
+//                 Don't make changes below here.                 //
+// But do look at it to see how your code is intended to be used. //
+//                                                                //
+////////////////////////////////////////////////////////////////////
 
 function Usage() {
   const messageDisplayRef = React.useRef()
