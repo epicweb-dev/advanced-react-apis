@@ -1,5 +1,6 @@
 // useContext: Caching response data in context
 import React from 'react'
+import fetchPokemon from '../fetch-pokemon'
 
 const PokemonCacheStateContext = React.createContext()
 const PokemonCacheDispatchContext = React.createContext()
@@ -88,40 +89,6 @@ function PreviousPokemon({onSelect}) {
   )
 }
 
-function fetchPokemon(name) {
-  const pokemonQuery = `
-    query ($name: String) {
-      pokemon(name: $name) {
-        id
-        number
-        name
-        attacks {
-          special {
-            name
-            type
-            damage
-          }
-        }
-      }
-    }
-  `
-
-  return window
-    .fetch('https://graphql-pokemon.now.sh', {
-      // learn more about this API here: https://graphql-pokemon.now.sh/
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-      },
-      body: JSON.stringify({
-        query: pokemonQuery,
-        variables: {name},
-      }),
-    })
-    .then(r => r.json())
-    .then(response => response.data.pokemon)
-}
-
 function asyncReducer(state, action) {
   switch (action.type) {
     case 'LOADING': {
@@ -176,7 +143,7 @@ function InvisibleButton(props) {
   )
 }
 
-function Form() {
+function Usage() {
   const [{submittedPokemon, pokemonName}, setState] = React.useReducer(
     (state, action) => ({...state, ...action}),
     {submittedPokemon: '', pokemonName: ''},
@@ -196,51 +163,49 @@ function Form() {
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <form
-        onSubmit={handleSubmit}
-        style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
-      >
-        <label htmlFor="pokemonName-input">Pokemon Name</label>
-        <small>
-          Try{' '}
-          <InvisibleButton onClick={() => handleSelect('pikachu')}>
-            "pikachu"
-          </InvisibleButton>
-          {', '}
-          <InvisibleButton onClick={() => handleSelect('charizard')}>
-            "charizard"
-          </InvisibleButton>
-          {', or '}
-          <InvisibleButton onClick={() => handleSelect('mew')}>
-            "mew"
-          </InvisibleButton>
-        </small>
-        <div>
-          <input
-            id="pokemonName-input"
-            name="pokemonName"
-            value={pokemonName}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <hr />
-      <div style={{display: 'flex'}}>
-        <PreviousPokemon onSelect={handleSelect} />
-        <div style={{marginLeft: 10}} data-testid="pokemon-display">
-          <PokemonInfo pokemonName={submittedPokemon} />
+    <PokemonCacheProvider>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <form
+          onSubmit={handleSubmit}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <label htmlFor="pokemonName-input">Pokemon Name</label>
+          <small>
+            Try{' '}
+            <InvisibleButton onClick={() => handleSelect('pikachu')}>
+              "pikachu"
+            </InvisibleButton>
+            {', '}
+            <InvisibleButton onClick={() => handleSelect('charizard')}>
+              "charizard"
+            </InvisibleButton>
+            {', or '}
+            <InvisibleButton onClick={() => handleSelect('mew')}>
+              "mew"
+            </InvisibleButton>
+          </small>
+          <div>
+            <input
+              id="pokemonName-input"
+              name="pokemonName"
+              value={pokemonName}
+              onChange={handleChange}
+            />
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        <hr />
+        <div style={{display: 'flex'}}>
+          <PreviousPokemon onSelect={handleSelect} />
+          <div style={{marginLeft: 10}} data-testid="pokemon-display">
+            <PokemonInfo pokemonName={submittedPokemon} />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-function Usage() {
-  return (
-    <PokemonCacheProvider>
-      <Form />
     </PokemonCacheProvider>
   )
 }

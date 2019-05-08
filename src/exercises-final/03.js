@@ -1,5 +1,4 @@
 // useContext: simple Counter
-//
 import React from 'react'
 
 const CountContext = React.createContext()

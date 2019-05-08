@@ -1,5 +1,6 @@
 // useReducer: HTTP requests
 import React from 'react'
+import fetchPokemon from '../fetch-pokemon'
 
 // 🐨 define your pokemonReducer here.
 // 💰 Might I suggest the following action types:
@@ -64,40 +65,6 @@ http://ws.kcd.im/?ws=advanced%20react%20hooks&e=02&em=
 // But do look at it to see how your code is intended to be used. //
 //                                                                //
 ////////////////////////////////////////////////////////////////////
-
-function fetchPokemon(name) {
-  const pokemonQuery = `
-    query ($name: String) {
-      pokemon(name: $name) {
-        id
-        number
-        name
-        attacks {
-          special {
-            name
-            type
-            damage
-          }
-        }
-      }
-    }
-  `
-
-  return window
-    .fetch('https://graphql-pokemon.now.sh', {
-      // learn more about this API here: https://graphql-pokemon.now.sh/
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json;charset=UTF-8',
-      },
-      body: JSON.stringify({
-        query: pokemonQuery,
-        variables: {name},
-      }),
-    })
-    .then(r => r.json())
-    .then(response => response.data.pokemon)
-}
 
 function Usage() {
   const [pokemonName, setPokemonName] = React.useState(null)
