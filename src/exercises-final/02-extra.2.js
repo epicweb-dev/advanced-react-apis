@@ -41,9 +41,12 @@ function useAsync(asyncCallback) {
 }
 
 function PokemonInfo({pokemonName}) {
-  const asyncCallback = React.useCallback(() => fetchPokemon(pokemonName), [
-    pokemonName,
-  ])
+  const asyncCallback = React.useCallback(() => {
+    if (!pokemonName) {
+      return Promise.resolve(null)
+    }
+    return fetchPokemon(pokemonName)
+  }, [pokemonName])
   const state = useAsync(asyncCallback)
   const {data: pokemon, loading, error} = state
 

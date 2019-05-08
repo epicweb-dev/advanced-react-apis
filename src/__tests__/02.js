@@ -28,7 +28,7 @@ test('displays the pokemon', async () => {
   )
   const {getByLabelText, getByText, getByTestId} = render(<Usage />)
   const input = getByLabelText(/pokemon/i)
-  const submit = getByText(/submit/i)
+  const submit = getByText(/^submit$/i)
 
   // verify that an initial request is made when mounted
   fireEvent.change(input, {target: {value: 'jeffry'}})

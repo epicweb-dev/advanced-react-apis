@@ -28,6 +28,9 @@ function PokemonInfo({pokemonName}) {
   const {pokemon, loading, error} = state
 
   React.useEffect(() => {
+    if (!pokemonName) {
+      return
+    }
     dispatch({type: 'LOADING'})
     fetchPokemon(pokemonName).then(
       pokemon => {

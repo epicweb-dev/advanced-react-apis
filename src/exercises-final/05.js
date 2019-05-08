@@ -1,22 +1,6 @@
 // useLayoutEffect: auto-growing textarea
 import React from 'react'
 
-// this is to simulate major computation/big rendering tree/etc.
-function sleep(time = 0) {
-  const wakeUpTime = Date.now() + time
-  while (Date.now() < wakeUpTime) {}
-}
-
-function SlooooowSibling() {
-  // try this with useLayoutEffect as well to see
-  // how it impacts interactivity of the page before updates.
-  React.useEffect(() => {
-    // increase this number to see a more stark difference
-    sleep(150)
-  })
-  return null
-}
-
 function MessagesDisplay({messages}) {
   const containerRef = React.useRef()
   React.useLayoutEffect(() => {
@@ -44,6 +28,22 @@ function MessagesDisplay({messages}) {
       ))}
     </div>
   )
+}
+
+// this is to simulate major computation/big rendering tree/etc.
+function sleep(time = 0) {
+  const wakeUpTime = Date.now() + time
+  while (Date.now() < wakeUpTime) {}
+}
+
+function SlooooowSibling() {
+  // try this with useLayoutEffect as well to see
+  // how it impacts interactivity of the page before updates.
+  React.useEffect(() => {
+    // increase this number to see a more stark difference
+    sleep(150)
+  })
+  return null
 }
 
 function Usage() {

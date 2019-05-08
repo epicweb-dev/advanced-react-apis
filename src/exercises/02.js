@@ -20,6 +20,9 @@ function PokemonInfo({pokemonName}) {
   const [error, setError] = React.useState(null)
 
   React.useEffect(() => {
+    if (!pokemonName) {
+      return
+    }
     // 🐨 dispatch a LOADING action here
     // 💣 remove all these sets
     setLoading(true)
