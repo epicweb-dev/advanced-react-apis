@@ -1,6 +1,70 @@
 // useContext: Caching response data in context
 import React from 'react'
-import deepEqual from 'dequal'
+
+function PokemonInfo({pokemonName}) {
+  const [cache, setCache] = React.useState({})
+  const cachedPokemon = cache[pokemonName]
+  const addToCache = React.useCallback(
+    pokemonData => setCache({...cache, [pokemonName]: pokemonData}),
+    [cache, pokemonName, setCache],
+  )
+
+  const asyncCallback = React.useCallback(() => {
+    if (cachedPokemon) {
+      return Promise.resolve(cachedPokemon)
+    } else {
+      return fetchPokemon(pokemonName).then(pokemonData => {
+        addToCache(pokemonData)
+        return pokemonData
+      })
+    }
+  }, [addToCache, cachedPokemon, pokemonName])
+
+  const state = useAsync(asyncCallback)
+  const {data: pokemon, loading, error} = state
+
+  return loading ? (
+    '...'
+  ) : error ? (
+    'ERROR (check your developer tools network tab)'
+  ) : (
+    <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
+  )
+}
+
+function fetchPokemon(name) {
+  const pokemonQuery = `
+    query ($name: String) {
+      pokemon(name: $name) {
+        id
+        number
+        name
+        attacks {
+          special {
+            name
+            type
+            damage
+          }
+        }
+      }
+    }
+  `
+
+  return window
+    .fetch('https://graphql-pokemon.now.sh', {
+      // learn more about this API here: https://graphql-pokemon.now.sh/
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json;charset=UTF-8',
+      },
+      body: JSON.stringify({
+        query: pokemonQuery,
+        variables: {name},
+      }),
+    })
+    .then(r => r.json())
+    .then(response => response.data.pokemon)
+}
 
 function asyncReducer(state, action) {
   switch (action.type) {
@@ -37,76 +101,6 @@ function useAsync(asyncCallback) {
     )
   }, [asyncCallback])
   return state
-}
-
-function useDeepCompareMemoize(value) {
-  const ref = React.useRef()
-
-  if (!deepEqual(value, ref.current)) {
-    ref.current = value
-  }
-
-  return ref.current
-}
-
-function useFetch(url, config = {}) {
-  const asyncCallback = React.useCallback(
-    () =>
-      window
-        .fetch(url, {
-          ...config,
-          headers: {
-            'content-type': 'application/json;charset=UTF-8',
-            ...config.headers,
-          },
-        })
-        .then(r => r.json())
-        .then(response => response.data),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useDeepCompareMemoize([url, config]),
-  )
-  return useAsync(asyncCallback)
-}
-
-function useFetchPokemon({name}) {
-  const pokemonQuery = `
-    query ($name: String) {
-      pokemon(name: $name) {
-        id
-        number
-        name
-        attacks {
-          special {
-            name
-            type
-            damage
-          }
-        }
-      }
-    }
-  `
-
-  const state = useFetch('https://graphql-pokemon.now.sh', {
-    // learn more about this API here: https://graphql-pokemon.now.sh/
-    method: 'POST',
-    body: JSON.stringify({
-      query: pokemonQuery,
-      variables: {name},
-    }),
-  })
-  return {...state, pokemon: state.data ? state.data.pokemon : null}
-}
-
-function PokemonInfo({pokemonName}) {
-  const {pokemon, loading, error} = useFetchPokemon({name: pokemonName})
-
-  return loading ? (
-    '...'
-  ) : error ? (
-    'ERROR (check your developer tools network tab)'
-  ) : (
-    <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
-  )
 }
 
 function Usage() {

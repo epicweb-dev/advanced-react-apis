@@ -1,4 +1,5 @@
 // useContext: simple Counter
+// 💯 optimized provider
 // src/count-context.js
 import React from 'react'
 
@@ -6,29 +7,22 @@ const CountContext = React.createContext()
 
 function CountProvider(props) {
   const [count, setCount] = React.useState(0)
+  const increment = React.useCallback(() => setCount(c => c + 1), [])
   const value = React.useMemo(() => {
     return {
       count,
-      setCount,
+      increment,
     }
-  }, [count])
+  }, [count, increment])
   return <CountContext.Provider value={value} {...props} />
 }
 
-function useCount({step = 1} = {}) {
+function useCount() {
   const context = React.useContext(CountContext)
   if (!context) {
     throw new Error('useCount must be used within a CountProvider')
   }
-  const {count, setCount} = context
-  const increment = React.useCallback(() => setCount(c => c + step), [
-    step,
-    setCount,
-  ])
-  return {
-    count,
-    increment,
-  }
+  return context
 }
 
 // export {CountProvider, useCount}
@@ -42,7 +36,7 @@ function CountDisplay() {
 }
 
 function Counter() {
-  const {increment} = useCount({step: 2})
+  const {increment} = useCount()
   return <button onClick={increment}>Increment count</button>
 }
 

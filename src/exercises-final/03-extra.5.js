@@ -1,14 +1,30 @@
 // useContext: simple Counter
-// 💯 context validation
+// 💯 passing dispatch directly
 // src/count-context.js
 import React from 'react'
 
 const CountContext = React.createContext()
 
+function countReducer(count, action) {
+  const {step = 1} = action
+  switch (action.type) {
+    case 'INCREMENT': {
+      return count + step
+    }
+    default: {
+      throw new Error(`Unsupported action type: ${action.type}`)
+    }
+  }
+}
+
 function CountProvider(props) {
-  const [count, setCount] = React.useState(0)
-  const increment = () => setCount(c => c + 1)
-  const value = {count, increment}
+  const [count, dispatch] = React.useReducer(countReducer, 0)
+  const value = React.useMemo(() => {
+    return {
+      count,
+      dispatch,
+    }
+  }, [count])
   return <CountContext.Provider value={value} {...props} />
 }
 
@@ -31,8 +47,12 @@ function CountDisplay() {
 }
 
 function Counter() {
-  const {increment} = useCount()
-  return <button onClick={increment}>Increment count</button>
+  const {dispatch} = useCount()
+  return (
+    <button onClick={() => dispatch({type: 'INCREMENT', step: 2})}>
+      Increment count
+    </button>
+  )
 }
 
 function Usage() {

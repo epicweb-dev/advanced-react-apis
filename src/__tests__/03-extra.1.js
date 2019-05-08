@@ -20,42 +20,27 @@ test('clicking the button increments the count', () => {
 // I'm just making sure that you're using useReducer
 // but your apps should not have tests like this.
 // That's an implementation detail... Read more: https://kcd.im/imp-deets
-test('CountProvider is rendering a context provider with the right value', () => {
+test('If CountDisplay is rendered outside of CountProvider a useful error is thrown', () => {
   const createElement = React.createElement
 
-  const providerProps = {}
+  let CountDisplay
   React.createElement = (...args) => {
-    if (args[0].$$typeof === Symbol.for('react.provider')) {
-      Object.assign(providerProps, args[1])
-      if (args.length > 2) {
-        providerProps.children = args.slice(2)
-      }
+    if (args[0].name === 'CountDisplay') {
+      CountDisplay = args[0]
     }
     return createElement(...args)
   }
 
-  const {rerender} = render(<Usage />)
+  render(<Usage />)
 
-  expect(providerProps.value).toEqual({
-    count: 0,
-    increment: expect.any(Function),
-  })
+  jest.spyOn(console, 'error').mockImplementation(() => {})
 
-  providerProps.value.increment() // lol
-
-  // assert that calling increment directly updates the count state
-  expect(providerProps.value).toEqual({
-    count: 1,
-    increment: expect.any(Function),
-  })
-
-  const currentValue = providerProps.value
-
-  // rerender with no changes to test whether the value is memoized
-  rerender(<Usage />)
+  expect(() => render(<CountDisplay />)).toThrow()
 
   try {
-    expect(providerProps.value.increment).toBe(currentValue.increment)
+    expect(() => render(<CountDisplay />)).not.toThrow(
+      /property.*count.*undefined/,
+    )
   } catch (error) {
     //
     //
@@ -63,26 +48,12 @@ test('CountProvider is rendering a context provider with the right value', () =>
     // these comment lines are just here to keep the next line out of the codeframe
     // so it doesn't confuse people when they see the error message twice.
     error.message = `🚨  ${chalk.red(
-      `The Provider's \`increment\` function be memoized via React.useCallback to potential issues when passing it to a useEffect dependencies list.`,
-    )}\n\n${error.message}`
-
-    throw error
-  }
-
-  try {
-    expect(providerProps.value).toBe(currentValue)
-  } catch (error) {
-    //
-    //
-    //
-    // these comment lines are just here to keep the next line out of the codeframe
-    // so it doesn't confuse people when they see the error message twice.
-    error.message = `🚨  ${chalk.red(
-      `The Provider's value prop should be memoized via React.useMemo to avoid triggering unnecessary re-renders.`,
+      `Rending <CountDisplay /> by itself is throwing a non-helpful error message. Throw a custom error message.`,
     )}\n\n${error.message}`
 
     throw error
   }
 
   React.createElement = createElement
+  console.error.mockRestore()
 })
