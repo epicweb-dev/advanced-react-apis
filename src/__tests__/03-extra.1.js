@@ -1,4 +1,3 @@
-import chalk from 'chalk'
 import React from 'react'
 import {render, fireEvent} from 'react-testing-library'
 import Usage from '../exercises-final/03-extra.1'
