@@ -1,8 +1,8 @@
 import React from 'react'
 
-// if there have been 20 calls of a given effect in 2 seconds then that's probably a runaway
+// if there have been 40 calls of a given effect in 1 seconds then that's probably a runaway
 const RECORDS = 20
-const TIME_LIMIT = 2000
+const TIME_LIMIT = 1000
 
 if (process.env.NODE_ENV !== 'production') {
   throttleEffectHook('useEffect')
@@ -50,10 +50,11 @@ function throttleEffectHook(hookName) {
       console.warn(...messages)
       warnedRef.current = true
       throw new Error(
-        `Uh oh... Looks like we've got a runaway ${hookName}. Check the console for more info. Make sure the ${hookName} is being passed the right dependencies. (Note, this error message is from Kent, not React 👋)`,
+        `Uh oh... Looks like we've got a runaway ${hookName}. Check the console for more info. Make sure the ${hookName} is being passed the right dependencies. (By the way, this error message is from Kent, not React 👋)`,
       )
     }
-    ref.current = calls.slice(0, RECORDS)
+    // remove old records
+    ref.current = calls.slice(0, RECORDS).filter(r => r.time > now - TIME_LIMIT)
     return originalHook.apply(React, args)
   }
 }

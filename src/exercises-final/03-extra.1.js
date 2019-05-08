@@ -1,24 +1,28 @@
 // useContext: simple Counter
-// 💯 memoize the context value
+// 💯 split up state context and dispatch context
 import React from 'react'
 
-const CountContext = React.createContext()
+const CountStateContext = React.createContext()
+const CountDispatchContext = React.createContext()
 
 function CountProvider(props) {
   const [count, setCount] = React.useState(0)
-  const value = React.useMemo(() => {
-    return {count, setCount}
-  }, [count])
-  return <CountContext.Provider value={value} {...props} />
+  return (
+    <CountStateContext.Provider value={count}>
+      <CountDispatchContext.Provider value={setCount}>
+        {props.children}
+      </CountDispatchContext.Provider>
+    </CountStateContext.Provider>
+  )
 }
 
 function CountDisplay() {
-  const {count} = React.useContext(CountContext)
+  const count = React.useContext(CountStateContext)
   return <div>{`The current count is ${count}`}</div>
 }
 
 function Counter() {
-  const {setCount} = React.useContext(CountContext)
+  const setCount = React.useContext(CountDispatchContext)
   const increment = () => setCount(c => c + 1)
   return <button onClick={increment}>Increment count</button>
 }
