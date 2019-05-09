@@ -192,8 +192,8 @@ function Isolated({loader}) {
 
 function Home() {
   return (
-    <div>
-      <h1 style={{textAlign: 'center'}}>Learn React</h1>
+    <div style={{maxWidth: 800, margin: '50px auto 0px auto'}}>
+      <h1 style={{textAlign: 'center'}}>Advanced React Hooks</h1>
       <div>
         {filesAndTitles.map(({title, filename}) => {
           return (
