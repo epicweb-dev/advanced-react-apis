@@ -6,7 +6,7 @@ import React from 'react'
 function CountProvider(props) {
   // 🐨 get the count state and setCount updater with React.useState
   // 🐨 create a `value` object with count and setCount properties
-  // 🐨 return your context provider with the value assigned to that object and foward all the other props
+  // 🐨 return your context provider with the value assigned to that object and forward all the other props
   // 💰 more specifically, we need the children prop forwarded to the context provider
   return 'TODO...'
 }
