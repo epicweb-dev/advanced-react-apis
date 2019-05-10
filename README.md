@@ -38,7 +38,7 @@ You will be learning and using the following hooks: `useReducer`, `useContext`,
 `useDebugValue`.
 
 1. `useReducer`: simple Counter
-2. `useReducer`: HTTP requests
+2. `useEffect`: HTTP requests
 3. `useContext`: simple Counter (covers `useMemo` and `useCallback` as well)
 4. `useContext`: Caching response data in context (covers `useMemo` and
    `useCallback` as well)
