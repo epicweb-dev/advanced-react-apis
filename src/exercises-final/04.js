@@ -163,50 +163,51 @@ function Usage() {
   }
 
   return (
-    <PokemonCacheProvider>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <label htmlFor="pokemonName-input">Pokemon Name</label>
-          <small>
-            Try{' '}
-            <InvisibleButton onClick={() => handleSelect('pikachu')}>
-              "pikachu"
-            </InvisibleButton>
-            {', '}
-            <InvisibleButton onClick={() => handleSelect('charizard')}>
-              "charizard"
-            </InvisibleButton>
-            {', or '}
-            <InvisibleButton onClick={() => handleSelect('mew')}>
-              "mew"
-            </InvisibleButton>
-          </small>
-          <div>
-            <input
-              id="pokemonName-input"
-              name="pokemonName"
-              value={pokemonName}
-              onChange={handleChange}
-            />
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-        <hr />
+
+    <div style={{display: 'flex', flexDirection: 'column'}}>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <label htmlFor="pokemonName-input">Pokemon Name</label>
+        <small>
+          Try{' '}
+          <InvisibleButton onClick={() => handleSelect('pikachu')}>
+            "pikachu"
+          </InvisibleButton>
+          {', '}
+          <InvisibleButton onClick={() => handleSelect('charizard')}>
+            "charizard"
+          </InvisibleButton>
+          {', or '}
+          <InvisibleButton onClick={() => handleSelect('mew')}>
+            "mew"
+          </InvisibleButton>
+        </small>
+        <div>
+          <input
+            id="pokemonName-input"
+            name="pokemonName"
+            value={pokemonName}
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <hr />
+      <PokemonCacheProvider>
         <div style={{display: 'flex'}}>
           <PreviousPokemon onSelect={handleSelect} />
           <div style={{marginLeft: 10}} data-testid="pokemon-display">
             <PokemonInfo pokemonName={submittedPokemon} />
           </div>
         </div>
-      </div>
-    </PokemonCacheProvider>
+      </PokemonCacheProvider>
+    </div>
   )
 }
 Usage.title = 'useContext: Caching response data in context'
