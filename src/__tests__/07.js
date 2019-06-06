@@ -23,13 +23,13 @@ test('works', () => {
   try {
     expect(React.useDebugValue).toHaveBeenCalled()
     expect(React.useDebugValue).toHaveBeenCalledWith(
-      expect.stringContaining('max-width: 299px'),
+      expect.stringContaining('max-width: 699px'),
     )
     expect(React.useDebugValue).toHaveBeenCalledWith(
-      expect.stringContaining('max-width: 499px'),
+      expect.stringContaining('max-width: 999px'),
     )
     expect(React.useDebugValue).toHaveBeenCalledWith(
-      expect.stringContaining('min-width: 500px'),
+      expect.stringContaining('min-width: 1000px'),
     )
   } catch (error) {
     //
@@ -46,12 +46,12 @@ test('works', () => {
 
   const box = container.querySelector('[style]')
 
-  window.resizeTo(600, 600)
+  window.resizeTo(1001, 1001)
   expect(box).toHaveStyle(`background-color: green;`)
 
-  window.resizeTo(400, 400)
+  window.resizeTo(800, 800)
   expect(box).toHaveStyle(`background-color: yellow;`)
 
-  window.resizeTo(200, 200)
+  window.resizeTo(600, 600)
   expect(box).toHaveStyle(`background-color: red;`)
 })
