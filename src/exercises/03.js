@@ -1,4 +1,5 @@
 // useContext: simple Counter
+
 import React from 'react'
 
 // 🐨 create your CountContext here with React.createContext
@@ -27,7 +28,7 @@ function Counter() {
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20hooks&e=03&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useContext%3A%20simple%20Counter&em=
 */
 
 ////////////////////////////////////////////////////////////////////

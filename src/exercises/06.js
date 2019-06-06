@@ -1,4 +1,5 @@
 // useImperativeHandle: scroll to top/bottom
+
 import React from 'react'
 
 // 🐨 wrap this in a React.forwardRef and accept `ref` as the second argument
@@ -45,7 +46,7 @@ function MessagesDisplay({messages}) {
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20hooks&e=06&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useImperativeHandle%3A%20scroll%20to%20top%2Fbottom&em=
 */
 
 ////////////////////////////////////////////////////////////////////

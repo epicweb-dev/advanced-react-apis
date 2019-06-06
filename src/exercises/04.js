@@ -1,4 +1,5 @@
 // useContext: Caching response data in context
+
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
 
@@ -94,7 +95,7 @@ function PreviousPokemon({onSelect}) {
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20hooks&e=04&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useContext%3A%20Caching%20response%20data%20in%20context&em=
 */
 
 ////////////////////////////////////////////////////////////////////

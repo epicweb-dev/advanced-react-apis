@@ -30,7 +30,7 @@ test('displays the pokemon', async () => {
   const input = getByLabelText(/pokemon/i)
   const submit = getByText(/^submit$/i)
 
-  // verify that an initial request is made when mounted
+  // verify that an initial request is made when a value is submitted
   fireEvent.change(input, {target: {value: 'jeffry'}})
   fireEvent.click(submit)
   await waitForDomChange(

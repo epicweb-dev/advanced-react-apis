@@ -7,13 +7,13 @@ const history = createBrowserHistory()
 const files = ['01', '02', '03', '04', '05', '06', '07']
 
 const pages = files.reduce((p, filename, index, fullArray) => {
-  const final = require(`./exercises-final/${filename}`)
+  const final = require(`./exercises-final/${filename}.js`)
   Object.assign(final, {
     previous: fullArray[index - 1],
     next: fullArray[index + 1],
     isolatedPath: `/isolated/exercises-final/${filename}`,
   })
-  const exercise = require(`./exercises/${filename}`)
+  const exercise = require(`./exercises/${filename}.js`)
   Object.assign(exercise, {
     previous: fullArray[index - 1],
     next: fullArray[index + 1],
@@ -260,9 +260,11 @@ function App() {
   if (pathname.startsWith('/isolated')) {
     const moduleName = pathname.split('/').slice(-1)[0]
     if (pathname.includes('-final')) {
-      ui = <Isolated loader={() => import(`./exercises-final/${moduleName}`)} />
+      ui = (
+        <Isolated loader={() => import(`./exercises-final/${moduleName}.js`)} />
+      )
     } else {
-      ui = <Isolated loader={() => import(`./exercises/${moduleName}`)} />
+      ui = <Isolated loader={() => import(`./exercises/${moduleName}.js`)} />
     }
   }
   return <React.Suspense fallback={<div>Loading...</div>}>{ui}</React.Suspense>

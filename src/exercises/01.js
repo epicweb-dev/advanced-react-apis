@@ -1,4 +1,5 @@
 // useReducer: simple Counter
+
 import React from 'react'
 
 function Counter({step = 1, initialCount = 0}) {
@@ -18,7 +19,7 @@ function Counter({step = 1, initialCount = 0}) {
 /*
 🦉 Elaboration & Feedback
 After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=advanced%20react%20hooks&e=01&em=
+http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useReducer%3A%20simple%20Counter&em=
 */
 
 ////////////////////////////////////////////////////////////////////

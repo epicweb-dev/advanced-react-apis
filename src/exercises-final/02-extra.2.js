@@ -1,5 +1,6 @@
 // useReducer: HTTP requests
 // 💯 using useCallback to empower the user to customize memoization
+
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
 
