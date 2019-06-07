@@ -27,6 +27,7 @@ test('using useReducer', () => {
   }
   render(<Usage />)
   React.createElement = createElement
+
   try {
     expect(counterFn.toString()).toContain('useReducer(')
   } catch (error) {
