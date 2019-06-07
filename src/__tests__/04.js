@@ -1,6 +1,6 @@
 import React from 'react'
 import chalk from 'chalk'
-import {render, fireEvent, waitForDomChange} from 'react-testing-library'
+import {render, fireEvent, waitForDomChange} from '@testing-library/react'
 import Usage from '../exercises-final/04'
 // import Usage from '../exercises/04'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import chalk from 'chalk'
-import {render, fireEvent, waitForDomChange} from 'react-testing-library'
+import {render, fireEvent, waitForDomChange} from '@testing-library/react'
 import Usage from '../exercises-final/02'
 // import Usage from '../exercises/02'
 
@@ -75,6 +75,11 @@ test('displays the pokemon', async () => {
   try {
     expect(window.fetch).not.toHaveBeenCalled()
   } catch (error) {
+    //
+    //
+    //
+    // these comment lines are just here to keep the next line out of the codeframe
+    // so it doesn't confuse people when they see the error message twice.
     error.message = [
       chalk.red(
         `🚨  Make certain that you are providing a dependencies list in useEffect! 🚨`,

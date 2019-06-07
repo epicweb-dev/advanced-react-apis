@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, fireEvent} from 'react-testing-library'
+import chalk from 'chalk'
+import {render, fireEvent} from '@testing-library/react'
 import Usage from '../exercises-final/01'
 // import Usage from '../exercises/01'
 
@@ -27,10 +28,17 @@ test('using useReducer', () => {
   render(<Usage />)
   React.createElement = createElement
   try {
-    expect(counterFn.toString()).toContain('useReducer')
+    expect(counterFn.toString()).toContain('useReducer(')
   } catch (error) {
-    throw new Error(
-      '🚨  The Counter component that is rendered must call "useReducer" to get the "state" and "dispatch" function.',
-    )
+    //
+    //
+    //
+    // these comment lines are just here to keep the next line out of the codeframe
+    // so it doesn't confuse people when they see the error message twice.
+    error.message = `🚨  ${chalk.red(
+      'The Counter component that is rendered must call "useReducer" to get the "state" and "dispatch" function.',
+    )}`
+
+    throw error
   }
 })

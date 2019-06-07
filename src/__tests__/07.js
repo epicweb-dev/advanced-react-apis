@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import matchMediaPolyfill from 'mq-polyfill'
 import React from 'react'
-import {render} from 'react-testing-library'
+import {render} from '@testing-library/react'
 import Usage from '../exercises-final/07'
 // import Usage from '../exercises/07'
 
