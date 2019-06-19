@@ -17,7 +17,7 @@
     "@testing-library/react": "^8.0.1",
     "dequal": "^1.0.0",
     "history": "^4.9.0",
-    "jest-dom": "^3.1.4",
+    "jest-dom": "^3.5.0",
     "mq-polyfill": "^1.1.8",
     "node-fetch": "^2.5.0",
     "react": "^16.8.6",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "cross-spawn": "^6.0.5",
-    "husky": "^2.2.0",
+    "husky": "^2.4.1",
     "inquirer": "^6.3.1",
     "is-ci": "^2.0.0",
     "node": "^12.1.0",
