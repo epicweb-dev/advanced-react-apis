@@ -37,6 +37,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "michaelfriedman",
+      "name": "Michael Friedman",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17555926?v=4",
+      "profile": "https://github.com/michaelfriedman",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
