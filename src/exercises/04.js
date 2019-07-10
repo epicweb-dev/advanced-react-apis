@@ -3,18 +3,13 @@
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
 
-// 🐨 Create a PokemonCacheStateContext
-// 🐨 Create a PokemonCacheDispatchContext
+// 🐨 Create a PokemonCacheContext
 
-function PokemonCacheProvider(props) {
-  // 🐨 useReducer right here with pokemonCacheReducer
-  // 💰 you can grab the one that's in PokemonInfo
-
-  // 🐨 return both of your context providers (nested)
-  // 💰 the order is irrelevent.
-  // 💰 make sure you render {props.children} in the inner-most provider
-  return props.children
-}
+// 🐨 create a PokemonCacheProvider function
+// 🐨 useReducer with pokemonCacheReducer in your PokemonCacheProvider
+// 💰 you can grab the one that's in PokemonInfo
+// 🐨 return your context provider with the value assigned to what you get back from useReducer
+// 💰 make sure you forward the props.children!
 
 function pokemonCacheReducer(state, action) {
   switch (action.type) {
@@ -30,8 +25,7 @@ function pokemonCacheReducer(state, action) {
 function PokemonInfo({pokemonName}) {
   // 💣 remove the useReducer here
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
-  // 🐨 get the cache from useContext with PokemonCacheStateContext
-  // 🐨 get the dispatch from useContext with PokemonCacheDispatchContext
+  // 🐨 get the cache and dispatch from useContext with PokemonCacheContext
   const cachedPokemon = cache[pokemonName]
 
   const asyncCallback = React.useCallback(() => {
@@ -76,7 +70,7 @@ function PokemonInfo({pokemonName}) {
 }
 
 function PreviousPokemon({onSelect}) {
-  // 🐨 get the cache from useContext with PokemonCacheStateContext
+  // 🐨 get the cache from useContext with PokemonCacheContext
   const cache = {}
   return (
     <div>
@@ -88,6 +82,19 @@ function PreviousPokemon({onSelect}) {
           </li>
         ))}
       </ul>
+    </div>
+  )
+}
+
+function PokemonSection({onSelect, submittedPokemon}) {
+  // 🐨 wrap this in the PokemonCacheProvider so the PreviousPokemon
+  // and PokemonInfo components have access to that context.
+  return (
+    <div style={{display: 'flex'}}>
+      <PreviousPokemon onSelect={onSelect} />
+      <div style={{marginLeft: 10}} data-testid="pokemon-display">
+        <PokemonInfo pokemonName={submittedPokemon} />
+      </div>
     </div>
   )
 }
@@ -208,14 +215,10 @@ function Usage() {
         </div>
       </form>
       <hr />
-      <PokemonCacheProvider>
-        <div style={{display: 'flex'}}>
-          <PreviousPokemon onSelect={handleSelect} />
-          <div style={{marginLeft: 10}} data-testid="pokemon-display">
-            <PokemonInfo pokemonName={submittedPokemon} />
-          </div>
-        </div>
-      </PokemonCacheProvider>
+      <PokemonSection
+        onSelect={handleSelect}
+        submittedPokemon={submittedPokemon}
+      />
     </div>
   )
 }

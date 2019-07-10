@@ -2,12 +2,15 @@
 
 import React from 'react'
 
+// 🦉 I recommend you look down at the usage example to make sure you
+// understand the structure and how these components will be used.
+
 // 🐨 create your CountContext here with React.createContext
 
 function CountProvider(props) {
   // 🐨 get the count state and setCount updater with React.useState
-  // 🐨 create a `value` object with count and setCount properties
-  // 🐨 return your context provider with the value assigned to that object and forward all the other props
+  // 🐨 create a `value` array with count and setCount
+  // 🐨 return your context provider with the value assigned to that array and forward all the other props
   // 💰 more specifically, we need the children prop forwarded to the context provider
   return 'TODO...'
 }

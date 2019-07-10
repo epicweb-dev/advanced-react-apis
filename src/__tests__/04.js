@@ -125,5 +125,3 @@ test('displays the pokemon', async () => {
     expect(getByTestId('pokemon-display')).toHaveTextContent(/error/i),
   )
 })
-
-// TODO: add a test that grabs the reducer (mock React.useReducer) and calls it directly

@@ -3,8 +3,7 @@
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
 
-const PokemonCacheStateContext = React.createContext()
-const PokemonCacheDispatchContext = React.createContext()
+const PokemonCacheContext = React.createContext()
 
 function pokemonCacheReducer(state, action) {
   switch (action.type) {
@@ -18,19 +17,12 @@ function pokemonCacheReducer(state, action) {
 }
 
 function PokemonCacheProvider(props) {
-  const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
-  return (
-    <PokemonCacheStateContext.Provider value={cache}>
-      <PokemonCacheDispatchContext.Provider value={dispatch}>
-        {props.children}
-      </PokemonCacheDispatchContext.Provider>
-    </PokemonCacheStateContext.Provider>
-  )
+  const value = React.useReducer(pokemonCacheReducer, {})
+  return <PokemonCacheContext.Provider value={value} {...props} />
 }
 
 function PokemonInfo({pokemonName}) {
-  const cache = React.useContext(PokemonCacheStateContext)
-  const dispatch = React.useContext(PokemonCacheDispatchContext)
+  const [cache, dispatch] = React.useContext(PokemonCacheContext)
   const cachedPokemon = cache[pokemonName]
 
   const asyncCallback = React.useCallback(() => {
@@ -75,7 +67,7 @@ function PokemonInfo({pokemonName}) {
 }
 
 function PreviousPokemon({onSelect}) {
-  const cache = React.useContext(PokemonCacheStateContext)
+  const [cache] = React.useContext(PokemonCacheContext)
   return (
     <div>
       Previous Pokemon
@@ -87,6 +79,19 @@ function PreviousPokemon({onSelect}) {
         ))}
       </ul>
     </div>
+  )
+}
+
+function PokemonSection({onSelect, submittedPokemon}) {
+  return (
+    <PokemonCacheProvider>
+      <div style={{display: 'flex'}}>
+        <PreviousPokemon onSelect={onSelect} />
+        <div style={{marginLeft: 10}} data-testid="pokemon-display">
+          <PokemonInfo pokemonName={submittedPokemon} />
+        </div>
+      </div>
+    </PokemonCacheProvider>
   )
 }
 
@@ -164,7 +169,6 @@ function Usage() {
   }
 
   return (
-
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <form
         onSubmit={handleSubmit}
@@ -200,14 +204,10 @@ function Usage() {
         </div>
       </form>
       <hr />
-      <PokemonCacheProvider>
-        <div style={{display: 'flex'}}>
-          <PreviousPokemon onSelect={handleSelect} />
-          <div style={{marginLeft: 10}} data-testid="pokemon-display">
-            <PokemonInfo pokemonName={submittedPokemon} />
-          </div>
-        </div>
-      </PokemonCacheProvider>
+      <PokemonSection
+        onSelect={handleSelect}
+        submittedPokemon={submittedPokemon}
+      />
     </div>
   )
 }
