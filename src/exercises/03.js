@@ -25,12 +25,6 @@ function Counter() {
   return <button onClick={increment}>Increment count</button>
 }
 
-/*
-🦉 Elaboration & Feedback
-After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useContext%3A%20simple%20Counter&em=
-*/
-
 ////////////////////////////////////////////////////////////////////
 //                                                                //
 //                 Don't make changes below here.                 //

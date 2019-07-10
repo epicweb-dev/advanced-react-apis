@@ -43,12 +43,6 @@ function MessagesDisplay({messages}) {
   )
 }
 
-/*
-🦉 Elaboration & Feedback
-After the instruction, copy the URL below into your browser and fill out the form:
-http://ws.kcd.im/?ws=Advanced%20React%20Hooks&e=useImperativeHandle%3A%20scroll%20to%20top%2Fbottom&em=
-*/
-
 ////////////////////////////////////////////////////////////////////
 //                                                                //
 //                 Don't make changes below here.                 //
