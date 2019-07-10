@@ -35,18 +35,12 @@ test('CountProvider is rendering a context provider with the right value', () =>
 
   render(<Usage />)
 
-  expect(providerProps.value).toEqual({
-    count: 0,
-    setCount: expect.any(Function),
-  })
+  expect(providerProps.value).toEqual([0, expect.any(Function)])
 
-  providerProps.value.setCount(1) // lol
+  providerProps.value[1](1) // lol
 
   // assert that calling setCount directly updates the count state
-  expect(providerProps.value).toEqual({
-    count: 1,
-    setCount: expect.any(Function),
-  })
+  expect(providerProps.value).toEqual([1, expect.any(Function)])
 
   React.createElement = createElement
 })
