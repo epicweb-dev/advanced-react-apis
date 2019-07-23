@@ -15,7 +15,7 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "@testing-library/jest-dom": "^4.0.0",
-    "@testing-library/react": "^8.0.4",
+    "@testing-library/react": "^8.0.6",
     "dequal": "^1.0.0",
     "history": "^4.9.0",
     "mq-polyfill": "^1.1.8",
@@ -26,8 +26,8 @@
   },
   "devDependencies": {
     "cross-spawn": "^6.0.5",
-    "husky": "^3.0.0",
-    "inquirer": "^6.4.1",
+    "husky": "^3.0.1",
+    "inquirer": "^6.5.0",
     "is-ci": "^2.0.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.17.0",
