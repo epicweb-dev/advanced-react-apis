@@ -60,7 +60,7 @@ function Usage() {
   const addMessage = () =>
     setMessages(allMessages.slice(0, messages.length + 1))
   const removeMessage = () =>
-    setMessages(allMessages.slice(0, messages.length - 1))
+    setMessages(allMessages.slice(0, Math.max(0, messages.length - 1)))
 
   return (
     <div>
