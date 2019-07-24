@@ -46,6 +46,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "btnwtn",
+      "name": "Brandon Newton",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/20847518?v=4",
+      "profile": "https://bitwise.cool",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
