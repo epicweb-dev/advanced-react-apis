@@ -36,7 +36,9 @@ function PokemonInfo({pokemonName}) {
       return Promise.resolve(cachedPokemon)
     } else {
       return fetchPokemon(pokemonName).then(pokemonData => {
-        dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData})
+        if (pokemonData) {
+          dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData})
+        }
         return pokemonData
       })
     }
