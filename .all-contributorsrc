@@ -65,6 +65,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "lgandecki",
+      "name": "Łukasz Gandecki",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4002543?v=4",
+      "profile": "http://team.thebrain.pro",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
