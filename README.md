@@ -169,15 +169,11 @@ Here's what the setup script does. If it fails, try doing each of these things
 individually yourself:
 
 ```
-# verify your environment will work with the project
-node ./scripts/verify
-
 # install dependencies
 npm install
 
-# verify the project is ready to run
-npm run build
-npm run test:coverage
+# verify your environment will work with the project
+npm run validate
 ```
 
 If any of those scripts fail, please try to work out what went wrong by the
