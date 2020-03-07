@@ -14,6 +14,5 @@ function Counter({initialCount = 0, step = 1}) {
 function Usage() {
   return <Counter />
 }
-Usage.title = 'useReducer: simple Counter'
 
 export default Usage

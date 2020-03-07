@@ -43,13 +43,6 @@ function MessagesDisplay({messages}) {
   )
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 function Usage() {
   const messageDisplayRef = React.useRef()
   const [messages, setMessages] = React.useState(allMessages.slice(0, 8))
@@ -77,7 +70,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useImperativeHandle: scroll to top/bottom'
 
 export default Usage
 

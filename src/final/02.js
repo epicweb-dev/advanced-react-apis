@@ -147,6 +147,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useReducer: HTTP requests'
 
 export default Usage

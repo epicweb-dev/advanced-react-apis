@@ -28,13 +28,6 @@ function Counter() {
   return <button onClick={increment}>Increment count</button>
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 function Usage() {
   return (
     <div>
@@ -45,6 +38,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useContext: simple Counter'
 
 export default Usage

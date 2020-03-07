@@ -40,6 +40,5 @@ function Box() {
 function Usage() {
   return <Box />
 }
-Usage.title = 'useDebugValue: useMedia'
 
 export default Usage

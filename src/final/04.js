@@ -211,6 +211,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useContext: Caching response data in context'
 
 export default Usage

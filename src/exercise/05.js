@@ -32,13 +32,6 @@ function MessagesDisplay({messages}) {
   )
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 // this is to simulate major computation/big rendering tree/etc.
 function sleep(time = 0) {
   const wakeUpTime = Date.now() + time
@@ -74,7 +67,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useLayoutEffect: auto-growing textarea'
 
 export default Usage
 

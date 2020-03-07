@@ -66,7 +66,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useLayoutEffect: auto-growing textarea'
 
 export default Usage
 

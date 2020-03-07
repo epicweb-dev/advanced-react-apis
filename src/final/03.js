@@ -33,6 +33,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useContext: simple Counter'
 
 export default Usage

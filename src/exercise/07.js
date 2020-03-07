@@ -29,13 +29,6 @@ function useMedia(query, initialState = false) {
   return state
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 function Box() {
   const isBig = useMedia('(min-width: 1000px)')
   const isMedium = useMedia('(max-width: 999px) and (min-width: 700px)')
@@ -48,6 +41,5 @@ function Box() {
 function Usage() {
   return <Box />
 }
-Usage.title = 'useDebugValue: useMedia'
 
 export default Usage

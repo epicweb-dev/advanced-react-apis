@@ -101,13 +101,6 @@ function PokemonSection({onSelect, submittedPokemon}) {
   )
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 function asyncReducer(state, action) {
   switch (action.type) {
     case 'LOADING': {
@@ -224,6 +217,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useContext: Caching response data in context'
 
 export default Usage

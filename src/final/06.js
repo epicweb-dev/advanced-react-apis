@@ -71,7 +71,6 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useImperativeHandle: scroll to top/bottom'
 
 export default Usage
 

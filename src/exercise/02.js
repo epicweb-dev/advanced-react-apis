@@ -72,13 +72,6 @@ function PokemonInfo({pokemonName}) {
   )
 }
 
-////////////////////////////////////////////////////////////////////
-//                                                                //
-//                 Don't make changes below here.                 //
-// But do look at it to see how your code is intended to be used. //
-//                                                                //
-////////////////////////////////////////////////////////////////////
-
 function InvisibleButton(props) {
   return (
     <button
@@ -159,6 +152,5 @@ function Usage() {
     </div>
   )
 }
-Usage.title = 'useReducer: HTTP requests'
 
 export default Usage
