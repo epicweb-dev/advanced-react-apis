@@ -1,7 +1,4 @@
-import './hacks'
 import './styles.css'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './app'
+import codegen from 'codegen.macro'
 
-ReactDOM.render(<App />, document.getElementById('⚛️'))
+codegen`module.exports = require('@kentcdodds/react-workshop-app/codegen')`

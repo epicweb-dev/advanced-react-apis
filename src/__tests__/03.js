@@ -1,12 +1,12 @@
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
-import Usage from '../exercises-final/03'
+import {render, screen, fireEvent, act} from '@testing-library/react'
+import Usage from '../final/03'
 // import Usage from '../exercises/03'
 
 test('clicking the button increments the count', () => {
-  const {getByText} = render(<Usage />)
-  const button = getByText(/increment count/i)
-  const display = getByText(/the current count/i)
+  render(<Usage />)
+  const button = screen.getByText(/increment count/i)
+  const display = screen.getByText(/the current count/i)
   expect(display).toHaveTextContent(/0/)
   fireEvent.click(button)
   expect(display).toHaveTextContent(/1/)
@@ -37,7 +37,9 @@ test('CountProvider is rendering a context provider with the right value', () =>
 
   expect(providerProps.value).toEqual([0, expect.any(Function)])
 
-  providerProps.value[1](1) // lol
+  act(() => {
+    providerProps.value[1](1) // lol
+  })
 
   // assert that calling setCount directly updates the count state
   expect(providerProps.value).toEqual([1, expect.any(Function)])

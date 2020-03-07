@@ -33,17 +33,17 @@
 ## Schedule
 
 - 😴 Logistics
-- 🏋 01. useReducer: simple Counter
-- 🏋 02. useReducer: HTTP requests
+- 💪 01. useReducer: simple Counter
+- 💪 02. useReducer: HTTP requests
 - 😴 10 Minutes
-- 🏋 03. useContext: simple Counter
+- 💪 03. useContext: simple Counter
 - 😴 30 Minutes
-- 🏋 04. useContext: Caching response data in context
+- 💪 04. useContext: Caching response data in context
 - 😴 10 Minutes
-- 🏋 05. useLayoutEffect: auto-growing textarea
-- 🏋 06. useImperativeHandle: scroll to top/bottom
+- 💪 05. useLayoutEffect: auto-growing textarea
+- 💪 06. useImperativeHandle: scroll to top/bottom
 - 😴 10 Minutes
-- 🏋 07. useDebugValue: useMedia
+- 💪 07. useDebugValue: useMedia
 - ❓ Q&A
 
 ## Scripts
@@ -64,19 +64,22 @@ Please do ask! Interrupt me. If you have an unrelated question, please ask on
 
 ## Exercises
 
-- `src/exercises/0x.md`: Background, Exercise Instructions, Extra Credit
-- `src/exercises/0x.js`: Exercise with Emoji helpers
+- `src/exercise/0x.md`: Background, Exercise Instructions, Extra Credit
+- `src/exercise/0x.js`: Exercise with Emoji helpers
 - `src/__tests__/0x.js`: Tests
-- `src/exercises-final/0x.js`: Final version
+- `src/final/0x.js`: Final version
 
 ## Emoji
 
 - **Kody the Koala Bear** 🐨 "Do this"
+- **Matthew the Muscle** 💪 "Exercise"
+- **Chuck the Checkered Flag** 🏁 "Final"
 - **Marty the Money Bag** 💰 "Here's a hint"
 - **Hannah the Hundred** 💯 "Extra Credit"
 - **Olivia the Owl** 🦉 "Pro-tip"
 - **Dominic the Document** 📜 "Docs links"
 - **Berry the Bomb** 💣 "Remove this code"
+- **Peter the Product Manager** 👨‍💼 "Story time"
 - **Alfred the Alert** 🚨 "Extra helpful in test errors"
 
 ## Workshop Feedback

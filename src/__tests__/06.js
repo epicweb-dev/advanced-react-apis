@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, fireEvent} from '@testing-library/react'
-import Usage from '../exercises-final/06'
+import Usage from '../final/06'
 // import Usage from '../exercises/06'
 
 test('adds and removes children from the log', () => {

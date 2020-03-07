@@ -1,6 +1,6 @@
 import React from 'react'
 import {render, fireEvent} from '@testing-library/react'
-import Usage from '../exercises-final/05'
+import Usage from '../final/05'
 
 test('adds and removes children from the log', () => {
   const {getByText, getByRole} = render(<Usage />)
