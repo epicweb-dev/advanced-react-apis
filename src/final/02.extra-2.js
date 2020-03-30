@@ -1,5 +1,6 @@
 // useReducer: HTTP requests
 // 💯 using useCallback to empower the user to customize memoization
+// http://localhost:3000/isolated/final/02.extra-2.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'

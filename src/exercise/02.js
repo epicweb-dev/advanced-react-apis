@@ -1,4 +1,5 @@
 // useReducer: HTTP requests
+// http://localhost:3000/isolated/exercise/02.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'

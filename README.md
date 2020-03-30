@@ -1,9 +1,3 @@
-<p align="center">
-<a href="https://codefund.io/properties/501/visit-sponsor">
-<img src="https://codefund.io/properties/501/sponsor" />
-</a>
-</p>
-
 # Advanced React Hooks
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com) and this is the
@@ -15,7 +9,7 @@ source material for
 [![AppVeyor Build Status][win-build-badge]][win-build]
 [![Code Coverage][coverage-badge]][coverage]
 [![GPL 3.0 License][license-badge]][license]
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
 [![Code of Conduct][coc-badge]][coc]
 <!-- prettier-ignore-end -->
@@ -25,8 +19,8 @@ source material for
 In order for us to maximize our efforts during the workshop, please complete the
 following things to prepare.
 
-- 📺 indicates steps that are only necessary if the workshop is remote via Zoom
-- 👋 indicates steps that are specific to the material for this workshop
+- 📺 only necessary if the workshop is remote via Zoom
+- 👋 specific to the material for this workshop
 
 - [ ] 👋 Setup the project (follow the setup instructions below) (~5 minutes)
 - [ ] 📺 Install and setup [Zoom](https://zoom.us) on the computer you will be
@@ -50,20 +44,11 @@ following things to prepare.
 
 The more prepared you are for the workshop, the better it will go for you.
 
-## Workshop Outline
+## Workshop Topics
 
 You will be learning and using the following hooks: `useReducer`, `useContext`,
 `useMemo`, `useCallback`, `useLayoutEffect`, `useImperativeHandle`, and
 `useDebugValue`.
-
-1. `useReducer`: simple Counter
-2. `useReducer`: HTTP requests
-3. `useContext`: simple Counter (covers `useMemo` and `useCallback` as well)
-4. `useContext`: Caching response data in context (covers `useMemo` and
-   `useCallback` as well)
-5. `useLayoutEffect`: auto-growing textarea
-6. `useImperativeHandle`: scroll to top/bottom
-7. `useDebugValue`: useMedia
 
 ## System Requirements
 
@@ -97,7 +82,7 @@ npm run setup --silent
 
 This may take a few minutes. **It will ask you for your email.** This is
 optional and just automatically adds your email to the links in the project to
-make filling out some forms easier If you get any errors, please read through
+make filling out some forms easier. If you get any errors, please read through
 them and see if you can find out what the problem is. If you can't work it out
 on your own then please [file an issue][issue] and provide _all_ the output from
 the commands you ran (even if it's a lot).
@@ -121,7 +106,7 @@ This should start up your browser. If you're familiar, this is a standard
 [react-scripts](https://create-react-app.dev/) application.
 
 You can also open
-[the deployment of the app on Netlify](https://advanced-react-hooks.netlify.com/).
+[the deployment of the app on Netlify](https://advanced-react-hooks.netlify.app/).
 
 ## Running the tests
 
@@ -135,7 +120,67 @@ however _sometimes_ you can accomplish the task and the tests still fail if you
 implement things differently than I do in my solution, so don't look to them as
 a complete authority.
 
-## Helpful Emoji 🐨 💪 🏁 💰 💯 🦉 📜 💣 👨‍💼 🚨
+# Advanced React Hooks
+
+> Time to get serious 🏎💨
+
+👋 I'm Kent C. Dodds
+
+- 🏡 Utah
+- 👩 👧 👦 👦 👦 🐕
+- 🏢 kentcdodds.com
+- 🐦/🐙 @kentcdodds
+- 🏆 testingjavascript.com
+- 🥚 kcd.im/egghead
+- 🥋 kcd.im/fem
+- 💌 kcd.im/news
+- 📝 kcd.im/blog
+- 📺 kcd.im/devtips
+- 💻 kcd.im/coding
+- 📽 kcd.im/youtube
+- 🎙 kcd.im/3-mins
+- ❓ kcd.im/ama
+
+### Schedule
+
+- 😴 Logistics
+- 💪 01. useReducer: simple Counter
+- 💪 02. useReducer: HTTP requests
+- 😴 10 Minutes
+- 💪 03. useContext: simple Counter
+- 😴 30 Minutes
+- 💪 04. useContext: Caching response data in context
+- 😴 10 Minutes
+- 💪 05. useLayoutEffect: auto-growing textarea
+- 💪 06. useImperativeHandle: scroll to top/bottom
+- 😴 10 Minutes
+- 💪 07. useDebugValue: useMedia
+- ❓ Q&A
+
+### Questions
+
+Please do ask! Interrupt me. If you have an unrelated question, please ask on
+[my AMA](https://kcd.im/ama).
+
+### Zoom (for remote workshops)
+
+- Help us make this more human by keeping your video on if possible
+- Keep microphone muted unless speaking
+- Breakout rooms
+
+### Exercises
+
+- `src/exercise/00.md`: Background, Exercise Instructions, Extra Credit
+- `src/exercise/00.js`: Exercise with Emoji helpers
+- `src/__tests__/00.js`: Tests
+- `src/final/00.js`: Final version
+- `src/final/00.extra-0.js`: Final version of extra credit
+
+The purpose of the exercise is **not** for you to work through all the material.
+It's intended to get your brain thinking about the right questions to ask me as
+_I_ walk through the material.
+
+### Helpful Emoji 🐨 💪 🏁 💰 💯 🦉 📜 💣 👨‍💼 🚨
 
 Each exercise has comments in it to help you get through the exercise. These fun
 emoji characters are here to help you.
@@ -157,6 +202,14 @@ emoji characters are here to help you.
 - **Peter the Product Manager** 👨‍💼 helps us know what our users want
 - **Alfred the Alert** 🚨 will occasionally show up in the test failures with
   potential explanations for why the tests are failing.
+
+## Workshop Feedback
+
+Each exercise has an Elaboration and Feedback link. Please fill that out after
+the exercise and instruction.
+
+At the end of the workshop, please go to this URL to give overall feedback.
+Thank you! https://kcd.im/arh-ws-feedback
 
 ## Contributors
 
@@ -197,22 +250,23 @@ at me@kentcdodds.com
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
-[build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=travis
-[build]: https://travis-ci.org/kentcdodds/advanced-react-patterns
+[build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-hooks.svg?style=flat-square&logo=travis
+[build]: https://travis-ci.org/kentcdodds/advanced-react-hooks
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/README.md#license
+[license]: https://github.com/kentcdodds/advanced-react-hooks/blob/master/README.md#license
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
 [prs]: http://makeapullrequest.com
+[donate-badge]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
+[donate]: http://kcd.im/donate
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/kentcdodds/advanced-react-patterns/blob/master/CODE_OF_CONDUCT.md
+[coc]: https://github.com/kentcdodds/advanced-react-hooks/blob/master/CODE_OF_CONDUCT.md
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
 [win-path]: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
 [mac-path]: http://stackoverflow.com/a/24322978/971592
-[issue]: https://github.com/kentcdodds/advanced-react-patterns/issues/new
-[win-build-badge]: https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-patterns.svg?style=flat-square&logo=appveyor
-[win-build]: https://ci.appveyor.com/project/kentcdodds/advanced-react-patterns
-[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-patterns.svg?style=flat-square
-[coverage]: https://codecov.io/github/kentcdodds/advanced-react-patterns
-[watchman]: https://facebook.github.io/watchman/docs/install.html
+[issue]: https://github.com/kentcdodds/advanced-react-hooks/issues/new
+[win-build-badge]: https://img.shields.io/appveyor/ci/kentcdodds/advanced-react-hooks.svg?style=flat-square&logo=appveyor
+[win-build]: https://ci.appveyor.com/project/kentcdodds/advanced-react-hooks
+[coverage-badge]: https://img.shields.io/codecov/c/github/kentcdodds/advanced-react-hooks.svg?style=flat-square
+[coverage]: https://codecov.io/github/kentcdodds/advanced-react-hooks
 <!-- prettier-ignore-end -->
