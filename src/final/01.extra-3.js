@@ -19,8 +19,8 @@ function Counter({initialCount = 0, step = 1}) {
   return <button onClick={increment}>{count}</button>
 }
 
-function Usage() {
+function App() {
   return <Counter />
 }
 
-export default Usage
+export default App

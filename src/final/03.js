@@ -24,7 +24,7 @@ function Counter() {
   return <button onClick={increment}>Increment count</button>
 }
 
-function Usage() {
+function App() {
   return (
     <div>
       <CountProvider>
@@ -35,4 +35,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

@@ -1,19 +1,19 @@
-// useReducer: HTTP requests
+// useCallback: custom hooks
 // http://localhost:3000/isolated/final/02.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
 
-function pokemonReducer(state, action) {
+function asyncReducer(state, action) {
   switch (action.type) {
-    case 'LOADING': {
-      return {loading: true, pokemon: null, error: null}
+    case 'pending': {
+      return {status: 'pending', data: null, error: null}
     }
-    case 'LOADED': {
-      return {loading: false, pokemon: action.pokemon, error: null}
+    case 'resolved': {
+      return {status: 'resolved', data: action.data, error: null}
     }
-    case 'ERROR': {
-      return {loading: false, pokemon: null, error: action.error}
+    case 'rejected': {
+      return {status: 'rejected', data: null, error: action.error}
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
@@ -21,28 +21,54 @@ function pokemonReducer(state, action) {
   }
 }
 
-function PokemonInfo({pokemonName}) {
-  const [state, dispatch] = React.useReducer(pokemonReducer, {
-    pokemon: null,
-    loading: false,
+function useAsync(asyncCallback, dependencies) {
+  const [state, dispatch] = React.useReducer(asyncReducer, {
+    status: 'idle',
+    data: null,
     error: null,
   })
-  const {pokemon, loading, error} = state
 
   React.useEffect(() => {
-    if (!pokemonName) {
-      return
-    }
-    dispatch({type: 'LOADING'})
-    fetchPokemon(pokemonName).then(
-      pokemon => {
-        dispatch({type: 'LOADED', pokemon})
+    dispatch({type: 'pending'})
+    asyncCallback().then(
+      data => {
+        dispatch({type: 'resolved', data})
       },
       error => {
-        dispatch({type: 'ERROR', error})
+        dispatch({type: 'rejected', error})
       },
     )
+    // too bad the eslint plugin can't statically analyze this :-(
+    // eslint-disable-next-line
+  }, dependencies)
+
+  return state
+}
+
+function PokemonInfo({pokemonName}) {
+  const state = useAsync(() => {
+    if (!pokemonName) {
+      return Promise.resolve(null)
+    }
+    return fetchPokemon(pokemonName)
   }, [pokemonName])
+
+  const {data: pokemon, status, error} = state
+
+  let info
+  if (status === 'idle') {
+    info = 'Submit a pokemon'
+  } else if (status === 'pending') {
+    info = '...'
+  } else if (status === 'rejected') {
+    info = (
+      <div>
+        There was an error: <pre>{error.message}</pre>
+      </div>
+    )
+  } else if (status === 'resolved') {
+    info = <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+  }
 
   return (
     <div
@@ -55,15 +81,7 @@ function PokemonInfo({pokemonName}) {
         padding: 10,
       }}
     >
-      {loading ? (
-        '...'
-      ) : error ? (
-        'ERROR (check your developer tools network tab)'
-      ) : pokemonName ? (
-        <pre>{JSON.stringify(pokemon || 'Unknown', null, 2)}</pre>
-      ) : (
-        'Submit a pokemon'
-      )}
+      {info}
     </div>
   )
 }
@@ -85,7 +103,7 @@ function InvisibleButton(props) {
   )
 }
 
-function Usage() {
+function App() {
   const [{submittedPokemon, pokemonName}, setState] = React.useReducer(
     (state, action) => ({...state, ...action}),
     {submittedPokemon: '', pokemonName: ''},
@@ -149,4 +167,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

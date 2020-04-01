@@ -1,14 +1,25 @@
-// useLayoutEffect: auto-growing textarea
+// useImperativeHandle: scroll to top/bottom
 // http://localhost:3000/isolated/exercise/05.js
 
 import React from 'react'
 
+// 🐨 wrap this in a React.forwardRef and accept `ref` as the second argument
 function MessagesDisplay({messages}) {
   const containerRef = React.useRef()
-  // 🐨 replace useEffect with useLayoutEffect
-  React.useEffect(() => {
-    containerRef.current.scrollTop = containerRef.current.scrollHeight
+  React.useLayoutEffect(() => {
+    scrollToBottom()
   })
+
+  // 💰 you're gonna want this as part of your imperative methods
+  // function scrollToTop() {
+  //   containerRef.current.scrollTop = 0
+  // }
+  function scrollToBottom() {
+    containerRef.current.scrollTop = containerRef.current.scrollHeight
+  }
+
+  // 🐨 call useImperativeHandle here with your ref and a callback function
+  // that returns an object with scrollToTop and scrollToBottom
 
   return (
     <div
@@ -33,28 +44,15 @@ function MessagesDisplay({messages}) {
   )
 }
 
-// this is to simulate major computation/big rendering tree/etc.
-function sleep(time = 0) {
-  const wakeUpTime = Date.now() + time
-  while (Date.now() < wakeUpTime) {}
-}
-
-function SlooooowSibling() {
-  // try this with useLayoutEffect as well to see
-  // how it impacts interactivity of the page before updates.
-  React.useEffect(() => {
-    // increase this number to see a more stark difference
-    sleep(150)
-  })
-  return null
-}
-
-function Usage() {
+function App() {
+  const messageDisplayRef = React.useRef()
   const [messages, setMessages] = React.useState(allMessages.slice(0, 8))
   const addMessage = () =>
     setMessages(allMessages.slice(0, messages.length + 1))
   const removeMessage = () =>
-    setMessages(allMessages.slice(0, Math.max(0, messages.length - 1)))
+    setMessages(allMessages.slice(0, messages.length - 1))
+  const scrollToTop = () => messageDisplayRef.current.scrollToTop()
+  const scrollToBottom = () => messageDisplayRef.current.scrollToBottom()
 
   return (
     <div>
@@ -63,13 +61,18 @@ function Usage() {
         <button onClick={removeMessage}>remove message</button>
       </div>
       <hr />
-      <MessagesDisplay messages={messages} />
-      <SlooooowSibling />
+      <div>
+        <button onClick={scrollToTop}>scroll to top</button>
+      </div>
+      <MessagesDisplay ref={messageDisplayRef} messages={messages} />
+      <div>
+        <button onClick={scrollToBottom}>scroll to bottom</button>
+      </div>
     </div>
   )
 }
 
-export default Usage
+export default App
 
 const allMessages = [
   `Leia: Aren't you a little short to be a stormtrooper?`,

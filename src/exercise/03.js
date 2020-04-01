@@ -3,7 +3,7 @@
 
 import React from 'react'
 
-// 🦉 I recommend you look down at the usage example to make sure you
+// 🦉 I recommend you look down at the App example to make sure you
 // understand the structure and how these components will be used.
 
 // 🐨 create your CountContext here with React.createContext
@@ -29,7 +29,7 @@ function Counter() {
   return <button onClick={increment}>Increment count</button>
 }
 
-function Usage() {
+function App() {
   return (
     <div>
       <CountProvider>
@@ -40,4 +40,4 @@ function Usage() {
   )
 }
 
-export default Usage
+export default App

@@ -1,7 +1,7 @@
 import React from 'react'
 import {render, screen, fireEvent, waitFor} from '@testing-library/react'
-import App from '../final/02'
-// import App from '../exercise/02'
+import App from '../final/03.extra-1'
+// import App from '../exercise/03.extra-1'
 
 beforeAll(() => {
   window.fetch.mockImplementation(() =>

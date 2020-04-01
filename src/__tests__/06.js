@@ -1,46 +1,54 @@
+import matchMediaPolyfill from 'mq-polyfill'
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
-import Usage from '../final/06'
-// import Usage from '../exercises/06'
+import {render, act} from '@testing-library/react'
+import App from '../final/06'
+// import App from '../exercises/06'
 
-test('adds and removes children from the log', () => {
-  const {getByText, getByRole} = render(<Usage />)
-  const log = getByRole('log')
-  const chatCount = log.children.length
-  const add = getByText(/add/i)
-  const remove = getByText(/remove/i)
-  fireEvent.click(add)
-  expect(log.children).toHaveLength(chatCount + 1)
-  fireEvent.click(remove)
-  expect(log.children).toHaveLength(chatCount)
+beforeAll(() => {
+  matchMediaPolyfill(window)
+  window.resizeTo = function resizeTo(width, height) {
+    Object.assign(this, {
+      innerWidth: width,
+      innerHeight: height,
+      outerWidth: width,
+      outerHeight: height,
+    }).dispatchEvent(new this.Event('resize'))
+  }
 })
 
-test('scroll to top scrolls to the top', () => {
-  const {getByText, getByRole} = render(<Usage />)
-  const log = getByRole('log')
-  const scrollToTop = getByText(/scroll to top/i)
-  const scrollToBottom = getByText(/scroll to bottom/i)
-  const scrollTopSetter = jest.fn()
-  Object.defineProperties(log, {
-    scrollHeight: {
-      get() {
-        return 100
-      },
-    },
-    scrollTop: {
-      get() {
-        return 0
-      },
-      set: scrollTopSetter,
-    },
+test('works', () => {
+  jest.spyOn(React, 'useDebugValue')
+  const {container} = render(<App />)
+  expect(
+    React.useDebugValue,
+    `Make sure to call \`useDebugValue\` with the formatted value`,
+  ).toHaveBeenCalled()
+  expect(
+    React.useDebugValue,
+    `Make sure to call \`useDebugValue\` with the formatted value`,
+  ).toHaveBeenCalledWith(expect.stringContaining('max-width: 699px'))
+  expect(
+    React.useDebugValue,
+    `Make sure to call \`useDebugValue\` with the formatted value`,
+  ).toHaveBeenCalledWith(expect.stringContaining('max-width: 999px'))
+  expect(
+    React.useDebugValue,
+    `Make sure to call \`useDebugValue\` with the formatted value`,
+  ).toHaveBeenCalledWith(expect.stringContaining('min-width: 1000px'))
+  const box = container.querySelector('[style]')
+
+  act(() => {
+    window.resizeTo(1001, 1001)
   })
-  fireEvent.click(scrollToTop)
-  expect(scrollTopSetter).toHaveBeenCalledTimes(1)
-  expect(scrollTopSetter).toHaveBeenCalledWith(0)
+  expect(box).toHaveStyle(`background-color: green;`)
 
-  scrollTopSetter.mockClear()
+  act(() => {
+    window.resizeTo(800, 800)
+  })
+  expect(box).toHaveStyle(`background-color: yellow;`)
 
-  fireEvent.click(scrollToBottom)
-  expect(scrollTopSetter).toHaveBeenCalledTimes(1)
-  expect(scrollTopSetter).toHaveBeenCalledWith(log.scrollHeight)
+  act(() => {
+    window.resizeTo(600, 600)
+  })
+  expect(box).toHaveStyle(`background-color: red;`)
 })

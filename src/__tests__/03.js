@@ -1,10 +1,10 @@
 import React from 'react'
 import {render, screen, fireEvent, act} from '@testing-library/react'
-import Usage from '../final/03'
-// import Usage from '../exercises/03'
+import App from '../final/03'
+// import App from '../exercises/03'
 
 test('clicking the button increments the count', () => {
-  render(<Usage />)
+  render(<App />)
   const button = screen.getByText(/increment count/i)
   const display = screen.getByText(/the current count/i)
   expect(display).toHaveTextContent(/0/)
@@ -33,7 +33,7 @@ test('CountProvider is rendering a context provider with the right value', () =>
     return createElement(...args)
   }
 
-  render(<Usage />)
+  render(<App />)
 
   expect(providerProps.value).toEqual([0, expect.any(Function)])
 
