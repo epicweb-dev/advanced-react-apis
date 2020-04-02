@@ -46,8 +46,9 @@ The more prepared you are for the workshop, the better it will go for you.
 
 ## Workshop Topics
 
-You will be learning and using the following hooks: `useReducer`, `useContext`,
-`useCallback`, `useLayoutEffect`, `useImperativeHandle`, and `useDebugValue`.
+You will be learning and using the following hooks: `useReducer`,
+`useContext`,`useCallback`, `useLayoutEffect`, `useImperativeHandle`, and
+`useDebugValue`.
 
 ## System Requirements
 
@@ -150,8 +151,8 @@ a complete authority.
 - 💪 03. useContext: simple Counter
 - 😴 10 Minutes
 - 💪 04. useLayoutEffect: auto-growing textarea
-- 😴 10 Minutes
 - 💪 05. useImperativeHandle: scroll to top/bottom
+- 😴 10 Minutes
 - 💪 06. useDebugValue: useMedia
 - ❓ Q&A
 
