@@ -2,7 +2,7 @@ import React from 'react'
 import chalk from 'chalk'
 import {render, fireEvent} from '@testing-library/react'
 import App from '../final/01'
-// import App from '../exercises/01'
+// import App from '../exercise/01'
 
 test('clicking the button increments the count', () => {
   const {container} = render(<App />)
@@ -28,18 +28,18 @@ test('using useReducer', () => {
   render(<App />)
   React.createElement = createElement
 
-  try {
-    expect(counterFn.toString()).toContain('useReducer(')
-  } catch (error) {
-    //
-    //
-    //
-    // these comment lines are just here to keep the next line out of the codeframe
-    // so it doesn't confuse people when they see the error message twice.
-    error.message = `🚨  ${chalk.red(
-      'The Counter component that is rendered must call "useReducer" to get the "state" and "dispatch" function.',
-    )}`
-
-    throw error
+  const lines = counterFn.toString().split('\n')
+  const useReducerLine = lines.find(line => {
+    return !line.trim().startsWith('//') && line.includes('useReducer(')
+  })
+  const useStateLine = lines.find(line => {
+    return !line.trim().startsWith('//') && line.includes('useState(')
+  })
+  if (!useReducerLine || useStateLine) {
+    throw new Error(
+      `🚨  ${chalk.red(
+        'The Counter component that is rendered must call "useReducer" to get the "state" and "dispatch" function and you should get rid of that useState call.',
+      )}`,
+    )
   }
 })
