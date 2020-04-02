@@ -1,0 +1,6 @@
+/img/*
+  # we want to cache these images for one hour
+  cache-control: public,max-age=3600,immutable
+/img/pokemon/*
+  # we want to cache these images for one hour
+  cache-control: public,max-age=3600,immutable

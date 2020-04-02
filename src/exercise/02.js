@@ -1,18 +1,27 @@
 // useCallback: custom hooks
-// http://localhost:3000/isolated/exercise/02.js
+// http://localhost:3000/isolated/final/02.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
+import {
+  PokemonForm,
+  PokemonDataView,
+  PokemonInfoFallback,
+} from '../pokemon-components'
 
-function pokemonReducer(state, action) {
+// 🐨 this is going to be our generic asyncReducer
+function pokemonInfoReducer(state, action) {
   switch (action.type) {
     case 'pending': {
+      // 🐨 replace "pokemon" with "data"
       return {status: 'pending', pokemon: null, error: null}
     }
     case 'resolved': {
+      // 🐨 replace "pokemon" with "data" (in the action too!)
       return {status: 'resolved', pokemon: action.pokemon, error: null}
     }
     case 'rejected': {
+      // 🐨 replace "pokemon" with "data"
       return {status: 'rejected', pokemon: null, error: action.error}
     }
     default: {
@@ -22,14 +31,29 @@ function pokemonReducer(state, action) {
 }
 
 function PokemonInfo({pokemonName}) {
-  const [state, dispatch] = React.useReducer(pokemonReducer, {
+  // 🐨 move both the useReducer and useEffect hooks to a custom hook called useAsync
+  // here's how you use it:
+  // const state = useAsync(() => {
+  //   if (!pokemonName) {
+  //     return Promise.resolve(null)
+  //   }
+  //   return fetchPokemon(pokemonName)
+  // }, [pokemonName])
+  // 🐨 so you're job is to create a useAsync function that makes this work.
+  const [state, dispatch] = React.useReducer(pokemonInfoReducer, {
     status: 'idle',
+    // 🐨 this'll need to be "data" instead of "pokemon"
     pokemon: null,
     error: null,
   })
-  const {pokemon, status, error} = state
 
   React.useEffect(() => {
+    // 💰 this first early-exit bit is a little tricky, so let me give you a hint:
+    // const promise = asyncCallback()
+    // if (!promise) {
+    //   return
+    // }
+    // then you can dispatch and handle the promise etc...
     if (!pokemonName) {
       return
     }
@@ -44,113 +68,45 @@ function PokemonInfo({pokemonName}) {
     )
   }, [pokemonName])
 
-  let info
-  if (status === 'idle') {
-    info = 'Submit a pokemon'
+  // 🐨 this'll change from "pokemon" to "data"
+  const {pokemon, status, error} = state
+
+  if (status === 'idle' || !pokemonName) {
+    return 'Submit a pokemon'
   } else if (status === 'pending') {
-    info = '...'
+    return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    info = (
+    return (
       <div>
-        There was an error: <pre>{error.message}</pre>
+        There was an error:{' '}
+        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
       </div>
     )
   } else if (status === 'resolved') {
-    info = <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+    return (
+      <div>
+        <div className="pokemon-info__img-wrapper">
+          <img src={pokemon.image} alt={pokemon.name} />
+        </div>
+        <PokemonDataView pokemon={pokemon} />
+      </div>
+    )
   }
-
-  return (
-    <div
-      style={{
-        height: 300,
-        width: 300,
-        overflow: 'scroll',
-        backgroundColor: '#eee',
-        borderRadius: 4,
-        padding: 10,
-      }}
-    >
-      {info}
-    </div>
-  )
-}
-
-function InvisibleButton(props) {
-  return (
-    <button
-      type="button"
-      style={{
-        border: 'none',
-        padding: 'inherit',
-        fontSize: 'inherit',
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        fontWeight: 'inherit',
-      }}
-      {...props}
-    />
-  )
 }
 
 function App() {
-  const [{submittedPokemon, pokemonName}, setState] = React.useReducer(
-    (state, action) => ({...state, ...action}),
-    {submittedPokemon: '', pokemonName: ''},
-  )
+  const [pokemonName, setPokemonName] = React.useState(null)
 
-  function handleChange(e) {
-    setState({pokemonName: e.target.value})
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    setState({submittedPokemon: pokemonName.toLowerCase()})
-  }
-
-  function handleSelect(pokemonName) {
-    setState({pokemonName, submittedPokemon: pokemonName})
+  function handleSubmit(newPokemonName) {
+    setPokemonName(newPokemonName)
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <label htmlFor="pokemonName-input">Pokemon Name</label>
-        <small>
-          Try{' '}
-          <InvisibleButton onClick={() => handleSelect('pikachu')}>
-            "pikachu"
-          </InvisibleButton>
-          {', '}
-          <InvisibleButton onClick={() => handleSelect('charizard')}>
-            "charizard"
-          </InvisibleButton>
-          {', or '}
-          <InvisibleButton onClick={() => handleSelect('mew')}>
-            "mew"
-          </InvisibleButton>
-        </small>
-        <div>
-          <input
-            id="pokemonName-input"
-            name="pokemonName"
-            value={pokemonName}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+    <div className="pokemon-info-app">
+      <PokemonForm onSubmit={handleSubmit} />
       <hr />
-      <div style={{display: 'flex'}}>
-        <div style={{marginLeft: 10}} data-testid="pokemon-display">
-          <PokemonInfo pokemonName={submittedPokemon} />
-        </div>
+      <div className="pokemon-info">
+        <PokemonInfo pokemonName={pokemonName} />
       </div>
     </div>
   )

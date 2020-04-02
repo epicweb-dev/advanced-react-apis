@@ -1,9 +1,17 @@
-// useContext: simple Counter
-// 💯 caching in a context provider
-// http://localhost:3000/isolated/final/03.extra.1.js
+// useContext: Caching response data in context
+// 💯 caching in a context provider (final)
+// http://localhost:3000/isolated/final/03.extra-1.js
+
+// you can edit this here and look at the isolated page or you can copy/paste
+// this in the regular exercise file.
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
+import {
+  PokemonForm,
+  PokemonDataView,
+  PokemonInfoFallback,
+} from '../pokemon-components'
 import {useAsync} from '../utils'
 
 const PokemonCacheContext = React.createContext()
@@ -21,78 +29,66 @@ function pokemonCacheReducer(state, action) {
 
 function PokemonCacheProvider(props) {
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
-  const addPokemon = React.useCallback(
-    ({pokemonName, pokemonData}) =>
-      dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData}),
-    [],
-  )
-  const getPokemon = React.useCallback(pokemonName => cache[pokemonName], [
-    cache,
-  ])
-  const value = {addPokemon, getPokemon, cache}
-  return <PokemonCacheContext.Provider value={value} {...props} />
+  return <PokemonCacheContext.Provider value={[cache, dispatch]} {...props} />
 }
 
 function PokemonInfo({pokemonName}) {
-  const {addPokemon, getPokemon} = React.useContext(PokemonCacheContext)
+  const [cache, dispatch] = React.useContext(PokemonCacheContext)
 
   const {data: pokemon, status, error, run, setData} = useAsync()
 
   React.useEffect(() => {
     if (!pokemonName) {
-      setData(null)
-    } else if (getPokemon(pokemonName)) {
-      setData(getPokemon(pokemonName))
+      return
+    } else if (cache[pokemonName]) {
+      setData(cache[pokemonName])
     } else {
       run(
         fetchPokemon(pokemonName).then(pokemonData => {
-          addPokemon({pokemonName, pokemonData})
+          dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData})
           return pokemonData
         }),
       )
     }
-  }, [addPokemon, getPokemon, pokemonName, run, setData])
+  }, [cache, dispatch, pokemonName, run, setData])
 
-  let info
   if (status === 'idle') {
-    info = 'Submit a pokemon'
+    return 'Submit a pokemon'
   } else if (status === 'pending') {
-    info = '...'
+    return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    info = (
+    return (
       <div>
-        There was an error: <pre>{error.message}</pre>
+        There was an error:{' '}
+        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
       </div>
     )
   } else if (status === 'resolved') {
-    info = <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+    return (
+      <div>
+        <div className="pokemon-info__img-wrapper">
+          <img src={pokemon.image} alt={pokemon.name} />
+        </div>
+        <PokemonDataView pokemon={pokemon} />
+      </div>
+    )
   }
-
-  return (
-    <div
-      style={{
-        height: 300,
-        width: 300,
-        overflow: 'scroll',
-        backgroundColor: '#eee',
-        borderRadius: 4,
-        padding: 10,
-      }}
-    >
-      {info}
-    </div>
-  )
 }
 
 function PreviousPokemon({onSelect}) {
-  const {cache} = React.useContext(PokemonCacheContext)
+  const [cache] = React.useContext(PokemonCacheContext)
   return (
     <div>
       Previous Pokemon
       <ul style={{listStyle: 'none', paddingLeft: 0}}>
         {Object.keys(cache).map(pokemonName => (
-          <li key={pokemonName}>
-            <button onClick={() => onSelect(pokemonName)}>{pokemonName}</button>
+          <li key={pokemonName} style={{margin: '4px auto'}}>
+            <button
+              style={{width: '100%'}}
+              onClick={() => onSelect(pokemonName)}
+            >
+              {pokemonName}
+            </button>
           </li>
         ))}
       </ul>
@@ -105,7 +101,7 @@ function PokemonSection({onSelect, submittedPokemon}) {
     <PokemonCacheProvider>
       <div style={{display: 'flex'}}>
         <PreviousPokemon onSelect={onSelect} />
-        <div style={{marginLeft: 10}} data-testid="pokemon-display">
+        <div className="pokemon-info" style={{marginLeft: 10}}>
           <PokemonInfo pokemonName={submittedPokemon} />
         </div>
       </div>
@@ -113,81 +109,30 @@ function PokemonSection({onSelect, submittedPokemon}) {
   )
 }
 
-function InvisibleButton(props) {
-  return (
-    <button
-      type="button"
-      style={{
-        border: 'none',
-        padding: 'inherit',
-        fontSize: 'inherit',
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        fontWeight: 'inherit',
-      }}
-      {...props}
-    />
-  )
-}
-
 function App() {
-  const [{submittedPokemon, pokemonName}, setState] = React.useReducer(
-    (state, action) => ({...state, ...action}),
-    {submittedPokemon: '', pokemonName: ''},
-  )
+  const [typedPokemonName, setTypedPokemonName] = React.useState(null)
+  const [submittedPokemonName, setSubmittedPokemonName] = React.useState(null)
 
-  function handleChange(e) {
-    setState({pokemonName: e.target.value})
+  function handleSubmit(newPokemonName) {
+    setSubmittedPokemonName(newPokemonName)
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    setState({submittedPokemon: pokemonName.toLowerCase()})
-  }
-
-  function handleSelect(pokemonName) {
-    setState({pokemonName, submittedPokemon: pokemonName})
+  function handleSelect(newPokemonName) {
+    setTypedPokemonName(newPokemonName)
+    setSubmittedPokemonName(newPokemonName)
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <form
+    <div className="pokemon-info-app">
+      <PokemonForm
         onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <label htmlFor="pokemonName-input">Pokemon Name</label>
-        <small>
-          Try{' '}
-          <InvisibleButton onClick={() => handleSelect('pikachu')}>
-            "pikachu"
-          </InvisibleButton>
-          {', '}
-          <InvisibleButton onClick={() => handleSelect('charizard')}>
-            "charizard"
-          </InvisibleButton>
-          {', or '}
-          <InvisibleButton onClick={() => handleSelect('mew')}>
-            "mew"
-          </InvisibleButton>
-        </small>
-        <div>
-          <input
-            id="pokemonName-input"
-            name="pokemonName"
-            value={pokemonName}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+        typedPokemonName={typedPokemonName}
+        onChange={setTypedPokemonName}
+      />
       <hr />
       <PokemonSection
         onSelect={handleSelect}
-        submittedPokemon={submittedPokemon}
+        submittedPokemon={submittedPokemonName}
       />
     </div>
   )

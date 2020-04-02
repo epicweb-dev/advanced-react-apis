@@ -3,18 +3,13 @@
 
 import React from 'react'
 
-// 🦉 I recommend you look down at the App example to make sure you
-// understand the structure and how these components will be used.
-
 // 🐨 create your CountContext here with React.createContext
 
-function CountProvider(props) {
-  // 🐨 get the count state and setCount updater with React.useState
-  // 🐨 create a `value` array with count and setCount
-  // 🐨 return your context provider with the value assigned to that array and forward all the other props
-  // 💰 more specifically, we need the children prop forwarded to the context provider
-  return 'TODO...'
-}
+// 🐨 create a CountProvider component here that does this:
+//   🐨 get the count state and setCount updater with React.useState
+//   🐨 create a `value` array with count and setCount
+//   🐨 return your context provider with the value assigned to that array and forward all the other props
+//   💰 more specifically, we need the children prop forwarded to the context provider
 
 function CountDisplay() {
   // 🐨 get the count from useContext with the CountContext
@@ -32,10 +27,12 @@ function Counter() {
 function App() {
   return (
     <div>
-      <CountProvider>
-        <CountDisplay />
-        <Counter />
-      </CountProvider>
+      {/*
+        🐨 wrap these two components in the CountProvider so they can access
+        the CountContext value
+      */}
+      <CountDisplay />
+      <Counter />
     </div>
   )
 }

@@ -1,18 +1,29 @@
 import React from 'react'
-import {render, screen, fireEvent, waitFor} from '@testing-library/react'
+import {
+  render,
+  screen,
+  fireEvent,
+  waitForElementToBeRemoved,
+} from '@testing-library/react'
 import App from '../final/03.extra-1'
 // import App from '../exercise/03.extra-1'
 
 beforeAll(() => {
   window.fetch.mockImplementation(() =>
-    Promise.resolve({json: () => Promise.resolve({data: {pokemon: {}}})}),
+    Promise.resolve({
+      json: () => Promise.resolve({data: {pokemon: {attacks: {special: []}}}}),
+    }),
   )
 })
 
 test('displays the pokemon', async () => {
+  let fakePokemonName = 'FAKE POKEMON'
   window.fetch.mockImplementationOnce(() =>
     Promise.resolve({
-      json: () => Promise.resolve({data: {pokemon: {id: 'fake-id'}}}),
+      json: () =>
+        Promise.resolve({
+          data: {pokemon: {name: fakePokemonName, attacks: {special: []}}},
+        }),
     }),
   )
   render(<App />)
@@ -22,13 +33,8 @@ test('displays the pokemon', async () => {
   // verify that an initial request is made when mounted
   fireEvent.change(input, {target: {value: 'jeffry'}})
   fireEvent.click(submit)
-  await waitFor(
-    () =>
-      expect(screen.getByTestId('pokemon-display')).toHaveTextContent(
-        'fake-id',
-      ),
-    {timeout: 100},
-  )
+  await waitForElementToBeRemoved(() => screen.getAllByText(/loading/i))
+  expect(screen.getByText(fakePokemonName)).toBeInTheDocument()
   expect(window.fetch).toHaveBeenCalledTimes(1)
   expect(window.fetch).toHaveBeenCalledWith('https://graphql-pokemon.now.sh', {
     method: 'POST',
@@ -39,20 +45,19 @@ test('displays the pokemon', async () => {
   window.fetch.mockClear()
 
   // verify that a request is made when props change
+  fakePokemonName = 'ANOTHER FAKE'
   window.fetch.mockImplementationOnce(() =>
     Promise.resolve({
-      json: () => Promise.resolve({data: {pokemon: {id: 'id-that-is-fake'}}}),
+      json: () =>
+        Promise.resolve({
+          data: {pokemon: {name: fakePokemonName, attacks: {special: []}}},
+        }),
     }),
   )
   fireEvent.change(input, {target: {value: 'fred'}})
   fireEvent.click(submit)
-  await waitFor(
-    () =>
-      expect(screen.getByTestId('pokemon-display')).toHaveTextContent(
-        'id-that-is-fake',
-      ),
-    {timeout: 100},
-  )
+  await waitForElementToBeRemoved(() => screen.getAllByText(/loading/i))
+  expect(screen.getByText(fakePokemonName)).toBeInTheDocument()
   expect(window.fetch).toHaveBeenCalledTimes(1)
   expect(window.fetch).toHaveBeenCalledWith('https://graphql-pokemon.now.sh', {
     method: 'POST',
@@ -71,16 +76,10 @@ test('displays the pokemon', async () => {
 
   // verify that an error renders an error
   window.fetch.mockImplementationOnce(() =>
-    Promise.reject({
-      error: 'some fake error',
-    }),
+    Promise.reject({message: 'some fake error'}),
   )
 
   fireEvent.change(input, {target: {value: 'george'}})
   fireEvent.click(submit)
-  await waitFor(
-    () =>
-      expect(screen.getByTestId('pokemon-display')).toHaveTextContent(/error/i),
-    {timeout: 100},
-  )
+  expect(await screen.findByText('some fake error')).toBeInTheDocument()
 })

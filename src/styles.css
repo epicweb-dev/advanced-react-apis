@@ -1,28 +1,49 @@
-/*
-Taken from the vanilla-tilt.js demo site:
-https://micku7zu.github.io/vanilla-tilt.js/index.html
-*/
-.tilt-root {
-  height: 150px;
-  background-color: red;
-  width: 200px;
-  background-image: -webkit-linear-gradient(315deg, #ff00ba 0%, #fae713 100%);
-  background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
-  transform-style: preserve-3d;
-  will-change: transform;
-  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+.pokemon-info-app a {
+  color: #cc0000;
 }
-.tilt-child {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translateZ(30px) translateX(-50%) translateY(-50%);
-  box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
-  background-color: white;
+
+.pokemon-info-app a:focus,
+.pokemon-info-app a:hover,
+.pokemon-info-app a:active {
+  color: #8a0000;
 }
-.totally-centered {
+
+.pokemon-info-app input {
+  line-height: 2;
+  font-size: 16px;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  border: none;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #eee;
+}
+
+.pokemon-info-app button {
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ff0000;
+  background-color: #cc0000;
+  cursor: pointer;
+  padding: 8px 10px;
+  color: #eee;
+  border-radius: 3px;
+}
+
+.pokemon-info-app button:disabled {
+  border-color: #dc9494;
+  background-color: #f16161;
+  cursor: unset;
+}
+
+.pokemon-info-app button:hover:not(:disabled),
+.pokemon-info-app button:active:not(:disabled),
+.pokemon-info-app button:focus:not(:disabled) {
+  border-color: #cc0000;
+  background-color: #8a0000;
+}
+
+.pokemon-info-app .totally-centered {
   width: 100%;
   height: 100%;
   display: flex;
@@ -30,52 +51,125 @@ https://micku7zu.github.io/vanilla-tilt.js/index.html
   align-items: center;
 }
 
-.game {
-  font: 14px 'Century Gothic', Futura, sans-serif;
-  margin: 20px;
-  min-height: 260px;
+.pokemon-info-app {
+  max-width: 500px;
+  margin: auto;
+}
+[class*='_isolated'] .pokemon-info-app {
+  margin-top: 50px;
 }
 
-.game ol,
-.game ul {
-  padding-left: 30px;
-}
-
-.board-row:after {
-  clear: both;
-  content: '';
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
-
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
-}
-
-.square:focus {
-  outline: none;
-  background: #ddd;
-}
-
-.game {
+.pokemon-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
 }
 
-.game-info {
-  margin-left: 20px;
+.pokemon-form input {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.pokemon-info {
+  height: 400px;
+  width: 300px;
+  margin: auto;
+  overflow: auto;
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 10px;
+  position: relative;
+}
+
+.pokemon-info.pokemon-loading {
+  opacity: 0.6;
+  transition: opacity 0s;
+  /* note: the transition delay is the same as the busyDelayMs config */
+  transition-delay: 0.4s;
+}
+
+.pokemon-info h2 {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.3em;
+}
+
+.pokemon-info img {
+  max-width: 100%;
+  max-height: 200px;
+}
+
+.pokemon-info .pokemon-info__img-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pokemon-info .pokemon-info__fetch-time {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+}
+
+.pokemon-info-app button.invisible-button {
+  border: none;
+  padding: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: inherit;
+  background-color: transparent;
+  color: #000;
+}
+.pokemon-info-app button.invisible-button:hover,
+.pokemon-info-app button.invisible-button:active,
+.pokemon-info-app button.invisible-button:focus {
+  border: none;
+  background-color: transparent;
+}
+
+.friends .header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.friends .header > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.friends .header > nav {
+  flex: 1;
+}
+
+.friends .header > nav ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  padding-left: 0;
+}
+
+.messaging-app {
+  max-width: 350px;
+  margin: auto;
+}
+
+[class*='_isolated'] .messaging-app {
+  margin-top: 50px;
+}
+
+.messaging-app [role='log'] {
+  margin: auto;
+  height: 300px;
+  overflow-y: scroll;
+  width: 300px;
+  outline: 1px solid black;
+  padding: 30px 10px;
+}
+
+.messaging-app [role='log'] hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }

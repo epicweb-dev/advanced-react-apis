@@ -23,22 +23,11 @@ const MessagesDisplay = React.forwardRef(function MessagesDisplay(
   }))
 
   return (
-    <div
-      ref={containerRef}
-      role="log"
-      style={{
-        height: 300,
-        overflowY: 'scroll',
-        width: 300,
-        outline: '1px solid black',
-        paddingLeft: 10,
-        paddingRight: 10,
-      }}
-    >
-      {messages.map(message => (
+    <div ref={containerRef} role="log">
+      {messages.map((message, index, array) => (
         <div key={message.id}>
           <strong>{message.author}</strong>: <span>{message.content}</span>
-          <hr />
+          {array.length - 1 === index ? null : <hr />}
         </div>
       ))}
     </div>
@@ -49,14 +38,19 @@ function App() {
   const messageDisplayRef = React.useRef()
   const [messages, setMessages] = React.useState(allMessages.slice(0, 8))
   const addMessage = () =>
-    setMessages(allMessages.slice(0, messages.length + 1))
+    messages.length < allMessages.length
+      ? setMessages(allMessages.slice(0, messages.length + 1))
+      : null
   const removeMessage = () =>
-    setMessages(allMessages.slice(0, messages.length - 1))
+    messages.length > 0
+      ? setMessages(allMessages.slice(0, messages.length - 1))
+      : null
+
   const scrollToTop = () => messageDisplayRef.current.scrollToTop()
   const scrollToBottom = () => messageDisplayRef.current.scrollToBottom()
 
   return (
-    <div>
+    <div className="messaging-app">
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <button onClick={addMessage}>add message</button>
         <button onClick={removeMessage}>remove message</button>

@@ -1,9 +1,14 @@
 // useCallback: custom hooks
-// 💯 make safeDispatch with useCallback, useRef, and useEffect
-// http://localhost:3000/isolated/final/02.extra.3.js
+// 💯 return a memoized `run` function from useAsync
+// http://localhost:3000/isolated/final/02.extra-3.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
+import {
+  PokemonForm,
+  PokemonDataView,
+  PokemonInfoFallback,
+} from '../pokemon-components'
 
 function useSafeDispatch(dispatch) {
   const mounted = React.useRef(false)
@@ -80,113 +85,42 @@ function PokemonInfo({pokemonName}) {
     return run(fetchPokemon(pokemonName))
   }, [pokemonName, run])
 
-  let info
   if (status === 'idle') {
-    info = 'Submit a pokemon'
+    return 'Submit a pokemon'
   } else if (status === 'pending') {
-    info = '...'
+    return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    info = (
+    return (
       <div>
-        There was an error: <pre>{error.message}</pre>
+        There was an error:{' '}
+        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
       </div>
     )
   } else if (status === 'resolved') {
-    info = <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+    return (
+      <div>
+        <div className="pokemon-info__img-wrapper">
+          <img src={pokemon.image} alt={pokemon.name} />
+        </div>
+        <PokemonDataView pokemon={pokemon} />
+      </div>
+    )
   }
-
-  return (
-    <div
-      style={{
-        height: 300,
-        width: 300,
-        overflow: 'scroll',
-        backgroundColor: '#eee',
-        borderRadius: 4,
-        padding: 10,
-      }}
-    >
-      {info}
-    </div>
-  )
-}
-
-function InvisibleButton(props) {
-  return (
-    <button
-      type="button"
-      style={{
-        border: 'none',
-        padding: 'inherit',
-        fontSize: 'inherit',
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        fontWeight: 'inherit',
-      }}
-      {...props}
-    />
-  )
 }
 
 function App() {
-  const [{submittedPokemon, pokemonName}, setState] = React.useReducer(
-    (state, action) => ({...state, ...action}),
-    {submittedPokemon: '', pokemonName: ''},
-  )
+  const [pokemonName, setPokemonName] = React.useState(null)
 
-  function handleChange(e) {
-    setState({pokemonName: e.target.value})
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault()
-    setState({submittedPokemon: pokemonName.toLowerCase()})
-  }
-
-  function handleSelect(pokemonName) {
-    setState({pokemonName, submittedPokemon: pokemonName})
+  function handleSubmit(newPokemonName) {
+    setPokemonName(newPokemonName)
   }
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column'}}>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <label htmlFor="pokemonName-input">Pokemon Name</label>
-        <small>
-          Try{' '}
-          <InvisibleButton onClick={() => handleSelect('pikachu')}>
-            "pikachu"
-          </InvisibleButton>
-          {', '}
-          <InvisibleButton onClick={() => handleSelect('charizard')}>
-            "charizard"
-          </InvisibleButton>
-          {', or '}
-          <InvisibleButton onClick={() => handleSelect('mew')}>
-            "mew"
-          </InvisibleButton>
-        </small>
-        <div>
-          <input
-            id="pokemonName-input"
-            name="pokemonName"
-            value={pokemonName}
-            onChange={handleChange}
-          />
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+    <div className="pokemon-info-app">
+      <PokemonForm onSubmit={handleSubmit} />
       <hr />
-      <div style={{display: 'flex'}}>
-        <div style={{marginLeft: 10}} data-testid="pokemon-display">
-          <PokemonInfo pokemonName={submittedPokemon} />
-        </div>
+      <div className="pokemon-info">
+        <PokemonInfo pokemonName={pokemonName} />
       </div>
     </div>
   )
