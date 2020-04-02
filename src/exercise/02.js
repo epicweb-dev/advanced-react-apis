@@ -35,7 +35,7 @@ function PokemonInfo({pokemonName}) {
   // here's how you use it:
   // const state = useAsync(() => {
   //   if (!pokemonName) {
-  //     return Promise.resolve(null)
+  //     return
   //   }
   //   return fetchPokemon(pokemonName)
   // }, [pokemonName])
