@@ -5,8 +5,8 @@ import {
   fireEvent,
   waitForElementToBeRemoved,
 } from '@testing-library/react'
-import App from '../final/03.extra-1'
-// import App from '../exercise/03.extra-1'
+import App from '../final/03.extra-2'
+// import App from '../exercise/03.extra-2'
 
 beforeAll(() => {
   window.fetch.mockImplementation(() =>

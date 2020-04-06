@@ -1,5 +1,5 @@
 // useCallback: custom hooks
-// http://localhost:3000/isolated/final/02.js
+// http://localhost:3000/isolated/exercise/02.js
 
 import React from 'react'
 import fetchPokemon from '../fetch-pokemon'
