@@ -1,14 +1,15 @@
 // useCallback: custom hooks
-// 💯 return a memoized `run` function from useAsync
+// 💯 make safeDispatch with useCallback, useRef, and useEffect
 // http://localhost:3000/isolated/final/02.extra-3.js
 
 import React from 'react'
-import fetchPokemon from '../fetch-pokemon'
+import {ErrorBoundary} from '../utils'
 import {
+  fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
-} from '../pokemon-components'
+} from '../pokemon'
 
 function useSafeDispatch(dispatch) {
   const mounted = React.useRef(false)
@@ -90,22 +91,21 @@ function PokemonInfo({pokemonName}) {
   } else if (status === 'pending') {
     return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    return (
-      <div>
-        There was an error:{' '}
-        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
-      </div>
-    )
+    throw error
   } else if (status === 'resolved') {
-    return (
-      <div>
-        <div className="pokemon-info__img-wrapper">
-          <img src={pokemon.image} alt={pokemon.name} />
-        </div>
-        <PokemonDataView pokemon={pokemon} />
-      </div>
-    )
+    return <PokemonDataView pokemon={pokemon} />
   }
+
+  throw new Error('This should be impossible')
+}
+
+function ErrorFallback({error}) {
+  return (
+    <div role="alert">
+      There was an error:{' '}
+      <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
+    </div>
+  )
 }
 
 function App() {
@@ -120,7 +120,9 @@ function App() {
       <PokemonForm onSubmit={handleSubmit} />
       <hr />
       <div className="pokemon-info">
-        <PokemonInfo pokemonName={pokemonName} />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <PokemonInfo pokemonName={pokemonName} />
+        </ErrorBoundary>
       </div>
     </div>
   )

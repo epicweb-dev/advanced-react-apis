@@ -2,12 +2,12 @@
 // http://localhost:3000/isolated/exercise/02.js
 
 import React from 'react'
-import fetchPokemon from '../fetch-pokemon'
 import {
+  fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
-} from '../pokemon-components'
+} from '../pokemon'
 
 // 🐨 this is going to be our generic asyncReducer
 function pokemonInfoReducer(state, action) {

@@ -6,13 +6,13 @@
 // this in the regular exercise file.
 
 import React from 'react'
-import fetchPokemon from '../fetch-pokemon'
+import {useAsync, ErrorBoundary} from '../utils'
 import {
+  fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
-} from '../pokemon-components'
-import {useAsync} from '../utils'
+} from '../pokemon'
 
 const PokemonCacheContext = React.createContext()
 
@@ -43,6 +43,7 @@ function PokemonInfo({pokemonName}) {
     } else if (cache[pokemonName]) {
       setData(cache[pokemonName])
     } else {
+      console.log('calling fetchPokemon', pokemonName, cache)
       run(
         fetchPokemon(pokemonName).then(pokemonData => {
           dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData})
@@ -57,22 +58,13 @@ function PokemonInfo({pokemonName}) {
   } else if (status === 'pending') {
     return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    return (
-      <div>
-        There was an error:{' '}
-        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
-      </div>
-    )
+    // this will be handled by an error boundary
+    throw error
   } else if (status === 'resolved') {
-    return (
-      <div>
-        <div className="pokemon-info__img-wrapper">
-          <img src={pokemon.image} alt={pokemon.name} />
-        </div>
-        <PokemonDataView pokemon={pokemon} />
-      </div>
-    )
+    return <PokemonDataView pokemon={pokemon} />
   }
+
+  throw new Error('This should be impossible')
 }
 
 function PreviousPokemon({onSelect}) {
@@ -96,16 +88,27 @@ function PreviousPokemon({onSelect}) {
   )
 }
 
-function PokemonSection({onSelect, submittedPokemon}) {
+function PokemonSection({onSelect, pokemonName}) {
   return (
     <PokemonCacheProvider>
       <div style={{display: 'flex'}}>
         <PreviousPokemon onSelect={onSelect} />
-        <div className="pokemon-info" style={{marginLeft: 10}}>
-          <PokemonInfo pokemonName={submittedPokemon} />
+        <div className="pokemon-info">
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <PokemonInfo pokemonName={pokemonName} />
+          </ErrorBoundary>
         </div>
       </div>
     </PokemonCacheProvider>
+  )
+}
+
+function ErrorFallback({error}) {
+  return (
+    <div role="alert">
+      There was an error:{' '}
+      <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
+    </div>
   )
 }
 
@@ -132,7 +135,7 @@ function App() {
       <hr />
       <PokemonSection
         onSelect={handleSelect}
-        submittedPokemon={submittedPokemonName}
+        pokemonName={submittedPokemonName}
       />
     </div>
   )

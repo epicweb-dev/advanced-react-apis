@@ -1,5 +1,5 @@
 // useContext: simple Counter
-// 💯 💯 create a consumer hook
+// 💯 create a consumer hook
 // http://localhost:3000/isolated/final/03.extra-1.js
 
 import React from 'react'

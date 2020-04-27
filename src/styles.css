@@ -127,30 +127,6 @@
   background-color: transparent;
 }
 
-.friends .header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.friends .header > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.friends .header > nav {
-  flex: 1;
-}
-
-.friends .header > nav ul {
-  display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding-left: 0;
-}
-
 .messaging-app {
   max-width: 350px;
   margin: auto;

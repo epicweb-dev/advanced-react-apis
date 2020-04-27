@@ -6,12 +6,12 @@
 // this in the regular exercise file.
 
 import React from 'react'
-import fetchPokemon from '../fetch-pokemon'
 import {
+  fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
-} from '../pokemon-components'
+} from '../pokemon'
 import {useAsync} from '../utils'
 
 // 🐨 Create a PokemonCacheContext
