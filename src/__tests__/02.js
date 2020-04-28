@@ -7,6 +7,11 @@ beforeAll(() => {
   window.fetch.mockImplementation(() =>
     Promise.resolve({json: () => Promise.resolve({data: {pokemon: {}}})}),
   )
+  jest.spyOn(console, 'error')
+})
+
+afterEach(() => {
+  jest.resetAllMocks()
 })
 
 function buildPokemon(overrides) {
@@ -93,7 +98,13 @@ test('displays the pokemon', async () => {
     }),
   )
 
+  console.error.mockImplementation(() => {})
+
   fireEvent.change(input, {target: {value: 'george'}})
   fireEvent.click(submit)
   expect(await screen.findByRole('alert')).toHaveTextContent(fakeErrorMessage)
+  expect(console.error).toHaveBeenCalledTimes(2)
+
+  console.error.mockReset()
+  window.fetch.mockClear()
 })

@@ -7,6 +7,11 @@ beforeAll(() => {
   window.fetch.mockImplementation(() =>
     Promise.resolve({json: () => Promise.resolve({data: {pokemon: {}}})}),
   )
+  jest.spyOn(console, 'error')
+})
+
+afterEach(() => {
+  jest.resetAllMocks()
 })
 
 function buildPokemon(overrides) {
@@ -51,6 +56,11 @@ test('displays the pokemon', async () => {
   })
   window.fetch.mockClear()
 
+  // don't normally do this. We really should fix the reason this exists
+  // (by caching promises), but that's more advanced than people are ready
+  // for at this stage, so we'll do this for now...
+  await waitFor(() => {})
+
   // verify that a request is made when props change
   const fakePokemon2 = buildPokemon({name: 'fred'})
   window.fetch.mockImplementationOnce(() =>
@@ -62,7 +72,7 @@ test('displays the pokemon', async () => {
   fireEvent.change(input, {target: {value: fakePokemon2.name}})
   fireEvent.click(submit)
 
-  await screen.findByRole('heading', {name: new RegExp(fakePokemon.name, 'i')})
+  await screen.findByRole('heading', {name: new RegExp(fakePokemon2.name, 'i')})
 
   expect(window.fetch).toHaveBeenCalledWith('https://graphql-pokemon.now.sh', {
     method: 'POST',
@@ -93,7 +103,20 @@ test('displays the pokemon', async () => {
     }),
   )
 
+  console.error.mockImplementation(() => {})
+
   fireEvent.change(input, {target: {value: 'george'}})
   fireEvent.click(submit)
   expect(await screen.findByRole('alert')).toHaveTextContent(fakeErrorMessage)
+  expect(console.error).toHaveBeenCalledTimes(2)
+
+  console.error.mockReset()
+  window.fetch.mockClear()
+
+  // use the cached value
+  fireEvent.click(
+    screen.getByRole('button', {name: new RegExp(fakePokemon.name, 'i')}),
+  )
+  expect(window.fetch).not.toHaveBeenCalled()
+  await screen.findByRole('heading', {name: new RegExp(fakePokemon.name, 'i')})
 })

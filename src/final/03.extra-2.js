@@ -43,7 +43,6 @@ function PokemonInfo({pokemonName}) {
     } else if (cache[pokemonName]) {
       setData(cache[pokemonName])
     } else {
-      console.log('calling fetchPokemon', pokemonName, cache)
       run(
         fetchPokemon(pokemonName).then(pokemonData => {
           dispatch({type: 'ADD_POKEMON', pokemonName, pokemonData})
