@@ -31,11 +31,12 @@ function asyncReducer(state, action) {
   }
 }
 
-function useAsync() {
+function useAsync(initialState) {
   const [state, unsafeDispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
     data: null,
     error: null,
+    ...initialState,
   })
 
   const dispatch = useSafeDispatch(unsafeDispatch)

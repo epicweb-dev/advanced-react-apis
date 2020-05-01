@@ -36,7 +36,9 @@ function PokemonCacheProvider(props) {
 function PokemonInfo({pokemonName}) {
   const [cache, dispatch] = React.useContext(PokemonCacheContext)
 
-  const {data: pokemon, status, error, run, setData} = useAsync()
+  const {data: pokemon, status, error, run, setData} = useAsync({
+    status: pokemonName ? 'pending' : 'idle',
+  })
 
   React.useEffect(() => {
     if (!pokemonName) {

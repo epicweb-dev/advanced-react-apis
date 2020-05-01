@@ -34,15 +34,19 @@ function pokemonInfoReducer(state, action) {
 function PokemonInfo({pokemonName}) {
   // 🐨 move both the useReducer and useEffect hooks to a custom hook called useAsync
   // here's how you use it:
-  // const state = useAsync(() => {
-  //   if (!pokemonName) {
-  //     return
-  //   }
-  //   return fetchPokemon(pokemonName)
-  // }, [pokemonName])
+  // const state = useAsync(
+  //   () => {
+  //     if (!pokemonName) {
+  //       return
+  //     }
+  //     return fetchPokemon(pokemonName)
+  //   },
+  //   {status: pokemonName ? 'pending' : 'idle'},
+  //   [pokemonName],
+  // )
   // 🐨 so you're job is to create a useAsync function that makes this work.
   const [state, dispatch] = React.useReducer(pokemonInfoReducer, {
-    status: 'idle',
+    status: pokemonName ? 'pending' : 'idle',
     // 🐨 this'll need to be "data" instead of "pokemon"
     pokemon: null,
     error: null,
@@ -87,14 +91,7 @@ function PokemonInfo({pokemonName}) {
       </div>
     )
   } else if (status === 'resolved') {
-    return (
-      <div>
-        <div className="pokemon-info__img-wrapper">
-          <img src={pokemon.image} alt={pokemon.name} />
-        </div>
-        <PokemonDataView pokemon={pokemon} />
-      </div>
-    )
+    return <PokemonDataView pokemon={pokemon} />
   }
 }
 
