@@ -12,7 +12,7 @@ function Counter({step = 1, initialCount = 0}) {
   // changes to the next two lines of code! Remember:
   // The 1st argument is called "state" - the current value of count
   // The 2nd argument is called "action" - the value passed to setCount
-  const increment = () => setCount(count + 1)
+  const increment = () => setCount(count + step)
   return <button onClick={increment}>{count}</button>
 }
 
