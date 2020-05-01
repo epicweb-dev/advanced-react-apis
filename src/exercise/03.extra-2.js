@@ -11,6 +11,7 @@ import {
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
+  PokemonErrorBoundary,
 } from '../pokemon'
 import {useAsync} from '../utils'
 
@@ -89,44 +90,40 @@ function PreviousPokemon({onSelect}) {
   )
 }
 
-function PokemonSection({onSelect, submittedPokemon}) {
+function PokemonSection({onSelect, pokemonName}) {
   // 🐨 wrap this in the PokemonCacheProvider so the PreviousPokemon
   // and PokemonInfo components have access to that context.
   return (
     <div style={{display: 'flex'}}>
       <PreviousPokemon onSelect={onSelect} />
       <div className="pokemon-info" style={{marginLeft: 10}}>
-        <PokemonInfo pokemonName={submittedPokemon} />
+        <PokemonErrorBoundary
+          onReset={() => onSelect('')}
+          resetKeys={[pokemonName]}
+        >
+          <PokemonInfo pokemonName={pokemonName} />
+        </PokemonErrorBoundary>
       </div>
     </div>
   )
 }
 
 function App() {
-  const [typedPokemonName, setTypedPokemonName] = React.useState(null)
-  const [submittedPokemonName, setSubmittedPokemonName] = React.useState(null)
+  const [pokemonName, setPokemonName] = React.useState(null)
 
   function handleSubmit(newPokemonName) {
-    setSubmittedPokemonName(newPokemonName)
+    setPokemonName(newPokemonName)
   }
 
   function handleSelect(newPokemonName) {
-    setTypedPokemonName(newPokemonName)
-    setSubmittedPokemonName(newPokemonName)
+    setPokemonName(newPokemonName)
   }
 
   return (
     <div className="pokemon-info-app">
-      <PokemonForm
-        onSubmit={handleSubmit}
-        typedPokemonName={typedPokemonName}
-        onChange={setTypedPokemonName}
-      />
+      <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
       <hr />
-      <PokemonSection
-        onSelect={handleSelect}
-        submittedPokemon={submittedPokemonName}
-      />
+      <PokemonSection onSelect={handleSelect} pokemonName={pokemonName} />
     </div>
   )
 }

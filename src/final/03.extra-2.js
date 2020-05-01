@@ -60,7 +60,6 @@ function PokemonInfo({pokemonName}) {
   } else if (status === 'pending') {
     return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    // this will be handled by an error boundary
     throw error
   } else if (status === 'resolved') {
     return <PokemonDataView pokemon={pokemon} />
