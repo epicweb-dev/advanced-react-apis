@@ -3,12 +3,12 @@
 // http://localhost:3000/isolated/final/02.extra-2.js
 
 import React from 'react'
-import {ErrorBoundary} from '../utils'
 import {
   fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
+  PokemonErrorBoundary,
 } from '../pokemon'
 
 function asyncReducer(state, action) {
@@ -80,30 +80,25 @@ function PokemonInfo({pokemonName}) {
   throw new Error('This should be impossible')
 }
 
-function ErrorFallback({error}) {
-  return (
-    <div role="alert">
-      There was an error:{' '}
-      <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
-    </div>
-  )
-}
-
 function App() {
-  const [pokemonName, setPokemonName] = React.useState(null)
+  const [pokemonName, setPokemonName] = React.useState('')
 
   function handleSubmit(newPokemonName) {
     setPokemonName(newPokemonName)
   }
 
+  function handleReset() {
+    setPokemonName('')
+  }
+
   return (
     <div className="pokemon-info-app">
-      <PokemonForm onSubmit={handleSubmit} />
+      <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
       <hr />
       <div className="pokemon-info">
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <PokemonErrorBoundary onReset={handleReset} resetKeys={[pokemonName]}>
           <PokemonInfo pokemonName={pokemonName} />
-        </ErrorBoundary>
+        </PokemonErrorBoundary>
       </div>
     </div>
   )

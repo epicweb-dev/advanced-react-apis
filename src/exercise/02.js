@@ -7,6 +7,7 @@ import {
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
+  PokemonErrorBoundary,
 } from '../pokemon'
 
 // 🐨 this is going to be our generic asyncReducer
@@ -98,18 +99,24 @@ function PokemonInfo({pokemonName}) {
 }
 
 function App() {
-  const [pokemonName, setPokemonName] = React.useState(null)
+  const [pokemonName, setPokemonName] = React.useState('')
 
   function handleSubmit(newPokemonName) {
     setPokemonName(newPokemonName)
   }
 
+  function handleReset() {
+    setPokemonName('')
+  }
+
   return (
     <div className="pokemon-info-app">
-      <PokemonForm onSubmit={handleSubmit} />
+      <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
       <hr />
       <div className="pokemon-info">
-        <PokemonInfo pokemonName={pokemonName} />
+        <PokemonErrorBoundary onReset={handleReset} resetKeys={[pokemonName]}>
+          <PokemonInfo pokemonName={pokemonName} />
+        </PokemonErrorBoundary>
       </div>
     </div>
   )

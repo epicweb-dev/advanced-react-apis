@@ -6,12 +6,13 @@
 // this in the regular exercise file.
 
 import React from 'react'
-import {useAsync, ErrorBoundary} from '../utils'
+import {useAsync} from '../utils'
 import {
   fetchPokemon,
   PokemonForm,
   PokemonDataView,
   PokemonInfoFallback,
+  PokemonErrorBoundary,
 } from '../pokemon'
 
 const PokemonCacheContext = React.createContext()
@@ -93,49 +94,34 @@ function PokemonSection({onSelect, pokemonName}) {
       <div style={{display: 'flex'}}>
         <PreviousPokemon onSelect={onSelect} />
         <div className="pokemon-info">
-          <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <PokemonErrorBoundary
+            onReset={() => onSelect('')}
+            resetKeys={[pokemonName]}
+          >
             <PokemonInfo pokemonName={pokemonName} />
-          </ErrorBoundary>
+          </PokemonErrorBoundary>
         </div>
       </div>
     </PokemonCacheProvider>
   )
 }
 
-function ErrorFallback({error}) {
-  return (
-    <div role="alert">
-      There was an error:{' '}
-      <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
-    </div>
-  )
-}
-
 function App() {
-  const [typedPokemonName, setTypedPokemonName] = React.useState(null)
-  const [submittedPokemonName, setSubmittedPokemonName] = React.useState(null)
+  const [pokemonName, setPokemonName] = React.useState(null)
 
   function handleSubmit(newPokemonName) {
-    setSubmittedPokemonName(newPokemonName)
+    setPokemonName(newPokemonName)
   }
 
   function handleSelect(newPokemonName) {
-    setTypedPokemonName(newPokemonName)
-    setSubmittedPokemonName(newPokemonName)
+    setPokemonName(newPokemonName)
   }
 
   return (
     <div className="pokemon-info-app">
-      <PokemonForm
-        onSubmit={handleSubmit}
-        typedPokemonName={typedPokemonName}
-        onChange={setTypedPokemonName}
-      />
+      <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
       <hr />
-      <PokemonSection
-        onSelect={handleSelect}
-        pokemonName={submittedPokemonName}
-      />
+      <PokemonSection onSelect={handleSelect} pokemonName={pokemonName} />
     </div>
   )
 }
