@@ -1,11 +1,14 @@
 // useDebugValue: useMedia
-// http://localhost:3000/isolated/final/06.js
+// 💯 use the format function
+// http://localhost:3000/isolated/final/06.extra-1.js
 
 import React from 'react'
 
+const formatDebugValue = ({query, state}) => `\`${query}\` => ${state}`
+
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
-  React.useDebugValue(`\`${query}\` => ${state}`)
+  React.useDebugValue({query, state}, formatDebugValue)
 
   React.useEffect(() => {
     let mounted = true

@@ -3,23 +3,23 @@
 
 import React from 'react'
 
-// 🐨 wrap this in a React.forwardRef and accept `ref` as the second argument
-function MessagesDisplay({messages}) {
+function MessagesDisplay({messages}, ref) {
   const containerRef = React.useRef()
   React.useLayoutEffect(() => {
     scrollToBottom()
   })
 
-  // 💰 you're gonna want this as part of your imperative methods
-  // function scrollToTop() {
-  //   containerRef.current.scrollTop = 0
-  // }
+  function scrollToTop() {
+    containerRef.current.scrollTop = 0
+  }
   function scrollToBottom() {
     containerRef.current.scrollTop = containerRef.current.scrollHeight
   }
 
-  // 🐨 call useImperativeHandle here with your ref and a callback function
-  // that returns an object with scrollToTop and scrollToBottom
+  React.useImperativeHandle(ref, () => ({
+    scrollToTop,
+    scrollToBottom,
+  }))
 
   return (
     <div ref={containerRef} role="log">
@@ -32,6 +32,8 @@ function MessagesDisplay({messages}) {
     </div>
   )
 }
+// eslint-disable-next-line no-func-assign
+MessagesDisplay = React.forwardRef(MessagesDisplay)
 
 function App() {
   const messageDisplayRef = React.useRef()

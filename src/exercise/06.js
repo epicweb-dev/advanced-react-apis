@@ -6,7 +6,7 @@ import React from 'react'
 function useMedia(query, initialState = false) {
   const [state, setState] = React.useState(initialState)
   // 🐨 call React.useDebugValue here.
-  // 💰 here's the formatted label I use: `useMedia(\`${query}\`) => ${state}`
+  // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
 
   React.useEffect(() => {
     let mounted = true
