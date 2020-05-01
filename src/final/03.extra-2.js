@@ -33,8 +33,18 @@ function PokemonCacheProvider(props) {
   return <PokemonCacheContext.Provider value={[cache, dispatch]} {...props} />
 }
 
+function usePokemonCache() {
+  const context = React.useContext(PokemonCacheContext)
+  if (!context) {
+    throw new Error(
+      'usePokemonCache must be used within a PokemonCacheProvider',
+    )
+  }
+  return context
+}
+
 function PokemonInfo({pokemonName}) {
-  const [cache, dispatch] = React.useContext(PokemonCacheContext)
+  const [cache, dispatch] = usePokemonCache()
 
   const {data: pokemon, status, error, run, setData} = useAsync({
     status: pokemonName ? 'pending' : 'idle',
@@ -69,7 +79,7 @@ function PokemonInfo({pokemonName}) {
 }
 
 function PreviousPokemon({onSelect}) {
-  const [cache] = React.useContext(PokemonCacheContext)
+  const [cache] = usePokemonCache()
   return (
     <div>
       Previous Pokemon
