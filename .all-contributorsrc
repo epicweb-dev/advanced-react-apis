@@ -83,8 +83,18 @@
       "contributions": [
         "fundingFinding"
       ]
+    },
+    {
+      "login": "motdde",
+      "name": "Oluwaseun Oyebade",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12215060?v=4",
+      "profile": "http://motdde.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
