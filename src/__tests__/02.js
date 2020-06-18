@@ -69,7 +69,7 @@ test('displays the pokemon', async () => {
   userEvent.type(input, fakePokemon2.name)
   userEvent.click(submit)
 
-  await screen.findByRole('heading', {name: new RegExp(fakePokemon.name, 'i')})
+  await screen.findByRole('heading', {name: new RegExp(fakePokemon2.name, 'i')})
 
   expect(window.fetch).toHaveBeenCalledTimes(1)
   expect(window.fetch).toHaveBeenCalledWith('https://graphql-pokemon.now.sh', {
