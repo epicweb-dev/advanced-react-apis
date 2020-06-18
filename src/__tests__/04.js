@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
+import {render} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../final/04'
 // import App from '../exercise/04'
 
@@ -9,8 +10,8 @@ test('adds and removes children from the log', () => {
   const chatCount = log.children.length
   const add = getByText(/add/i)
   const remove = getByText(/remove/i)
-  fireEvent.click(add)
+  userEvent.click(add)
   expect(log.children).toHaveLength(chatCount + 1)
-  fireEvent.click(remove)
+  userEvent.click(remove)
   expect(log.children).toHaveLength(chatCount)
 })

@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, screen, fireEvent, act} from '@testing-library/react'
+import {render, screen, act} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../final/03'
 // import App from '../exercises/03'
 
@@ -8,9 +9,9 @@ test('clicking the button increments the count', () => {
   const button = screen.getByText(/increment count/i)
   const display = screen.getByText(/the current count/i)
   expect(display).toHaveTextContent(/0/)
-  fireEvent.click(button)
+  userEvent.click(button)
   expect(display).toHaveTextContent(/1/)
-  fireEvent.click(button)
+  userEvent.click(button)
   expect(display).toHaveTextContent(/2/)
 })
 

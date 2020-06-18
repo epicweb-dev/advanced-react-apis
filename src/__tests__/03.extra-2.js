@@ -1,5 +1,6 @@
 import React from 'react'
-import {render, screen, fireEvent, waitFor} from '@testing-library/react'
+import {render, screen, waitFor} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../final/03.extra-2'
 // import App from '../exercise/03.extra-2'
 
@@ -42,8 +43,8 @@ test('displays the pokemon', async () => {
   const submit = screen.getByText(/^submit$/i)
 
   // verify that an initial request is made when mounted
-  fireEvent.change(input, {target: {value: fakePokemon.name}})
-  fireEvent.click(submit)
+  userEvent.type(input, fakePokemon.name)
+  userEvent.click(submit)
 
   await screen.findByRole('heading', {name: new RegExp(fakePokemon.name, 'i')})
 
@@ -69,8 +70,9 @@ test('displays the pokemon', async () => {
       json: () => Promise.resolve({data: {pokemon: fakePokemon2}}),
     }),
   )
-  fireEvent.change(input, {target: {value: fakePokemon2.name}})
-  fireEvent.click(submit)
+  userEvent.clear(input)
+  userEvent.type(input, fakePokemon2.name)
+  userEvent.click(submit)
 
   await screen.findByRole('heading', {name: new RegExp(fakePokemon2.name, 'i')})
 
@@ -84,7 +86,7 @@ test('displays the pokemon', async () => {
   window.fetch.mockClear()
 
   // verify that when props remain the same a request is not made
-  fireEvent.click(submit)
+  userEvent.click(submit)
 
   await screen.findByRole('heading', {name: new RegExp(fakePokemon2.name, 'i')})
 
@@ -105,8 +107,9 @@ test('displays the pokemon', async () => {
 
   console.error.mockImplementation(() => {})
 
-  fireEvent.change(input, {target: {value: 'george'}})
-  fireEvent.click(submit)
+  userEvent.clear(input)
+  userEvent.type(input, 'george')
+  userEvent.click(submit)
   expect(await screen.findByRole('alert')).toHaveTextContent(fakeErrorMessage)
   expect(console.error).toHaveBeenCalledTimes(2)
 
@@ -114,7 +117,7 @@ test('displays the pokemon', async () => {
   window.fetch.mockClear()
 
   // use the cached value
-  fireEvent.click(
+  userEvent.click(
     screen.getByRole('button', {name: new RegExp(fakePokemon.name, 'i')}),
   )
   expect(window.fetch).not.toHaveBeenCalled()

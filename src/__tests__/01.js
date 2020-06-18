@@ -1,13 +1,14 @@
 import React from 'react'
 import chalk from 'chalk'
-import {render, fireEvent} from '@testing-library/react'
+import {render} from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import App from '../final/01'
 // import App from '../exercise/01'
 
 test('clicking the button increments the count', () => {
   const {container} = render(<App />)
   const button = container.querySelector('button')
-  fireEvent.click(button)
+  userEvent.click(button)
   expect(button).toHaveTextContent('1')
 })
 
