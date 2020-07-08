@@ -6,6 +6,7 @@ source material for
 
 <div align="center">
   <a href="https://epicreact.dev">
+    <h2>EpicReact.Dev</h2>
     <img
       width="500"
       alt="Learn React from Start to Finish"
@@ -13,6 +14,8 @@ source material for
     />
   </a>
 </div>
+
+<hr />
 
 <!-- prettier-ignore-start -->
 [![Build Status][build-badge]][build]
