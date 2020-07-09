@@ -139,18 +139,18 @@ a complete authority.
 
 - 🏡 Utah
 - 👩 👧 👦 👦 👦 🐕
-- 🏢 kentcdodds.com
-- 🐦/🐙 @kentcdodds
-- 🏆 testingjavascript.com
-- 🥚 kcd.im/egghead
-- 🥋 kcd.im/fem
-- 💌 kcd.im/news
-- 📝 kcd.im/blog
-- 📺 kcd.im/devtips
-- 💻 kcd.im/coding
-- 📽 kcd.im/youtube
-- 🎙 kcd.im/3-mins
-- ❓ kcd.im/ama
+- 🏢 [kentcdodds.com](https://kentcdodds.com)
+- 🐦/🐙 [@kentcdodds](https://twitter.com/kentcdodds)
+- 🏆 [testingjavascript.com](https://testingjavascript.com)
+- 🥚 [kcd.im/egghead](https://kcd.im/egghead)
+- 🥋 [kcd.im/fem](https://kcd.im/fem)
+- 💌 [kcd.im/news](https://kcd.im/news)
+- 📝 [kcd.im/blog](https://kcd.im/blog)
+- 📺 [kcd.im/devtips](https://kcd.im/devtips)
+- 💻 [kcd.im/coding](https://kcd.im/coding)
+- 📽 [kcd.im/youtube](https://kcd.im/youtube)
+- 🎙 [kcd.im/3-mins](https://kcd.im/3-mins)
+- ❓ [kcd.im/ama](https://kcd.im/ama)
 
 ### Schedule
 
