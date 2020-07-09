@@ -92,6 +92,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "kevscript",
+      "name": "Kevin Ostafinski",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/28754130?v=4",
+      "profile": "http://kevinostafinski.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
