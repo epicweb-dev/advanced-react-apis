@@ -2,7 +2,7 @@ import matchMediaPolyfill from 'mq-polyfill'
 import React from 'react'
 import {render, act} from '@testing-library/react'
 import App from '../final/06'
-// import App from '../exercises/06'
+// import App from '../exercise/06'
 
 beforeAll(() => {
   matchMediaPolyfill(window)
