@@ -84,12 +84,7 @@ function PokemonInfo({pokemonName}) {
   } else if (status === 'pending') {
     return <PokemonInfoFallback name={pokemonName} />
   } else if (status === 'rejected') {
-    return (
-      <div>
-        There was an error:{' '}
-        <pre style={{whiteSpace: 'normal'}}>{error.message}</pre>
-      </div>
-    )
+    throw error
   } else if (status === 'resolved') {
     return <PokemonDataView pokemon={pokemon} />
   }
