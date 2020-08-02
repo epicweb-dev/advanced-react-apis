@@ -128,6 +128,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kylereblora",
+      "name": "Kyle Matthew Reblora",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/33372538?v=4",
+      "profile": "https://kylereblora.github.io/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
