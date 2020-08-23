@@ -159,11 +159,13 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://ricardobusquet.com"><img src="https://avatars1.githubusercontent.com/u/7198302?v=4" width="100px;" alt=""/><br /><sub><b>Ricardo Busquet</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=rbusquet" title="Code">💻</a></td>
     <td align="center"><a href="https://kylereblora.github.io/"><img src="https://avatars2.githubusercontent.com/u/33372538?v=4" width="100px;" alt=""/><br /><sub><b>Kyle Matthew Reblora</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=kylereblora" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/marcosvega91"><img src="https://avatars2.githubusercontent.com/u/5365582?v=4" width="100px;" alt=""/><br /><sub><b>Marco Moretti</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=marcosvega91" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
