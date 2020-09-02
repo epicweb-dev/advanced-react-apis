@@ -1,6 +1,8 @@
-/* For exercises 2 and 3, we're handling errors with an error boundary */
-body[class*='2'] iframe,
-body[class*='3'] iframe {
+/* For exercise 2 and 3, we're handling errors with an error boundary */
+body[class*='2'] :not(.render-container) > iframe,
+body[class*='2'] > iframe,
+body[class*='3'] :not(.render-container) > iframe,
+body[class*='3'] > iframe {
   display: none;
 }
 
