@@ -165,6 +165,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "fonstack",
+      "name": "Carlos Fontes",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35873992?v=4",
+      "profile": "https://fonstack.dev/",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
