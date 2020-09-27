@@ -5,9 +5,10 @@
 import React from 'react'
 
 function countReducer(state, action) {
-  switch (action.type) {
+  const {type, step} = action
+  switch (type) {
     case 'increment': {
-      return {count: state.count + 1}
+      return {count: state.count + step}
     }
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
@@ -20,7 +21,7 @@ function Counter({initialCount = 0, step = 1}) {
     count: initialCount,
   })
   const {count} = state
-  const increment = () => dispatch({type: 'increment'})
+  const increment = () => dispatch({type: 'increment', step})
   return <button onClick={increment}>{count}</button>
 }
 
