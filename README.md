@@ -165,6 +165,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/gugol2"><img src="https://avatars0.githubusercontent.com/u/4933016?v=4" width="100px;" alt=""/><br /><sub><b>Watchmaker</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=gugol2" title="Code">💻</a> <a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=gugol2" title="Documentation">📖</a></td>
     <td align="center"><a href="https://fonstack.dev/"><img src="https://avatars3.githubusercontent.com/u/35873992?v=4" width="100px;" alt=""/><br /><sub><b>Carlos Fontes</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/issues?q=author%3Afonstack" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/pritamsangani/"><img src="https://avatars3.githubusercontent.com/u/22857896?v=4" width="100px;" alt=""/><br /><sub><b>Pritam Sangani</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=PritamSangani" title="Code">💻</a></td>
+    <td align="center"><a href="http://wbeuil.com"><img src="https://avatars1.githubusercontent.com/u/8110579?v=4" width="100px;" alt=""/><br /><sub><b>William BEUIL</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=wbeuil" title="Documentation">📖</a></td>
   </tr>
 </table>
 
