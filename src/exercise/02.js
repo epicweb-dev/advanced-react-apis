@@ -47,7 +47,7 @@ function PokemonInfo({pokemonName}) {
   // 🐨 so you're job is to create a useAsync function that makes this work.
   const [state, dispatch] = React.useReducer(pokemonInfoReducer, {
     status: pokemonName ? 'pending' : 'idle',
-    // 🐨 this'll need to be "data" instead of "pokemon"
+    // 🐨 this will need to be "data" instead of "pokemon"
     pokemon: null,
     error: null,
   })
@@ -76,7 +76,7 @@ function PokemonInfo({pokemonName}) {
     // the react-hooks/exhaustive-deps rule. We'll fix this in an extra credit.
   }, [pokemonName])
 
-  // 🐨 this'll change from "pokemon" to "data"
+  // 🐨 this will change from "pokemon" to "data"
   const {pokemon, status, error} = state
 
   if (status === 'idle' || !pokemonName) {
