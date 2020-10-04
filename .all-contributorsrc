@@ -210,6 +210,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "joemaffei",
+      "name": "Joe Maffei",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/9068746?v=4",
+      "profile": "https://github.com/joemaffei",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
