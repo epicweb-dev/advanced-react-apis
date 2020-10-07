@@ -228,6 +228,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "rphuber",
+      "name": "Ryan Huber",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/8245890?v=4",
+      "profile": "http://blog.rphuber.com",
+      "contributions": [
+        "doc",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
