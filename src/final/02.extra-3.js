@@ -12,15 +12,20 @@ import {
 } from '../pokemon'
 
 function useSafeDispatch(dispatch) {
-  const mounted = React.useRef(false)
+  const mountedRef = React.useRef(false)
 
-  React.useLayoutEffect(() => {
-    mounted.current = true
-    return () => (mounted.current = false)
+  // to make this even more generic you should use the useLayoutEffect hook to
+  // make sure that you are correctly setting the mountedRef.current immediately
+  // after React updates the DOM. Even though this effect does not interact
+  // with the dom another side effect inside a useLayoutEffect which does
+  // interact with the dom may depend on the value being set
+  React.useEffect(() => {
+    mountedRef.current = true
+    return () => (mountedRef.current = false)
   }, [])
 
   return React.useCallback(
-    (...args) => (mounted.current ? dispatch(...args) : void 0),
+    (...args) => (mountedRef.current ? dispatch(...args) : void 0),
     [dispatch],
   )
 }
