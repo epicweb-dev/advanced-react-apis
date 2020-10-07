@@ -44,7 +44,7 @@ function PokemonInfo({pokemonName}) {
   //   {status: pokemonName ? 'pending' : 'idle'},
   //   [pokemonName],
   // )
-  // 🐨 so you're job is to create a useAsync function that makes this work.
+  // 🐨 so your job is to create a useAsync function that makes this work.
   const [state, dispatch] = React.useReducer(pokemonInfoReducer, {
     status: pokemonName ? 'pending' : 'idle',
     // 🐨 this will need to be "data" instead of "pokemon"
