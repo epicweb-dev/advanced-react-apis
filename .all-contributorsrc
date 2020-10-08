@@ -238,6 +238,15 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "dominicchapman",
+      "name": "Dominic Chapman",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/7607007?v=4",
+      "profile": "https://dominicchapman.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
