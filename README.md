@@ -179,6 +179,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/joemaffei"><img src="https://avatars1.githubusercontent.com/u/9068746?v=4" width="100px;" alt=""/><br /><sub><b>Joe Maffei</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=joemaffei" title="Documentation">📖</a></td>
     <td align="center"><a href="https://magrippis.com"><img src="https://avatars0.githubusercontent.com/u/3502800?v=4" width="100px;" alt=""/><br /><sub><b>Johnny Magrippis</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jmagrippis" title="Code">💻</a></td>
     <td align="center"><a href="http://blog.rphuber.com"><img src="https://avatars0.githubusercontent.com/u/8245890?v=4" width="100px;" alt=""/><br /><sub><b>Ryan Huber</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=rphuber" title="Documentation">📖</a> <a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=rphuber" title="Code">💻</a></td>
+    <td align="center"><a href="https://dominicchapman.com"><img src="https://avatars2.githubusercontent.com/u/7607007?v=4" width="100px;" alt=""/><br /><sub><b>Dominic Chapman</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=dominicchapman" title="Documentation">📖</a></td>
   </tr>
 </table>
 
