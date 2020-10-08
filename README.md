@@ -32,6 +32,13 @@
 
 - You should be experienced with `useState`, `useEffect`, and `useRef`.
 
+## Additional Resources
+
+- Videos
+  [Getting Closure on React Hooks by Shaen Wang](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
+  (26 minutes)
+
+
 ## System Requirements
 
 - [git][git] v2.13 or greater
