@@ -215,7 +215,7 @@ Thank you! https://kcd.im/arh-ws-feedback
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
 [build-badge]: https://img.shields.io/travis/kentcdodds/advanced-react-hooks.svg?style=flat-square&logo=travis
-[build]: https://travis-ci.org/kentcdodds/advanced-react-hooks
+[build]: https://travis-ci.com/kentcdodds/advanced-react-hooks
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
 [license]: https://github.com/kentcdodds/advanced-react-hooks/blob/main/LICENSE
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
