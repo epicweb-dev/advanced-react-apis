@@ -38,7 +38,6 @@
   [Getting Closure on React Hooks by Shaen Wang](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
   (26 minutes)
 
-
 ## System Requirements
 
 - [git][git] v2.13 or greater
@@ -59,6 +58,10 @@ variable and how to fix it here for [windows][win-path] or
 [mac/linux][mac-path].
 
 ## Setup
+
+> If you want to commit and push your work as you go, you'll want to
+> [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)
+> first and then clone your fork rather than this repo directly.
 
 After you've made sure to have the correct things (and versions) installed, you
 should be able to just run a few commands to get set up:
@@ -192,6 +195,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
