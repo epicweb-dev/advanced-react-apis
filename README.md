@@ -199,12 +199,12 @@ Thanks goes to these wonderful people
     <td align="center"><a href="http://blog.rphuber.com"><img src="https://avatars0.githubusercontent.com/u/8245890?v=4" width="100px;" alt=""/><br /><sub><b>Ryan Huber</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=rphuber" title="Documentation">📖</a> <a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=rphuber" title="Code">💻</a></td>
     <td align="center"><a href="https://dominicchapman.com"><img src="https://avatars2.githubusercontent.com/u/7607007?v=4" width="100px;" alt=""/><br /><sub><b>Dominic Chapman</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=dominicchapman" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/imalbert"><img src="https://avatars1.githubusercontent.com/u/12537973?v=4" width="100px;" alt=""/><br /><sub><b>imalbert</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=imalbert" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/Huuums"><img src="https://avatars1.githubusercontent.com/u/9745322?v=4" width="100px;" alt=""/><br /><sub><b>Dennis Collon</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=Huuums" title="Documentation">📖</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the
