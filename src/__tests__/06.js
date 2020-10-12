@@ -1,5 +1,6 @@
 import matchMediaPolyfill from 'mq-polyfill'
 import React from 'react'
+import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
 import {render, act} from '@testing-library/react'
 import App from '../final/06'
 // import App from '../exercise/06'
@@ -19,22 +20,31 @@ beforeAll(() => {
 test('works', () => {
   jest.spyOn(React, 'useDebugValue')
   const {container} = render(<App />)
-  expect(
-    React.useDebugValue,
+  alfredTip(
+    () => expect(React.useDebugValue).toHaveBeenCalled(),
     `Make sure to call \`useDebugValue\` with the formatted value`,
-  ).toHaveBeenCalled()
-  expect(
-    React.useDebugValue,
+  )
+  alfredTip(
+    () =>
+      expect(React.useDebugValue).toHaveBeenCalledWith(
+        expect.stringContaining('max-width: 699px'),
+      ),
     `Make sure to call \`useDebugValue\` with the formatted value`,
-  ).toHaveBeenCalledWith(expect.stringContaining('max-width: 699px'))
-  expect(
-    React.useDebugValue,
+  )
+  alfredTip(
+    () =>
+      expect(React.useDebugValue).toHaveBeenCalledWith(
+        expect.stringContaining('max-width: 999px'),
+      ),
     `Make sure to call \`useDebugValue\` with the formatted value`,
-  ).toHaveBeenCalledWith(expect.stringContaining('max-width: 999px'))
-  expect(
-    React.useDebugValue,
+  )
+  alfredTip(
+    () =>
+      expect(React.useDebugValue).toHaveBeenCalledWith(
+        expect.stringContaining('min-width: 1000px'),
+      ),
     `Make sure to call \`useDebugValue\` with the formatted value`,
-  ).toHaveBeenCalledWith(expect.stringContaining('min-width: 1000px'))
+  )
   const box = container.querySelector('[style]')
 
   act(() => {
