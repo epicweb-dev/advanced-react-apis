@@ -201,6 +201,9 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/imalbert"><img src="https://avatars1.githubusercontent.com/u/12537973?v=4" width="100px;" alt=""/><br /><sub><b>imalbert</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=imalbert" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/Huuums"><img src="https://avatars1.githubusercontent.com/u/9745322?v=4" width="100px;" alt=""/><br /><sub><b>Dennis Collon</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=Huuums" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/jrozbicki"><img src="https://avatars3.githubusercontent.com/u/35103924?v=4" width="100px;" alt=""/><br /><sub><b>Jakub Różbicki</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jrozbicki" title="Documentation">📖</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
