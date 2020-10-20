@@ -91,7 +91,7 @@ function PokemonInfo({pokemonName}) {
     if (!pokemonName) {
       return
     }
-    return run(fetchPokemon(pokemonName))
+    run(fetchPokemon(pokemonName))
   }, [pokemonName, run])
 
   if (status === 'idle') {
