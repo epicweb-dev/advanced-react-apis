@@ -283,6 +283,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "alexfertel",
+      "name": "Alexander Gonzalez",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/22298999?v=4",
+      "profile": "http://alexfertel.netlify.app",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
