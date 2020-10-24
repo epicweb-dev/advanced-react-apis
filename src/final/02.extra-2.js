@@ -36,8 +36,6 @@ function useAsync(initialState) {
     ...initialState,
   })
 
-  const {data, error, status} = state
-
   const run = React.useCallback(promise => {
     dispatch({type: 'pending'})
     promise.then(
@@ -51,9 +49,7 @@ function useAsync(initialState) {
   }, [])
 
   return {
-    error,
-    status,
-    data,
+    ...state,
     run,
   }
 }
