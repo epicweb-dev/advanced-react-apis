@@ -2,7 +2,7 @@
 // 💯 return a memoized `run` function from useAsync
 // http://localhost:3000/isolated/final/02.extra-2.js
 
-import React from 'react'
+import * as React from 'react'
 import {
   fetchPokemon,
   PokemonForm,

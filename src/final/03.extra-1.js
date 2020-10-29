@@ -2,7 +2,7 @@
 // 💯 create a consumer hook
 // http://localhost:3000/isolated/final/03.extra-1.js
 
-import React from 'react'
+import * as React from 'react'
 
 const CountContext = React.createContext()
 

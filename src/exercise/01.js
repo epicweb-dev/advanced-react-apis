@@ -1,7 +1,7 @@
 // useReducer: simple Counter
 // http://localhost:3000/isolated/exercise/01.js
 
-import React from 'react'
+import * as React from 'react'
 
 function Counter({initialCount = 0, step = 1}) {
   // 🐨 replace React.useState with React.useReducer.
