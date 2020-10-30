@@ -2,7 +2,7 @@
 // 💯 use the format function
 // http://localhost:3000/isolated/final/06.extra-1.js
 
-import React from 'react'
+import * as React from 'react'
 
 const formatDebugValue = ({query, state}) => `\`${query}\` => ${state}`
 

@@ -2,7 +2,7 @@
 // 💯 simulate setState with an object OR function
 // http://localhost:3000/isolated/final/01.extra-3.js
 
-import React from 'react'
+import * as React from 'react'
 
 const countReducer = (state, action) => ({
   ...state,

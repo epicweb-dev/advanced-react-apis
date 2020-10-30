@@ -1,7 +1,7 @@
 // useImperativeHandle: scroll to top/bottom
 // http://localhost:3000/isolated/final/05.js
 
-import React from 'react'
+import * as React from 'react'
 
 const MessagesDisplay = React.forwardRef(function MessagesDisplay(
   {messages},

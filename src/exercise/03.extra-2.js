@@ -5,7 +5,7 @@
 // you can edit this here and look at the isolated page or you can copy/paste
 // this in the regular exercise file.
 
-import React from 'react'
+import * as React from 'react'
 import {
   fetchPokemon,
   PokemonForm,
