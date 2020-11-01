@@ -310,6 +310,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "thegoodsheppard",
+      "name": "Greg Sheppard",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/13774377?v=4",
+      "profile": "https://github.com/thegoodsheppard",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
