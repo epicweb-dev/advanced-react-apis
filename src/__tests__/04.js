@@ -15,3 +15,34 @@ test('adds and removes children from the log', () => {
   userEvent.click(remove)
   expect(log.children).toHaveLength(chatCount)
 })
+
+test('scrolls to the bottom', () => {
+  const {getByText, getByRole} = render(<App />)
+  const log = getByRole('log')
+  const add = getByText(/add/i)
+  const remove = getByText(/remove/i)
+  const scrollTopSetter = jest.fn()
+  Object.defineProperties(log, {
+    scrollHeight: {
+      get() {
+        return 100
+      },
+    },
+    scrollTop: {
+      get() {
+        return 0
+      },
+      set: scrollTopSetter,
+    },
+  })
+
+  userEvent.click(add)
+  expect(scrollTopSetter).toHaveBeenCalledTimes(1)
+  expect(scrollTopSetter).toHaveBeenCalledWith(log.scrollHeight)
+
+  scrollTopSetter.mockClear()
+
+  userEvent.click(remove)
+  expect(scrollTopSetter).toHaveBeenCalledTimes(1)
+  expect(scrollTopSetter).toHaveBeenCalledWith(log.scrollHeight)
+})
