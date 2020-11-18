@@ -131,4 +131,22 @@ function App() {
   )
 }
 
-export default App
+function AppWithUnmountCheckbox() {
+  const [mountApp, setMountApp] = React.useState(true)
+  return (
+    <div>
+      <label>
+        <input
+          type="checkbox"
+          checked={mountApp}
+          onChange={e => setMountApp(e.target.checked)}
+        />{' '}
+        Mount Component
+      </label>
+      <hr />
+      {mountApp ? <App /> : null}
+    </div>
+  )
+}
+
+export default AppWithUnmountCheckbox
