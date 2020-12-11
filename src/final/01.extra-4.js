@@ -8,7 +8,10 @@ function countReducer(state, action) {
   const {type, step} = action
   switch (type) {
     case 'increment': {
-      return {count: state.count + step}
+      return {
+        ...state,
+        count: state.count + step,
+      }
     }
     default: {
       throw new Error(`Unsupported action type: ${action.type}`)
