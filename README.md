@@ -217,6 +217,9 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/thegoodsheppard"><img src="https://avatars1.githubusercontent.com/u/13774377?v=4" width="100px;" alt=""/><br /><sub><b>Greg Sheppard</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=thegoodsheppard" title="Documentation">📖</a></td>
     <td align="center"><a href="http://bobbywarner.com"><img src="https://avatars0.githubusercontent.com/u/554961?v=4" width="100px;" alt=""/><br /><sub><b>Bobby Warner</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=bobbywarner" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/jwm0"><img src="https://avatars0.githubusercontent.com/u/28310983?v=4" width="100px;" alt=""/><br /><sub><b>Jakub Majorek</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jwm0" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->
