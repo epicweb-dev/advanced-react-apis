@@ -1,5 +1,5 @@
 <div>
-  <h1 align="center"><a href="https://epicreact.dev">🔥 Advanced React Hooks 🚀 EpicReact.Dev</a></h1>
+  <h1 align="center"><a href="https://epicreact.dev/advanced-hooks">🔥 Advanced React Hooks 🚀 EpicReact.Dev</a></h1>
   <strong>
     Learn the more advanced React hooks and different patterns to enable great
     developer APIs for custom hooks.
