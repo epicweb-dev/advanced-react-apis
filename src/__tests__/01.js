@@ -12,6 +12,8 @@ test('clicking the button increments the count with useReducer', () => {
   const button = container.querySelector('button')
   userEvent.click(button)
   expect(button).toHaveTextContent('1')
+  userEvent.click(button)
+  expect(button).toHaveTextContent('2')
 
   alfredTip(() => {
     expect(React.useReducer).toHaveBeenCalled()
