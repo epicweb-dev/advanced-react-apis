@@ -2,8 +2,7 @@ import * as React from 'react'
 import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from '../final/01'
-// import App from '../exercise/01'
+import App from '../exercise/01'
 
 test('clicking the button increments the count with useReducer', () => {
   jest.spyOn(React, 'useReducer')
