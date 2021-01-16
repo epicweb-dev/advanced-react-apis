@@ -1,6 +1,6 @@
 // useContext: Caching response data in context
 // 💯 caching in a context provider (final)
-// http://localhost:3000/isolated/final/03.extra-2.js
+// http://localhost:3000/isolated/final-ts/03.extra-2.tsx
 
 // you can edit this here and look at the isolated page or you can copy/paste
 // this in the regular exercise file.
@@ -13,11 +13,25 @@ import {
   PokemonDataView,
   PokemonInfoFallback,
   PokemonErrorBoundary,
+  IPokemon,
 } from '../pokemon'
 
-const PokemonCacheContext = React.createContext()
+type PokemonCacheContextInterface = readonly [
+  cache: Record<string, IPokemon>,
+  dispatch: React.Dispatch<Action>,
+]
+const PokemonCacheContext = React.createContext<PokemonCacheContextInterface>(
+  undefined!,
+)
 
-function pokemonCacheReducer(state, action) {
+type PokemonName = string
+type State = Record<PokemonName, IPokemon>
+type Action = {
+  type: 'ADD_POKEMON'
+  pokemonData: IPokemon
+  pokemonName: PokemonName
+}
+const pokemonCacheReducer: React.Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case 'ADD_POKEMON': {
       return {...state, [action.pokemonName]: action.pokemonData}
@@ -28,12 +42,19 @@ function pokemonCacheReducer(state, action) {
   }
 }
 
-function PokemonCacheProvider(props) {
+function PokemonCacheProvider(props: {
+  children?: React.ReactNode
+}): JSX.Element {
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
-  return <PokemonCacheContext.Provider value={[cache, dispatch]} {...props} />
+  return (
+    <PokemonCacheContext.Provider
+      value={[cache, dispatch] as const}
+      {...props}
+    />
+  )
 }
 
-function usePokemonCache() {
+function usePokemonCache(): PokemonCacheContextInterface {
   const context = React.useContext(PokemonCacheContext)
   if (!context) {
     throw new Error(
@@ -43,14 +64,17 @@ function usePokemonCache() {
   return context
 }
 
-function PokemonInfo({pokemonName}) {
+interface PokemonInfoProps {
+  pokemonName: string
+}
+function PokemonInfo({pokemonName}: PokemonInfoProps): JSX.Element {
   const [cache, dispatch] = usePokemonCache()
 
-  const {state, run, setData} = useAsync({
+  const {state, run, setData} = useAsync<IPokemon>({
     status: pokemonName ? 'pending' : 'idle',
+    error: null,
+    data: null,
   })
-
-  const {data: pokemon, status, error} = state
 
   React.useEffect(() => {
     if (!pokemonName) {
@@ -67,20 +91,28 @@ function PokemonInfo({pokemonName}) {
     }
   }, [cache, dispatch, pokemonName, run, setData])
 
-  if (status === 'idle') {
-    return 'Submit a pokemon'
-  } else if (status === 'pending') {
-    return <PokemonInfoFallback name={pokemonName} />
-  } else if (status === 'rejected') {
-    throw error
-  } else if (status === 'resolved') {
-    return <PokemonDataView pokemon={pokemon} />
-  }
+  switch (state.status) {
+    case 'idle':
+      return <>Submit a pokemon</>
 
-  throw new Error('This should be impossible')
+    case 'pending':
+      return <PokemonInfoFallback name={pokemonName} />
+
+    case 'rejected':
+      throw state.error
+
+    case 'resolved':
+      return <PokemonDataView pokemon={state.data} />
+
+    default:
+      throw new Error('This should be impossible')
+  }
 }
 
-function PreviousPokemon({onSelect}) {
+interface PreviousPokemonProps {
+  onSelect: (pokemonName: string) => void
+}
+function PreviousPokemon({onSelect}: PreviousPokemonProps): JSX.Element {
   const [cache] = usePokemonCache()
   return (
     <div>
@@ -101,7 +133,14 @@ function PreviousPokemon({onSelect}) {
   )
 }
 
-function PokemonSection({onSelect, pokemonName}) {
+interface PokemonSectionProps {
+  onSelect: (pokemonName: string) => void
+  pokemonName: string
+}
+function PokemonSection({
+  onSelect,
+  pokemonName,
+}: PokemonSectionProps): JSX.Element {
   return (
     <PokemonCacheProvider>
       <div style={{display: 'flex'}}>
@@ -119,14 +158,14 @@ function PokemonSection({onSelect, pokemonName}) {
   )
 }
 
-function App() {
-  const [pokemonName, setPokemonName] = React.useState(null)
+function App(): JSX.Element {
+  const [pokemonName, setPokemonName] = React.useState<string>('')
 
-  function handleSubmit(newPokemonName) {
+  function handleSubmit(newPokemonName: string): void {
     setPokemonName(newPokemonName)
   }
 
-  function handleSelect(newPokemonName) {
+  function handleSelect(newPokemonName: string): void {
     setPokemonName(newPokemonName)
   }
 

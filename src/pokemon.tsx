@@ -1,13 +1,52 @@
 import * as React from 'react'
-import {ErrorBoundary} from 'react-error-boundary'
+import {ErrorBoundary, FallbackProps} from 'react-error-boundary'
 
-const formatDate = date =>
+const formatDate = (date: Date): string =>
   `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')} ${String(
     date.getSeconds(),
   ).padStart(2, '0')}.${String(date.getMilliseconds()).padStart(3, '0')}`
 
+//#region Pokemon interface
+
+interface FetchedAt {
+  fetchedAt: string
+}
+
+/** Represents a Pokémon */
+export interface Pokemon {
+  /** The ID of an object */
+  id: string
+  /** The identifier of this Pokémon */
+  number?: null | string
+  /** The name of this Pokémon */
+  name?: null | string
+  image?: null | string
+
+  attacks: null | PokemonAttack
+}
+
+/** Represents a Pokémon's attack types */
+interface PokemonAttack {
+  /** The fast attacks of this Pokémon */
+  fast?: null | Array<null | Attack>
+  /** The special attacks of this Pokémon */
+  special?: null | Array<null | Attack>
+}
+
+/** Represents a Pokémon's attack type */
+interface Attack {
+  /** The name of this Pokémon attack */
+  name?: null | string
+  /** The type of this Pokémon attack */
+  type?: null | string
+  /** The damage of this Pokémon attack */
+  damage?: null | number
+}
+export type IPokemon = Pokemon & FetchedAt
+//#endregion
+
 // the delay argument is for faking things out a bit
-function fetchPokemon(name, delay = 1500) {
+function fetchPokemon(name: string, delay: number = 1500): Promise<IPokemon> {
   const pokemonQuery = `
     query PokemonInfo($name: String) {
       pokemon(name: $name) {
@@ -32,7 +71,7 @@ function fetchPokemon(name, delay = 1500) {
       method: 'POST',
       headers: {
         'content-type': 'application/json;charset=UTF-8',
-        delay: delay,
+        delay: String(delay),
       },
       body: JSON.stringify({
         query: pokemonQuery,
@@ -51,24 +90,25 @@ function fetchPokemon(name, delay = 1500) {
         }
       } else {
         // handle the graphql errors
-        const error = {
-          message: data?.errors?.map(e => e.message).join('\n'),
+        const error: Partial<Error> = {
+          message: data?.errors?.map((e: Error) => e.message).join('\n'),
         }
         return Promise.reject(error)
       }
     })
 }
 
-function PokemonInfoFallback({name}) {
+function PokemonInfoFallback({name}: {name: string}): JSX.Element {
   const initialName = React.useRef(name).current
-  const fallbackPokemonData = {
+  const fallbackPokemonData: IPokemon = {
+    id: '',
     name: initialName,
     number: 'XXX',
     image: '/img/pokemon/fallback-pokemon.jpg',
     attacks: {
       special: [
-        {name: 'Loading Attack 1', type: 'Type', damage: 'XX'},
-        {name: 'Loading Attack 2', type: 'Type', damage: 'XX'},
+        {name: 'Loading Attack 1', type: 'Type', damage: null},
+        {name: 'Loading Attack 2', type: 'Type', damage: null},
       ],
     },
     fetchedAt: 'loading...',
@@ -76,11 +116,11 @@ function PokemonInfoFallback({name}) {
   return <PokemonDataView pokemon={fallbackPokemonData} />
 }
 
-function PokemonDataView({pokemon}) {
+function PokemonDataView({pokemon}: {pokemon: IPokemon}): JSX.Element {
   return (
     <div>
       <div className="pokemon-info__img-wrapper">
-        <img src={pokemon.image} alt={pokemon.name} />
+        <img src={pokemon.image || ''} alt={pokemon.name || 'a pokemon'} />
       </div>
       <section>
         <h2>
@@ -90,11 +130,11 @@ function PokemonDataView({pokemon}) {
       </section>
       <section>
         <ul>
-          {pokemon.attacks.special.map(attack => (
-            <li key={attack.name}>
-              <label>{attack.name}</label>:{' '}
+          {pokemon.attacks?.special?.map((attack, idx) => (
+            <li key={attack?.name || idx}>
+              <label>{attack?.name}</label>:{' '}
               <span>
-                {attack.damage} <small>({attack.type})</small>
+                {attack?.damage} <small>({attack?.type})</small>
               </span>
             </li>
           ))}
@@ -105,11 +145,16 @@ function PokemonDataView({pokemon}) {
   )
 }
 
+interface PokemonFormProps {
+  pokemonName: string
+  initialPokemonName?: string
+  onSubmit: (pokemonName: string) => void
+}
 function PokemonForm({
   pokemonName: externalPokemonName,
   initialPokemonName = externalPokemonName || '',
   onSubmit,
-}) {
+}: PokemonFormProps): JSX.Element {
   const [pokemonName, setPokemonName] = React.useState(initialPokemonName)
 
   // this is generally not a great idea. We're synchronizing state when it is
@@ -124,16 +169,16 @@ function PokemonForm({
     }
   }, [externalPokemonName])
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
     setPokemonName(e.target.value)
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault()
     onSubmit(pokemonName)
   }
 
-  function handleSelect(newPokemonName) {
+  function handleSelect(newPokemonName: string): void {
     setPokemonName(newPokemonName)
     onSubmit(newPokemonName)
   }
@@ -184,7 +229,10 @@ function PokemonForm({
   )
 }
 
-function ErrorFallback({error, resetErrorBoundary}) {
+function ErrorFallback({
+  error,
+  resetErrorBoundary,
+}: FallbackProps): JSX.Element {
   return (
     <div role="alert">
       There was an error:{' '}
@@ -194,7 +242,9 @@ function ErrorFallback({error, resetErrorBoundary}) {
   )
 }
 
-function PokemonErrorBoundary(props) {
+function PokemonErrorBoundary(
+  props: Omit<React.ComponentProps<typeof ErrorBoundary>, 'FallbackComponent'>,
+): JSX.Element {
   return <ErrorBoundary FallbackComponent={ErrorFallback} {...props} />
 }
 

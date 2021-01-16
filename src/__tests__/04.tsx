@@ -2,6 +2,7 @@ import * as React from 'react'
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../final/04'
+// import App from '../final-ts/04'
 // import App from '../exercise/04'
 
 test('adds and removes children from the log', () => {
@@ -24,12 +25,12 @@ test('scrolls to the bottom', () => {
   const scrollTopSetter = jest.fn()
   Object.defineProperties(log, {
     scrollHeight: {
-      get() {
+      get(): number {
         return 100
       },
     },
     scrollTop: {
-      get() {
+      get(): number {
         return 0
       },
       set: scrollTopSetter,

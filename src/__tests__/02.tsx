@@ -2,17 +2,21 @@ import * as React from 'react'
 import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
 import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from '../final/03.extra-2'
-// import App from '../exercise/03.extra-2'
+// import App from '../final/02'
+import App from '../final-ts/02'
+// import App from '../exercise/02'
+
+let spyFetch: jest.SpyInstance
+let spyConsoleError: jest.SpyInstance
 
 beforeEach(() => {
-  jest.spyOn(window, 'fetch')
-  jest.spyOn(console, 'error')
+  spyFetch = jest.spyOn(window, 'fetch')
+  spyConsoleError = jest.spyOn(console, 'error')
 })
 
 afterEach(() => {
-  window.fetch.mockRestore()
-  console.error.mockRestore()
+  spyFetch.mockRestore()
+  spyConsoleError.mockRestore()
 })
 
 test('displays the pokemon', async () => {
@@ -34,7 +38,7 @@ test('displays the pokemon', async () => {
   await screen.findByRole('heading', {name: /ditto/i})
 
   // verify that when props remain the same a request is not made
-  window.fetch.mockClear()
+  spyFetch.mockClear()
 
   userEvent.click(submit)
 
@@ -46,7 +50,7 @@ test('displays the pokemon', async () => {
   )
 
   // verify error handling
-  console.error.mockImplementation(() => {})
+  spyConsoleError.mockImplementation(() => {})
 
   userEvent.clear(input)
   userEvent.type(input, 'george')
@@ -56,11 +60,5 @@ test('displays the pokemon', async () => {
   )
   expect(console.error).toHaveBeenCalledTimes(2)
 
-  console.error.mockReset()
-  window.fetch.mockClear()
-
-  // use the cached value
-  userEvent.click(screen.getByRole('button', {name: /ditto/i}))
-  expect(window.fetch).not.toHaveBeenCalled()
-  await screen.findByRole('heading', {name: /ditto/i})
+  spyConsoleError.mockReset()
 })
