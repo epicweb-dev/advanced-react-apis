@@ -219,6 +219,7 @@ Thanks goes to these wonderful people
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/jwm0"><img src="https://avatars0.githubusercontent.com/u/28310983?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Majorek</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jwm0" title="Code">💻</a></td>
+    <td align="center"><a href="https://suddenlyGiovanni.dev"><img src="https://avatars2.githubusercontent.com/u/15946771?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giovanni Ravalico</b></sub></a><br /><a href="#ideas-suddenlyGiovanni" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
