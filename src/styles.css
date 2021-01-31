@@ -1,3 +1,16 @@
+.counter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.counter button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 8px;
+}
+
 /* For exercise 2 and 3, we're handling errors with an error boundary */
 body[class*='2'] :not(.render-container) > iframe,
 body[class*='2'] > iframe,
