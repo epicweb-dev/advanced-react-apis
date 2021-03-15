@@ -21,7 +21,9 @@ function useSafeDispatch(dispatch) {
   // interact with the dom may depend on the value being set
   React.useEffect(() => {
     mountedRef.current = true
-    return () => (mountedRef.current = false)
+    return () => {
+      mountedRef.current = false
+    }
   }, [])
 
   return React.useCallback(
