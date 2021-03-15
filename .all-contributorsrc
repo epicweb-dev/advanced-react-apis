@@ -348,6 +348,15 @@
       "contributions": [
         "ideas"
       ]
+    },
+    {
+      "login": "jsberlanga",
+      "name": "Julio Soto",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32543746?v=4",
+      "profile": "https://juliosoto.dev",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
