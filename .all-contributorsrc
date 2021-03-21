@@ -357,6 +357,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jmtes",
+      "name": "Juno Tesoro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38450133?v=4",
+      "profile": "http://jmtes.github.io",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
