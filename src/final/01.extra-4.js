@@ -14,7 +14,7 @@ function countReducer(state, action) {
       }
     }
     default: {
-      throw new Error(`Unsupported action type: ${action.type}`)
+      throw new Error(`Unsupported action type: ${type}`)
     }
   }
 }
