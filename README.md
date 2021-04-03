@@ -223,6 +223,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://suddenlyGiovanni.dev"><img src="https://avatars2.githubusercontent.com/u/15946771?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giovanni Ravalico</b></sub></a><br /><a href="#ideas-suddenlyGiovanni" title="Ideas, Planning, & Feedback">🤔</a></td>
     <td align="center"><a href="https://juliosoto.dev"><img src="https://avatars.githubusercontent.com/u/32543746?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Julio Soto</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jsberlanga" title="Code">💻</a></td>
     <td align="center"><a href="http://jmtes.github.io"><img src="https://avatars.githubusercontent.com/u/38450133?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Juno Tesoro</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=jmtes" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://www.andresosante.com"><img src="https://avatars.githubusercontent.com/u/37124700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrés Osante</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=aosante" title="Code">💻</a></td>
   </tr>
 </table>
 
