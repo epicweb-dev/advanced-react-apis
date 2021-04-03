@@ -366,6 +366,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "aosante",
+      "name": "Andrés Osante",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37124700?v=4",
+      "profile": "http://www.andresosante.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
