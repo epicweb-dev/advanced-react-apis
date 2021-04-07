@@ -18,12 +18,12 @@ function useMedia(query, initialState = false) {
       setState(Boolean(mql.matches))
     }
 
-    mql.addListener(onChange)
+    mql.addEventListener("change", onChange)
     setState(mql.matches)
 
     return () => {
       mounted = false
-      mql.removeListener(onChange)
+      mql.removeEventListener("change", onChange)
     }
   }, [query])
 
