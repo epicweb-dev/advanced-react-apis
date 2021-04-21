@@ -35,13 +35,13 @@
 ## Additional Resources
 
 - Videos
-  [Getting Closure on React Hooks by Shaen Wang](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
+  [Getting Closure on React Hooks by Shawn Wang](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
   (26 minutes)
 
 ## System Requirements
 
 - [git][git] v2.13 or greater
-- [NodeJS][node] `12 || 14 || 15`
+- [NodeJS][node] `12 || 14 || 15 || 16`
 - [npm][npm] v6 or greater
 
 All of these must be available in your `PATH`. To verify things are set up
