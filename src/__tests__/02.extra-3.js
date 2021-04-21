@@ -1,10 +1,9 @@
 import * as React from 'react'
 import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
-import {render, screen} from '@testing-library/react'
+import {render, screen, act} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../final/02.extra-3'
 // import App from '../exercise/02'
-import {act} from 'react-dom/test-utils'
 
 beforeEach(() => {
   jest.spyOn(window, 'fetch')
@@ -57,18 +56,18 @@ test('displays the pokemon', async () => {
   )
   expect(console.error).toHaveBeenCalledTimes(2)
 
-  console.error.mockReset()
+  // restore the original implementation
+  console.error.mockRestore()
+  // but we still want to make sure it's not called
+  jest.spyOn(console, 'error')
 
-  act(() => {
-    userEvent.type(input, 'mew')
-    userEvent.click(submit)
+  userEvent.type(input, 'mew')
+  userEvent.click(submit)
 
-    // verify unmounting does not result in an error
-    unmount()
-  })
-
+  // verify unmounting does not result in an error
+  unmount()
   // wait for a bit for the mocked request to resolve:
-  await new Promise(r => setTimeout(r, 100))
+  await act(() => new Promise(r => setTimeout(r, 100)))
   alfredTip(
     () => expect(console.error).not.toHaveBeenCalled(),
     'Make sure that when the component is unmounted the component does not attempt to trigger a rerender with `dispatch`',
