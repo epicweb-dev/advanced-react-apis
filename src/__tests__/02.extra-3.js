@@ -4,6 +4,7 @@ import {render, screen} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../final/02.extra-3'
 // import App from '../exercise/02'
+import {act} from 'react-dom/test-utils'
 
 beforeEach(() => {
   jest.spyOn(window, 'fetch')
@@ -58,11 +59,14 @@ test('displays the pokemon', async () => {
 
   console.error.mockReset()
 
-  userEvent.type(input, 'mew')
-  userEvent.click(submit)
+  act(() => {
+    userEvent.type(input, 'mew')
+    userEvent.click(submit)
 
-  // verify unmounting does not result in an error
-  unmount()
+    // verify unmounting does not result in an error
+    unmount()
+  })
+
   // wait for a bit for the mocked request to resolve:
   await new Promise(r => setTimeout(r, 100))
   alfredTip(
