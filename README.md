@@ -5,6 +5,7 @@
     developer APIs for custom hooks.
   </strong>
   <p>
+    
     We’ll look at some of the more advanced hooks and ways they can be used to
     optimize your components and custom hooks. We’ll also look at several
     patterns you can follow to make custom hooks that provide great APIs for
