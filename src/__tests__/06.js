@@ -17,34 +17,12 @@ beforeAll(() => {
   }
 })
 
+// sorry, I just couldn't find a reliable way to test your implementation
+// so this test just ensures you don't break anything 😅
+
 test('works', () => {
-  jest.spyOn(React, 'useDebugValue')
   const {container} = render(<App />)
-  alfredTip(
-    () => expect(React.useDebugValue).toHaveBeenCalled(),
-    `Make sure to call \`useDebugValue\` with the formatted value`,
-  )
-  alfredTip(
-    () =>
-      expect(React.useDebugValue).toHaveBeenCalledWith(
-        expect.stringContaining('max-width: 699px'),
-      ),
-    `Make sure to call \`useDebugValue\` with the formatted value`,
-  )
-  alfredTip(
-    () =>
-      expect(React.useDebugValue).toHaveBeenCalledWith(
-        expect.stringContaining('max-width: 999px'),
-      ),
-    `Make sure to call \`useDebugValue\` with the formatted value`,
-  )
-  alfredTip(
-    () =>
-      expect(React.useDebugValue).toHaveBeenCalledWith(
-        expect.stringContaining('min-width: 1000px'),
-      ),
-    `Make sure to call \`useDebugValue\` with the formatted value`,
-  )
+
   const box = container.querySelector('[style]')
 
   act(() => {

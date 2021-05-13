@@ -5,9 +5,17 @@ import userEvent from '@testing-library/user-event'
 import App from '../final/01'
 // import App from '../exercise/01'
 
-test('clicking the button increments the count with useReducer', () => {
-  jest.spyOn(React, 'useReducer')
+// don't do this in regular tests!
+const Counter = App().type
 
+if (!Counter) {
+  alfredTip(
+    true,
+    `Can't find the Counter from the exported App component. Please make sure to not edit the App component so I can find the Counter and run some tests on it.`,
+  )
+}
+
+test('clicking the button increments the count with useReducer', () => {
   const {container} = render(<App />)
   const button = container.querySelector('button')
   userEvent.click(button)
@@ -16,6 +24,11 @@ test('clicking the button increments the count with useReducer', () => {
   expect(button).toHaveTextContent('2')
 
   alfredTip(() => {
-    expect(React.useReducer).toHaveBeenCalled()
-  }, 'The Counter component that is rendered must call "useReducer" to get the "state" and "dispatch" function and you should get rid of that useState call.')
+    const commentLessLines = Counter.toString()
+      .split('\n')
+      .filter(l => !l.includes('//'))
+      .join('\n')
+    expect(commentLessLines).toMatch('useReducer(')
+    expect(commentLessLines).not.toMatch('useState(')
+  }, 'The Counter component that is rendered must call "useReducer" and not "useState" to get the "state" and "dispatch" function and you should get rid of that useState call.')
 })
