@@ -384,6 +384,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "giancarlol",
+      "name": "Giancarlo Brusca",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33439343?v=4",
+      "profile": "https://github.com/giancarlol",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
