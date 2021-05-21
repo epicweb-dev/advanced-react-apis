@@ -393,6 +393,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "tsargent",
+      "name": "Tyler Sargent",
+      "avatar_url": "https://avatars.githubusercontent.com/u/173215?v=4",
+      "profile": "https://github.com/tsargent",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
