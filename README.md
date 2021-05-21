@@ -227,6 +227,9 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/IanVS"><img src="https://avatars.githubusercontent.com/u/4616705?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ian VanSchooten</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=IanVS" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/giancarlol"><img src="https://avatars.githubusercontent.com/u/33439343?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Giancarlo Brusca</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=giancarlol" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/tsargent"><img src="https://avatars.githubusercontent.com/u/173215?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tyler Sargent</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=tsargent" title="Tests">⚠️</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
