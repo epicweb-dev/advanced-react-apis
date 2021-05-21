@@ -26,7 +26,7 @@ test('clicking the button increments the count with useReducer', () => {
   alfredTip(() => {
     const commentLessLines = Counter.toString()
       .split('\n')
-      .filter(l => !l.includes('//'))
+      .filter(l => !l.trim().substr(0, 2).includes('//'))
       .join('\n')
     expect(commentLessLines).toMatch('useReducer(')
     expect(commentLessLines).not.toMatch('useState(')
