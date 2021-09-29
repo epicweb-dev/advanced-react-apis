@@ -31,20 +31,15 @@ function pokemonInfoReducer(state, action) {
   }
 }
 
-function PokemonInfo({pokemonName}) {
-  // 🐨 move both the useReducer and useEffect hooks to a custom hook called useAsync
-  // here's how you use it:
-  // const state = useAsync(
-  //   () => {
-  //     if (!pokemonName) {
-  //       return
-  //     }
-  //     return fetchPokemon(pokemonName)
-  //   },
-  //   {status: pokemonName ? 'pending' : 'idle'},
-  //   [pokemonName],
-  // )
-  // 🐨 so your job is to create a useAsync function that makes this work.
+function PokemonInfo({pokemonName}: {pokemonName: string}) {
+  // 🐨 move all the code between the lines into a new useAsync function.
+  // 💰 look below to see how the useAsync hook is supposed to be called
+  // 💰 If you want some help, here's the function signature (or delete this
+  // comment really quick if you don't want the spoiler)!
+  // function useAsync(asyncCallback, dependencies) {/* code in here */}
+
+  // -------------------------- start --------------------------
+
   const [state, dispatch] = React.useReducer(pokemonInfoReducer, {
     status: pokemonName ? 'pending' : 'idle',
     // 🐨 this will need to be "data" instead of "pokemon"
@@ -75,21 +70,30 @@ function PokemonInfo({pokemonName}) {
     // 🐨 because of limitations with ESLint, you'll need to ignore
     // the react-hooks/exhaustive-deps rule. We'll fix this in an extra credit.
   }, [pokemonName])
+  // --------------------------- end ---------------------------
 
+  // 🐨 here's how you'll use the new useAsync hook you're writing:
+  // const state = useAsync(() => {
+  //   if (!pokemonName) {
+  //     return
+  //   }
+  //   return fetchPokemon(pokemonName)
+  // }, [pokemonName])
   // 🐨 this will change from "pokemon" to "data"
   const {pokemon, status, error} = state
 
-  if (status === 'idle' || !pokemonName) {
-    return 'Submit a pokemon'
-  } else if (status === 'pending') {
-    return <PokemonInfoFallback name={pokemonName} />
-  } else if (status === 'rejected') {
-    throw error
-  } else if (status === 'resolved') {
-    return <PokemonDataView pokemon={pokemon} />
+  switch (status) {
+    case 'idle':
+      return <span>Submit a pokemon</span>
+    case 'pending':
+      return <PokemonInfoFallback name={pokemonName} />
+    case 'rejected':
+      throw error
+    case 'resolved':
+      return <PokemonDataView pokemon={pokemon} />
+    default:
+      throw new Error('This should be impossible')
   }
-
-  throw new Error('This should be impossible')
 }
 
 function App() {
