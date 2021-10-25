@@ -31,7 +31,7 @@ function pokemonInfoReducer(state, action) {
   }
 }
 
-function PokemonInfo({pokemonName}: {pokemonName: string}) {
+function PokemonInfo({pokemonName}) {
   // 🐨 move all the code between the lines into a new useAsync function.
   // 💰 look below to see how the useAsync hook is supposed to be called
   // 💰 If you want some help, here's the function signature (or delete this
