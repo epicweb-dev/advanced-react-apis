@@ -234,6 +234,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/diegotc86"><img src="https://avatars.githubusercontent.com/u/23508800?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Diego Torres</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=diegotc86" title="Code">💻</a></td>
     <td align="center"><a href="https://icyjoseph.dev/"><img src="https://avatars.githubusercontent.com/u/21013447?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joseph</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=icyJoseph" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/marioleed"><img src="https://avatars.githubusercontent.com/u/1763448?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mario Sannum</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=marioleed" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/wdj82"><img src="https://avatars.githubusercontent.com/u/37749088?v=4?s=100" width="100px;" alt=""/><br /><sub><b>wdj82</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=wdj82" title="Documentation">📖</a></td>
   </tr>
 </table>
 
