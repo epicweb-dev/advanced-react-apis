@@ -43,12 +43,13 @@ function usePokemonCache() {
   return context
 }
 
-function PokemonInfo({pokemonName}) {
+function PokemonInfo({pokemonName: externalPokemonName}) {
   const [cache, dispatch] = usePokemonCache()
 
   const {data: pokemon, status, error, run, setData} = useAsync({
     status: pokemonName ? 'pending' : 'idle',
   })
+  const pokemonName = externalPokemonName?.toLowerCase()
 
   React.useEffect(() => {
     if (!pokemonName) {
