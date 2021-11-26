@@ -40,8 +40,8 @@ function PokemonInfo({pokemonName: externalPokemonName}) {
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
   // 🐨 get the cache and dispatch from useContext with PokemonCacheContext
 
-  const {data: pokemon, status, error, run, setData} = useAsync()
   const pokemonName = externalPokemonName?.toLowerCase()
+  const {data: pokemon, status, error, run, setData} = useAsync()
 
   React.useEffect(() => {
     if (!pokemonName) {
