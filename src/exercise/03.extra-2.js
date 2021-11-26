@@ -35,12 +35,13 @@ function pokemonCacheReducer(state, action) {
   }
 }
 
-function PokemonInfo({pokemonName}) {
+function PokemonInfo({pokemonName: externalPokemonName}) {
   // 💣 remove the useReducer here (or move it up to your PokemonCacheProvider)
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
   // 🐨 get the cache and dispatch from useContext with PokemonCacheContext
 
   const {data: pokemon, status, error, run, setData} = useAsync()
+  const pokemonName = externalPokemonName?.toLowerCase()
 
   React.useEffect(() => {
     if (!pokemonName) {
