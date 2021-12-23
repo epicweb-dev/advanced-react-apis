@@ -25,7 +25,7 @@ function useMedia(query, initialState = false) {
 
     return () => {
       mounted = false
-      mql.removeListener('change', onChange)
+      mql.removeEventListener('change', onChange)
     }
   }, [query])
 
