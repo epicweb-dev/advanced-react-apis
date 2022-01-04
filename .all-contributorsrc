@@ -465,6 +465,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "DarkHorse1997",
+      "name": "Tanmoy Das",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22052923?v=4",
+      "profile": "https://github.com/DarkHorse1997",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
