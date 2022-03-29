@@ -5,20 +5,23 @@ import * as React from 'react'
 
 /**
  * useReducer (state, action)
- * is an alternative to useState
- * state is whatever the current value is
+ *  - is an alternative to useState
+ *  - usually passes two arguments:
+ *    - the current state (current value)
+ *    - whatever the dispatch function (setCount) is called with - this is often called the action
  */
 
-function Counter({initialCount = 0, step = 1}) {
-  // 🐨 replace React.useState with React.useReducer.
-  // 💰 React.useReducer(countReducer, initialCount)
-  const [count, setCount] = React.useState(initialCount)
+function countReducer(count, step) {
+  // state is kind of where you're up to in the loop
+  return count + step
+}
 
-  // 💰 you can write the countReducer function so you don't have to make any
-  // changes to the next two lines of code! Remember:
-  // The 1st argument is called "state" - the current value of count
-  // The 2nd argument is called "newState" - the value passed to setCount
-  const increment = () => setCount(count + step)
+function Counter({initialCount = 0, step = 1}) {
+  // always pass two params: the reducer and the initial state
+  const [count, changeCount] = React.useReducer(countReducer, initialCount)
+
+  // our newState is + 1 every time increment is called
+  const increment = () => changeCount(step)
   return <button onClick={increment}>{count}</button>
 }
 
