@@ -27,6 +27,7 @@ function asyncReducer(state, action) {
   }
 }
 
+// is now generic async handler
 function useAsync(asyncCallback, initialState, dependencies) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
@@ -56,6 +57,7 @@ function useAsync(asyncCallback, initialState, dependencies) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies)
 
+  // cannot destructure property data of state as it is undefined: return state !
   return state
 }
 
