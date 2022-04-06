@@ -28,7 +28,7 @@ function asyncReducer(state, action) {
 }
 
 // is now generic async handler
-function useAsync(asyncCallback, initialState) {
+function useAsync(initialState) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
     data: null,
@@ -37,16 +37,10 @@ function useAsync(asyncCallback, initialState) {
     ...initialState,
   })
 
-  React.useEffect(() => {
-    const promise = asyncCallback()
+  const {data, error, status} = state
 
-    // no promise returned, end early
-    if (!promise) {
-      return
-    }
-
+  const run = React.useCallback(promise => {
     dispatch({type: 'pending'})
-
     promise.then(
       data => {
         dispatch({type: 'resolved', data})
@@ -55,27 +49,34 @@ function useAsync(asyncCallback, initialState) {
         dispatch({type: 'rejected', error})
       },
     )
-  }, [asyncCallback]) // whenever asyncCallback changes, state of the world has fallen out of sync with state of the application, so call useCallback
+  }, [])
 
   // cannot destructure property data of state as it is undefined: return state !
-  return state
+  return {
+    error,
+    status,
+    data,
+    run,
+  }
 }
 
 // use the fetched data in our components
 function PokemonInfo({pokemonName}) {
-  const asyncCallback = React.useCallback(() => {
+  // assign fetched data to pokemon var
+  const {
+    data: pokemon,
+    status,
+    error,
+    run,
+  } = useAsync({status: pokemonName ? 'pending' : 'idle'})
+
+  React.useEffect(() => {
     if (!pokemonName) {
       return
     }
-    return fetchPokemon(pokemonName)
-  }, [pokemonName]) // only call when pokemonName changes
 
-  const state = useAsync(asyncCallback, {
-    status: pokemonName ? 'pending' : 'idle',
-  })
-
-  // assign fetched data to pokemon var
-  const {data: pokemon, status, error} = state
+    run(fetchPokemon(pokemonName))
+  }, [pokemonName, run])
 
   // render the components outside the useEffect
   if (status === 'idle') {
