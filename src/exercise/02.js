@@ -37,7 +37,7 @@ function useAsync(initialState) {
     ...initialState,
   })
 
-  const {status, data, error} = state
+  const {status, data, error} = state // always remember to destructure so the vars are available to use throughout the app!
   console.log('everything in state=', state) // returns an object with those key value pairs for every step (idle, pending, resolved/rejected)
 
   const run = React.useCallback(promise => {
@@ -57,7 +57,7 @@ function useAsync(initialState) {
     data,
     error,
     run,
-  }
+  } // can write this shorter: return {...state, run}
 }
 
 function PokemonInfo({pokemonName}) {
