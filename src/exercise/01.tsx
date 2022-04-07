@@ -3,19 +3,16 @@
 
 import * as React from 'react'
 
-// 🐨 here's where you'll implement your countReducer function.
+// to handle state checking in ts, do state: unknown
+// const countReducer = (state: unknown, newState: number) => newState // return the newState
+
+const countReducer = (count: number, change: number) => count + change
 
 function Counter({initialCount = 0, step = 1}) {
-  // 🐨 replace React.useState with React.useReducer.
-  // 💰 React.useReducer(countReducer, initialCount)
-  const [count, setCount] = React.useState(initialCount)
+  const [count, changeCount] = React.useReducer(countReducer, initialCount)
+  const increment = () => changeCount(step)
+  const decrement = () => changeCount(step)
 
-  // 💰 you can write the countReducer function above so you don't have to make
-  // any changes to the next two lines of code! Remember:
-  // The 1st argument is called "state" - the current value of count
-  // The 2nd argument is called "newState" - the value passed to setCount
-  const increment = () => setCount(count + step)
-  const decrement = () => setCount(count - step)
   return (
     <div className="counter">
       <button onClick={decrement}>⬅️</button>
