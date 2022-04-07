@@ -1,5 +1,6 @@
 // useCallback: custom hooks
-// http://localhost:3000/isolated/exercise/02.js
+// 💯 use useCallback to empower the user to customize memoization
+// http://localhost:3000/isolated/final/02.extra-1.js
 
 import * as React from 'react'
 import {
@@ -27,17 +28,17 @@ function asyncReducer(state, action) {
   }
 }
 
-// is now generic async handler
+// generic async handler
 function useAsync(initialState) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
     data: null,
     error: null,
-    // spread into initial state
     ...initialState,
   })
 
-  const {data, error, status} = state
+  const {status, data, error} = state
+  console.log('everything in state=', state) // returns an object with those key value pairs for every step (idle, pending, resolved/rejected)
 
   const run = React.useCallback(promise => {
     dispatch({type: 'pending'})
@@ -49,20 +50,17 @@ function useAsync(initialState) {
         dispatch({type: 'rejected', error})
       },
     )
-  }, [])
+  }, []) // always pass array of dependencies, even if empty
 
-  // cannot destructure property data of state as it is undefined: return state !
   return {
-    error,
     status,
     data,
+    error,
     run,
   }
 }
 
-// use the fetched data in our components
 function PokemonInfo({pokemonName}) {
-  // assign fetched data to pokemon var
   const {
     data: pokemon,
     status,
@@ -74,11 +72,13 @@ function PokemonInfo({pokemonName}) {
     if (!pokemonName) {
       return
     }
-
-    run(fetchPokemon(pokemonName))
+    // absence of await here: we're literally passing the promise
+    // to `run` so `useAsync` can attach it's own `.then` handler on it
+    // to keep track of the state of the promise.
+    const pokemonPromise = fetchPokemon(pokemonName)
+    run(pokemonPromise)
   }, [pokemonName, run])
 
-  // render the components outside the useEffect
   if (status === 'idle') {
     return 'Submit a pokemon'
   } else if (status === 'pending') {
