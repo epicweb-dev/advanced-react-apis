@@ -18,5 +18,6 @@ export const CountProvider = props => {
   // create a `value` array with count and setCount
   const value = [count, setCount] // value is an integer (count) and a function (setCount)
   // return your context provider with the value assigned to that array and forward all the other props, specifically children prop to the context provider
+  // alwyas has a single prop called value
   return <CountContext.Provider value={value} {...props} />
 }
