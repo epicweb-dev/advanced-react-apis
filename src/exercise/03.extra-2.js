@@ -73,7 +73,7 @@ function PokemonInfo({ pokemonName }) {
 
 function PreviousPokemon({ onSelect }) {
   // 🐨 get the cache from useContext with PokemonCacheContext
-  const cache = React.useContext(PokemonCacheContext)
+  const [cache] = React.useContext(PokemonCacheContext)
   // cache without [cache] accesses the array that has two items within it {obj, func}
   // [cache] accesses the first item in the array, which is what we want to iterate through
 
