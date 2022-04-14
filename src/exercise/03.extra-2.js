@@ -15,18 +15,23 @@ import {
 } from '../pokemon'
 import { useAsync } from '../utils'
 
-// 🐨 Create a PokemonCacheContext
 const PokemonCacheContext = React.createContext() // returns an array with [obj, func]
 
-// 🐨 create a PokemonCacheProvider function
-// 🐨 useReducer with pokemonCacheReducer in your PokemonCacheProvider
-// 💰 you can grab the one that's in PokemonInfo
-// 🐨 return your context provider with the value assigned to what you get back from useReducer
-// 💰 value={[cache, dispatch]}
-// 💰 make sure you forward the props.children!
 const PokemonCacheProvider = props => {
   const [cache, dispatch] = React.useReducer(pokemonCacheReducer, {})
+  // are the properties available on the PokemonCacheProvider, which is wrapping the PokemonSection, so it contains all the properties available on that
+  console.log('what are the props = ', props)
   return <PokemonCacheContext.Provider value={[cache, dispatch]} {...props} />
+}
+
+const usePokemonCache = () => {
+  const context = React.useContext(PokemonCacheContext)
+  if (!context) {
+    throw new Error(
+      'usePokemonCache must be used within the PokemonCacheProvider',
+    )
+  }
+  return context // always remember to return the context! Otherwise will break
 }
 
 function pokemonCacheReducer(state, action) {
@@ -41,8 +46,7 @@ function pokemonCacheReducer(state, action) {
 }
 
 function PokemonInfo({ pokemonName }) {
-  // 🐨 get the cache and dispatch from useContext with PokemonCacheContext
-  const [cache, dispatch] = React.useContext(PokemonCacheContext)
+  const [cache, dispatch] = usePokemonCache()
   const { data: pokemon, status, error, run, setData } = useAsync()
 
   React.useEffect(() => {
@@ -72,12 +76,12 @@ function PokemonInfo({ pokemonName }) {
 }
 
 function PreviousPokemon({ onSelect }) {
-  // 🐨 get the cache from useContext with PokemonCacheContext
-  const [cache] = React.useContext(PokemonCacheContext)
-  // cache without [cache] accesses the array that has two items within it {obj, func}
+  const [cache] = usePokemonCache()
+  // cache without [cache] accesses the array that has two items within it {obj, func} - that is what the createContext hook returns
   // [cache] accesses the first item in the array, which is what we want to iterate through
-
-  console.log(cache)
+  // if we just do cache without [], we will map through the array which has two items [0 - cache, 1 - function] - we don't want that,
+  // we just want the first item, which is the [cache] which contains the pokemon being cached
+  console.log("what's in the cache = ", cache)
 
   return (
     <div>
