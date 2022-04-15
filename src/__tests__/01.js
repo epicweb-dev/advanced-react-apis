@@ -15,12 +15,12 @@ if (!Counter) {
   )
 }
 
-test('clicking the button increments the count with useReducer', () => {
+test('clicking the button increments the count with useReducer', async () => {
   const {container} = render(<App />)
   const button = container.querySelector('button')
-  userEvent.click(button)
+  await userEvent.click(button)
   expect(button).toHaveTextContent('1')
-  userEvent.click(button)
+  await userEvent.click(button)
   expect(button).toHaveTextContent('2')
 
   alfredTip(() => {

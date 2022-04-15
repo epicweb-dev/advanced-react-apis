@@ -32,6 +32,10 @@
 
 - You should be experienced with `useState`, `useEffect`, and `useRef`.
 
+> NOTE: The EpicReact.dev videos were recorded with React version ^16.13 and all
+> material in this repo has been updated to React version ^18. Differences are
+> minor and any relevant differences are noted in the instructions.
+
 ## Additional Resources
 
 - Videos
