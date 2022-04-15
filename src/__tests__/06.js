@@ -19,7 +19,7 @@ beforeAll(() => {
 // sorry, I just couldn't find a reliable way to test your implementation
 // so this test just ensures you don't break anything 😅
 
-test('works', () => {
+test('works', async () => {
   const {container} = render(<App />)
 
   const box = container.querySelector('[style]')
