@@ -244,6 +244,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/ssmkhrj"><img src="https://avatars.githubusercontent.com/u/49264891?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Som Shekhar Mukherjee</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=ssmkhrj" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/DarkHorse1997"><img src="https://avatars.githubusercontent.com/u/22052923?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Tanmoy Das</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=DarkHorse1997" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/maheshjag"><img src="https://avatars.githubusercontent.com/u/1705603?v=4?s=100" width="100px;" alt=""/><br /><sub><b>MJ</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=maheshjag" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://stackoverflow.com/users/5411817/sherylhohman?tab=topactivity"><img src="https://avatars.githubusercontent.com/u/8204778?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sheryl Hohman</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=SherylHohman" title="Code">💻</a></td>
   </tr>
 </table>
 
