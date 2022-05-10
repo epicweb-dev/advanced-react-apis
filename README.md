@@ -26,6 +26,7 @@
 [![All Contributors][all-contributors-badge]](#contributors)
 [![GPL 3.0 License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
+[![Gitpod ready-to-code][gitpod-badge]](https://gitpod.io/#https://github.com/kentcdodds/advanced-react-hooks)
 <!-- prettier-ignore-end -->
 
 ## Prerequisites
@@ -41,6 +42,18 @@
 - Videos
   [Getting Closure on React Hooks by Shawn Wang](https://www.youtube.com/watch?v=KJP1E-Y-xyo)
   (26 minutes)
+
+## Quick start
+
+It's recommended you run everything in the same environment you work in every
+day, but if you don't want to set up the repository locally, you can get started
+in one click with [Gitpod](https://gitpod.io),
+[CodeSandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-hooks), or by following the [video demo](https://www.youtube.com/watch?v=gCoVJm3hGk4)
+instructions for [GitHub Codespaces](https://github.com/features/codespaces).
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kentcdodds/advanced-react-hooks)
+
+For a local development environment, follow the instructions below
 
 ## System Requirements
 
@@ -70,7 +83,7 @@ variable and how to fix it here for [windows][win-path] or
 After you've made sure to have the correct things (and versions) installed, you
 should be able to just run a few commands to get set up:
 
-```
+```shell
 git clone https://github.com/kentcdodds/advanced-react-hooks.git
 cd advanced-react-hooks
 node setup
@@ -88,7 +101,7 @@ it's a lot).
 If you can't get the setup script to work, then just make sure you have the
 right versions of the requirements listed above, and run the following commands:
 
-```
+```shell
 npm install
 npm run validate
 ```
@@ -96,15 +109,9 @@ npm run validate
 If you are still unable to fix issues and you know how to use Docker 🐳 you can
 setup the project with the following command:
 
-```
+```shell
 docker-compose up
 ```
-
-It's recommended you run everything locally in the same environment you work in
-every day, but if you're having issues getting things set up, you can also set
-this up using [GitHub Codespaces](https://github.com/features/codespaces)
-([video demo](https://www.youtube.com/watch?v=gCoVJm3hGk4)) or
-[Codesandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-hooks).
 
 ## Running the app
 
@@ -274,6 +281,7 @@ Thank you! https://kcd.im/arh-ws-feedback
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
 [license]: https://github.com/kentcdodds/advanced-react-hooks/blob/main/LICENSE
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[gitpod-badge]: https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod
 [coc]: https://github.com/kentcdodds/advanced-react-hooks/blob/main/CODE_OF_CONDUCT.md
 [emojis]: https://github.com/kentcdodds/all-contributors#emoji-key
 [all-contributors]: https://github.com/kentcdodds/all-contributors
