@@ -10,13 +10,13 @@
   "license": "GPL-3.0-only",
   "main": "src/index.js",
   "engines": {
-    "node": "12 || 14 || 15 || 16",
+    "node": "14 || 16 || 18",
     "npm": ">=6"
   },
   "dependencies": {
-    "@kentcdodds/react-workshop-app": "^5.0.0",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^14.1.1",
+    "@kentcdodds/react-workshop-app": "^6.0.0",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^14.2.0",
     "chalk": "^4.1.2",
     "codegen.macro": "^4.1.0",
     "mq-polyfill": "^1.1.8",
@@ -25,17 +25,18 @@
     "react-error-boundary": "^3.1.4"
   },
   "devDependencies": {
-    "@types/react": "^18.0.8",
-    "@types/react-dom": "^18.0.0",
+    "@craco/craco": "^6.4.3",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
     "husky": "^4.3.8",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "test:coverage": "npm run test -- --watchAll=false",
     "test:exercises": "npm run test -- testing.*exercises\\/ --onlyChanged",
     "setup": "node setup",
@@ -56,11 +57,6 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-react-app"
-    ]
   },
   "browserslist": {
     "development": [
