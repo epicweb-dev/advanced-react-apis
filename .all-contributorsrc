@@ -492,6 +492,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "shahbaz17",
+      "name": "Mohammad Shahbaz Alam",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6962565?v=4",
+      "profile": "http://mdsbzalam.dev",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
