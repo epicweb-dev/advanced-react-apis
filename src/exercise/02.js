@@ -36,7 +36,7 @@ function PokemonInfo({pokemonName}) {
   // 💰 look below to see how the useAsync hook is supposed to be called
   // 💰 If you want some help, here's the function signature (or delete this
   // comment really quick if you don't want the spoiler)!
-  // function useAsync(asyncCallback, dependencies) {/* code in here */}
+  // function useAsync(asyncCallback, initialState, dependencies) {/* code in here */}
 
   // -------------------------- start --------------------------
 
@@ -78,7 +78,7 @@ function PokemonInfo({pokemonName}) {
   //     return
   //   }
   //   return fetchPokemon(pokemonName)
-  // }, [pokemonName])
+  // }, {/* initial state */}, [pokemonName])
   // 🐨 this will change from "pokemon" to "data"
   const {pokemon, status, error} = state
 
