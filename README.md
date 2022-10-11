@@ -258,10 +258,10 @@ Thanks goes to these wonderful people
       <td align="center"><a href="https://github.com/anabellaspinelli"><img src="https://avatars.githubusercontent.com/u/7825875?v=4?s=100" width="100px;" alt="Anabella"/><br /><sub><b>Anabella</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=anabellaspinelli" title="Documentation">📖</a></td>
       <td align="center"><a href="http://lucasminter.dev"><img src="https://avatars.githubusercontent.com/u/26470581?v=4?s=100" width="100px;" alt="Lucas Minter"/><br /><sub><b>Lucas Minter</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=lsminter" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center"><a href="https://github.com/leggsimon"><img src="https://avatars.githubusercontent.com/u/11544418?v=4?s=100" width="100px;" alt="Simon Legg"/><br /><sub><b>Simon Legg</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=leggsimon" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
-  <tfoot>
-    
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
