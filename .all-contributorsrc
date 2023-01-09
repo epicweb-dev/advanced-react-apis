@@ -537,6 +537,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "alexsurelee",
+      "name": "Alex Lee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11603625?v=4",
+      "profile": "https://github.com/alexsurelee",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
