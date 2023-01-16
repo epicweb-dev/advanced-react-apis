@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import App from '../final/05'
-// import App from '../exercise/05'
+// import App from '../final/05'
+import App from '../exercise/05'
 
 test('adds and removes children from the log', async () => {
   const {getByText, getByRole} = render(<App />)
