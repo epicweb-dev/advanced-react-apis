@@ -8,12 +8,25 @@ import App from '../final/01'
 // don't do this in regular tests!
 const Counter = App().type
 
+jest.mock('react', () => {return {
+    ...jest.requireActual('react'),
+    useReducer: jest.fn(),
+    useState: jest.fn(),
+  }
+})
+
 if (!Counter) {
   alfredTip(
     true,
     `Can't find the Counter from the exported App component. Please make sure to not edit the App component so I can find the Counter and run some tests on it.`,
   )
 }
+
+beforeEach(() => {
+  const {useReducer, useState} = jest.requireActual('react')
+  react.useReducer.mockImplementation(useReducer)
+  react.useState.mockImplementation(useState)
+})
 
 test('clicking the button increments the count with useReducer', async () => {
   const {container} = render(<App />)
@@ -24,11 +37,7 @@ test('clicking the button increments the count with useReducer', async () => {
   expect(button).toHaveTextContent('2')
 
   alfredTip(() => {
-    const commentLessLines = Counter.toString()
-      .split('\n')
-      .filter(l => !l.trim().substr(0, 2).includes('//'))
-      .join('\n')
-    expect(commentLessLines).toMatch('useReducer(')
-    expect(commentLessLines).not.toMatch('useState(')
+    expect(react.useReducer).toHaveBeenCalled()
+    expect(react.useState).not.toHaveBeenCalled()
   }, 'The Counter component that is rendered must call "useReducer" and not "useState" to get the "state" and "dispatch" function and you should get rid of that useState call.')
 })
