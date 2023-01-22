@@ -4,6 +4,7 @@ import {render} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import App from '../final/01'
 // import App from '../exercise/01'
+import react from 'react'
 
 // don't do this in regular tests!
 const Counter = App().type
