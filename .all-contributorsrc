@@ -546,6 +546,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "plumcoding",
+      "name": "plumcoding",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88927709?v=4",
+      "profile": "https://github.com/plumcoding",
+      "contributions": [
+        "test"
+      ]
     }
   ],
   "contributorsPerLine": 7,
