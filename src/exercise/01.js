@@ -5,7 +5,19 @@ import * as React from 'react'
 
 
 // changing the state to an object e.g. {count: 0} extra credit 2
-const countReducer = (state, action) => ({...state, ...action})
+
+//extra credit 3 modding to accept a funtion to support both an object and an option.
+const countReducer = (state, action) => ({
+  ...state,
+   ...(typeof action === 'function' ? action(state) : state)
+   /*
+   if(typeof action === 'function){
+    action(state) //function call.
+   } else {
+    state //object call.
+   }
+   */
+  })
 
 
 function Counter({initialCount = 0, step = 1}) {
@@ -17,7 +29,8 @@ function Counter({initialCount = 0, step = 1}) {
     count: initialCount,
   })
   const {count} = state
-  const increment = () => setState({count: count + step})
+  const increment = () =>
+    setState(currentState => ({count: currentState.count + step}))
   
   return <button onClick={increment}>{count}</button>
 }
