@@ -32,32 +32,18 @@ function asyncReducer(state, action) {
 }
 
 //new useAsync function //modding for extra credit 1, using the useCallback
-function useAsync (asyncCallback, initialState){ //removes the depenecies arg.
+function useAsync(initialState) {
   const [state, dispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
-    // 🐨 this will need to be "data" instead of "pokemon"
     data: null,
     error: null,
-    ...initialState
+    ...initialState,
   })
 
-  React.useEffect(() => {
-    // 💰 this first early-exit bit is a little tricky, so let me give you a hint:
-    // const promise = asyncCallback()
-    // if (!promise) {
-    //   return
-    // }
-    const promise = asyncCallback()
-    if(!promise){
-      return
-    }
+  const {data, error, status} = state
 
-    // then you can dispatch and handle the promise etc...
-    /*
-    if (!pokemonName) {
-      return
-    }
-    */
+  //implementing the run function with useCallback
+  const run = React.useCallback(promise => {
     dispatch({type: 'pending'})
     promise.then(
       data => {
@@ -67,14 +53,17 @@ function useAsync (asyncCallback, initialState){ //removes the depenecies arg.
         dispatch({type: 'rejected', error})
       },
     )
-    // 🐨 you'll accept dependencies as an array and pass that here.
-    // 🐨 because of limitations with ESLint, you'll need to ignore
-    // the react-hooks/exhaustive-deps rule. We'll fix this in an extra credit.
-  }, [asyncCallback]) //chaning the dependencies to the function asyncCallback
-  
-  return state
+  }, [])
 
+  return {
+    error,
+    status,
+    data,
+    run,
+  }
 }
+
+  
 
 function PokemonInfo({pokemonName}) {
   // 🐨 move all the code between the lines into a new useAsync function.
@@ -96,17 +85,21 @@ function PokemonInfo({pokemonName}) {
 
   //implementing callback extra credit 1.
 
-  const asyncCallback = React.useCallback(()=>{
-    if(!pokemonName){return}
-    return fetchPokemon(pokemonName)
-  }, [pokemonName])
+  const {
+    data: pokemon,
+    status,
+    error,
+    run,
+  } = useAsync({
+    status: pokemonName ? 'pending' : 'idle',
+  })
 
-  const state = useAsync(asyncCallback, {
-   status: pokemonName ? 'pending' : 'idle',}
-  )
-
-  // 🐨 this will change from "pokemon" to "data"
-  const {data:pokemon, status, error} = state //it can also be just data or data:pokemon
+  React.useEffect(()=>{
+    if(!pokemonName){
+      return
+    }
+    run(fetchPokemon(pokemonName))
+  }, [pokemonName, run]) //using the run fuction in the dependencies. extra credit 2
 
   switch (status) {
     case 'idle':
