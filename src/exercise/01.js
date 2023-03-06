@@ -4,22 +4,21 @@
 import * as React from 'react'
 
 
-const countReducer = (count, change) => count + change
+// changing the state to an object e.g. {count: 0} extra credit 2
+const countReducer = (state, action) => ({...state, ...action})
 
 
 function Counter({initialCount = 0, step = 1}) {
   // 🐨 replace React.useState with React.useReducer.
   // 💰 React.useReducer(countReducer, initialCount)
-  const [count, changeCount] = React.useReducer(countReducer, initialCount)
-  // 💰 you can write the countReducer function so you don't have to make any
-  // changes to the next two lines of code! Remember:
+
+  //extra crdit 2 API, must addapt the reducer hook.
+  const [state, setState] = React.useReducer(countReducer, {
+    count: initialCount,
+  })
+  const {count} = state
+  const increment = () => setState({count: count + step})
   
-
-  // The 1st argument is called "state" - the current value of count
-  // The 2nd argument is called "newState" - the value passed to setCount
-
-  //extra credit 1 moddifications to change the ste into an acction and pass it.
-  const increment = () => changeCount(step)
   return <button onClick={increment}>{count}</button>
 }
 
