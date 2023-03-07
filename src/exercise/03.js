@@ -22,18 +22,27 @@ function CountProvider(props){
   return <CountContext.Provider value={value} {...props}/> //return jsx component.
 }
 
+//costum hook useCount()
+function useCount(){
+  const context = React.useContext(CountContext)
+  if(!context){ //no default or value and to not get 'undefined'
+    throw new Error('useCount must be used within a CountProvider')
+  }
+  return context
+}
+
 
 function CountDisplay() {
   // 🐨 get the count from useContext with the CountContext
 
   //had a bug for not using the [] to keep an eye out.
-  const [count] = React.useContext(CountContext) //access the value through the useContext.
+  const [count] = useCount() //access the value through the useContext.
   return <div>{`The current count is ${count}`}</div>
 }
 
 function Counter() {
   // 🐨 get the setCount from useContext with the CountContext
-  const [, setCount] = React.useContext(CountContext)
+  const [, setCount] = useCount()
   const increment = () => setCount(c => c + 1)
   return <button onClick={increment}>Increment count</button>
 }
