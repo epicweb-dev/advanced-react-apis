@@ -1,6 +1,9 @@
 // useCallback: custom hooks
 // http://localhost:3000/isolated/exercise/02.js
 
+//implementing safeDispatch with useCallback, useRef and useEffect. extra credit 3.
+
+
 import * as React from 'react'
 import {
   fetchPokemon,
@@ -9,6 +12,26 @@ import {
   PokemonInfoFallback,
   PokemonErrorBoundary,
 } from '../pokemon'
+
+
+//implementing the useSafeDispatch function
+//using useRef, useEffect and useCallback.
+function useSafeDispatch(dispatch){
+  const mountedRef = React.useRef(false) //use of the useRef
+
+  //useEffect with no dependecies.
+  React.useEffect(()=>{
+    mountedRef.current = true
+    return()=> {
+      mountedRef.current = false
+    }
+  }, [])
+
+  //use of the useCallback
+  return React.useCallback((...args)=> (mountedRef.current ? dispatch(...args) : void 0),
+  [dispatch],
+  )
+}
 
 // 🐨 this is going to be our generic asyncReducer
 function asyncReducer(state, action) {
@@ -33,12 +56,14 @@ function asyncReducer(state, action) {
 
 //new useAsync function //modding for extra credit 1, using the useCallback
 function useAsync(initialState) {
-  const [state, dispatch] = React.useReducer(asyncReducer, {
+  const [state, unsafeDispatch] = React.useReducer(asyncReducer, {
     status: 'idle',
     data: null,
     error: null,
     ...initialState,
   })
+
+  const dispatch = useSafeDispatch(unsafeDispatch)
 
   const {data, error, status} = state
 
@@ -53,7 +78,7 @@ function useAsync(initialState) {
         dispatch({type: 'rejected', error})
       },
     )
-  }, [])
+  }, [dispatch])
 
   return {
     error,
