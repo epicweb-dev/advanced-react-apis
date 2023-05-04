@@ -555,6 +555,15 @@
       "contributions": [
         "test"
       ]
+    },
+    {
+      "login": "CNate",
+      "name": "Nathan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13683291?v=4",
+      "profile": "https://github.com/CNate",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
