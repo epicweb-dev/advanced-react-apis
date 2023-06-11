@@ -264,6 +264,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/alexsurelee"><img src="https://avatars.githubusercontent.com/u/11603625?v=4?s=100" width="100px;" alt="Alex Lee"/><br /><sub><b>Alex Lee</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=alexsurelee" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/plumcoding"><img src="https://avatars.githubusercontent.com/u/88927709?v=4?s=100" width="100px;" alt="plumcoding"/><br /><sub><b>plumcoding</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=plumcoding" title="Tests">⚠️</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/CNate"><img src="https://avatars.githubusercontent.com/u/13683291?v=4?s=100" width="100px;" alt="Nathan"/><br /><sub><b>Nathan</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=CNate" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/GavinOsborn"><img src="https://avatars.githubusercontent.com/u/581588?v=4?s=100" width="100px;" alt="Gavin Osborn"/><br /><sub><b>Gavin Osborn</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=GavinOsborn" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
