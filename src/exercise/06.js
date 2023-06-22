@@ -3,14 +3,14 @@
 
 import * as React from 'react'
 
-function useMedia(query, initialState = false) {
-  const [state, setState] = React.useState(initialState)
+function useMedia(query) {
+  const mql = React.useMemo(() => window.matchMedia(query), [query])
+  const [state, setState] = React.useState(() => mql.matches)
   // 🐨 call React.useDebugValue here.
   // 💰 here's the formatted label I use: `\`${query}\` => ${state}`
 
   React.useEffect(() => {
     let mounted = true
-    const mql = window.matchMedia(query)
     function onChange() {
       if (!mounted) {
         return
@@ -19,13 +19,12 @@ function useMedia(query, initialState = false) {
     }
 
     mql.addListener(onChange)
-    setState(mql.matches)
 
     return () => {
       mounted = false
       mql.removeListener(onChange)
     }
-  }, [query])
+  }, [mql])
 
   return state
 }
