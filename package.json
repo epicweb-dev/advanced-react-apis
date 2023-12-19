@@ -20,6 +20,7 @@
     "chalk": "^4.1.2",
     "codegen.macro": "^4.1.0",
     "mq-polyfill": "^1.1.8",
+    "npm": "^8.16.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4"
