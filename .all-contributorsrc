@@ -582,6 +582,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "LorisYanis",
+      "name": "Loris-Yanis",
+      "avatar_url": "https://avatars.githubusercontent.com/u/115280526?v=4",
+      "profile": "https://github.com/LorisYanis",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
