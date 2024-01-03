@@ -267,6 +267,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/GavinOsborn"><img src="https://avatars.githubusercontent.com/u/581588?v=4?s=100" width="100px;" alt="Gavin Osborn"/><br /><sub><b>Gavin Osborn</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=GavinOsborn" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://creador.dev"><img src="https://avatars.githubusercontent.com/u/40248406?v=4?s=100" width="100px;" alt="Pawan Kumar"/><br /><sub><b>Pawan Kumar</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=creador-dev" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/LorisYanis"><img src="https://avatars.githubusercontent.com/u/115280526?v=4?s=100" width="100px;" alt="Loris-Yanis"/><br /><sub><b>Loris-Yanis</b></sub></a><br /><a href="https://github.com/kentcdodds/advanced-react-hooks/commits?author=LorisYanis" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
