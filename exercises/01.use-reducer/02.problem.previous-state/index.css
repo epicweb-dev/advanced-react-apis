@@ -1,0 +1,65 @@
+.app {
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	form {
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		div:has(label) {
+			width: 100%;
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			label {
+				flex-basis: 50%;
+				text-align: right;
+			}
+			input {
+				flex: 1;
+				padding: 8px;
+				font-size: 1.25rem;
+				max-width: 100px;
+			}
+		}
+		button {
+			padding: 8px;
+			font-size: 1.25rem;
+		}
+	}
+
+	.counter {
+		padding: 16px;
+		display: flex;
+		gap: 8px;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		div:has(button) {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			justify-content: center;
+		}
+		button {
+			border: none;
+			background-color: transparent;
+			padding: 8px;
+			font-size: 1.25rem;
+		}
+		output {
+			min-width: 3ch;
+			text-align: center;
+			font-variant-numeric: tabular-nums;
+			font-size: 1.5rem;
+			padding: 16px 32px;
+			background-color: #f0f0f0;
+			border-radius: 8px;
+		}
+	}
+}
