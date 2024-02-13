@@ -1,0 +1,15 @@
+# Optimize state updates
+
+👨‍💼 We're bringing back our search and card page. Now we are storing the entire
+`URLSearchParams` in state (not just the `query` param) and we want to make sure
+we don't rerender the page if the params are unchanged.
+
+If you want to test this out, you'll notice we have added a `console.log` in the
+function body for the `App` component so you can know each time the component
+rerenders, and also put one in the `setSearchParams` callback so you know
+each time we call `setSearchParams`. Submit the form multiple times observe the
+logs. Alternate between changing the search params and not changing them.
+
+When you're all finished, it should log whenever you set the search params, but
+it should not log the rerender when you submit the form without changing the
+query.

@@ -1,0 +1,30 @@
+# State Optimization
+
+If you set state to the exact value it already is set to, React will not bother
+triggering a re-render of your components because it knows nothing has changed.
+
+```tsx
+const [count, setCount] = useState(0)
+
+// ...
+setCount(0) // <-- will not trigger a rerender if the state is still 0
+```
+
+With objects, this is a little more tricky because you need to make certain you
+return the exact same object:
+
+```tsx
+const [state, setState] = useState({ count: 0 })
+
+// ...
+setState({ count: 0 }) // <-- will trigger a rerender
+setState(previousState => {
+	count: previousState.count
+}) // <-- will trigger a rerender
+setState(previousState => previousState) // <-- will not trigger a rerender
+```
+
+So, with a little forethought, you can optimize your state updates by
+determining yourself whether state has changed and returning the original state
+if it has not. This applies both in a reducer for `useReducer` as well as the
+callback for `useState`.
