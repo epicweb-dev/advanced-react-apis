@@ -1,0 +1,18 @@
+.messaging-app {
+	max-width: 350px;
+	margin: auto;
+}
+
+.messaging-app [role='log'] {
+	margin: auto;
+	height: 300px;
+	overflow-y: scroll;
+	width: 300px;
+	outline: 1px solid black;
+	padding: 30px 10px;
+}
+
+.messaging-app [role='log'] hr {
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
