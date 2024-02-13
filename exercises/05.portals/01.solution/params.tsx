@@ -1,10 +1,4 @@
-import {
-	createContext,
-	useCallback,
-	useContext,
-	useEffect,
-	useState,
-} from 'react'
+import { createContext, useCallback, use, useEffect, useState } from 'react'
 import { setGlobalSearchParams } from '#shared/utils'
 
 type SearchParamsTuple = readonly [
@@ -58,7 +52,7 @@ export function QueryParamsProvider({
 }
 
 export function useSearchParams() {
-	const context = useContext(QueryParamsContext)
+	const context = use(QueryParamsContext)
 	if (!context) {
 		throw new Error('useSearchParams must be used within a QueryParamsProvider')
 	}

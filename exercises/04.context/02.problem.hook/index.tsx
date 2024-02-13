@@ -1,10 +1,4 @@
-import {
-	createContext,
-	useEffect,
-	useState,
-	useContext,
-	useCallback,
-} from 'react'
+import { createContext, useEffect, useState, use, useCallback } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import {
 	type BlogPost,
@@ -76,7 +70,7 @@ function App() {
 }
 
 function Form() {
-	const [searchParams, setSearchParams] = useContext(QueryParamsContext)
+	const [searchParams, setSearchParams] = use(QueryParamsContext)
 	const query = getQueryParam(searchParams)
 
 	const words = query.split(' ').map(w => w.trim())
@@ -138,7 +132,7 @@ function Form() {
 }
 
 function MatchingPosts() {
-	const [searchParams] = useContext(QueryParamsContext)
+	const [searchParams] = use(QueryParamsContext)
 	const query = getQueryParam(searchParams)
 	const matchingPosts = getMatchingPosts(query)
 

@@ -1,10 +1,4 @@
-import {
-	createContext,
-	useEffect,
-	useState,
-	useContext,
-	useCallback,
-} from 'react'
+import { createContext, useEffect, useState, use, useCallback } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import {
 	type BlogPost,
@@ -60,7 +54,7 @@ function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 }
 
 function useSearchParams() {
-	const context = useContext(QueryParamsContext)
+	const context = use(QueryParamsContext)
 	if (!context) {
 		throw new Error('useSearchParams must be used within a QueryParamsProvider')
 	}
