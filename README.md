@@ -32,7 +32,6 @@
 [![Build Status][build-badge]][build]
 [![GPL 3.0 License][license-badge]][license]
 [![Code of Conduct][coc-badge]][coc]
-[![Gitpod ready-to-code][gitpod-badge]](https://gitpod.io/#https://github.com/kentcdodds/advanced-react-hooks)
 <!-- prettier-ignore-end -->
 
 ## Prerequisites
