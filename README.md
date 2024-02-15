@@ -45,19 +45,6 @@ speed on some of the tools and concepts we'll be covering:
 
 - TODO: add resources
 
-## Quick start
-
-It's recommended you run everything in the same environment you work in every
-day, but if you don't want to set up the repository locally, you can get started
-in one click with [Gitpod](https://gitpod.io),
-[CodeSandbox](https://codesandbox.io/s/github/kentcdodds/advanced-react-hooks),
-or by following the [video demo](https://www.youtube.com/watch?v=gCoVJm3hGk4)
-instructions for [GitHub Codespaces](https://github.com/features/codespaces).
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/kentcdodds/advanced-react-hooks)
-
-For a local development environment, follow the instructions below
-
 ## System Requirements
 
 - [git][git] v2.18 or greater
