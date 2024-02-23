@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import { flushSync } from 'react-dom'
 import * as ReactDOM from 'react-dom/client'
 
 function EditableText({
@@ -18,7 +17,7 @@ function EditableText({
 	const [edit, setEdit] = useState(false)
 	const [value, setValue] = useState(initialValue)
 	const inputRef = useRef<HTMLInputElement>(null)
-	const buttonRef = useRef<HTMLButtonElement>(null)
+	// 🐨 add a button ref here
 
 	return edit ? (
 		<form
@@ -26,11 +25,10 @@ function EditableText({
 			onSubmit={event => {
 				event.preventDefault()
 				// here's where you'd send the updated value to the server
-				flushSync(() => {
-					setValue(inputRef.current?.value ?? '')
-					setEdit(false)
-				})
-				buttonRef.current?.focus()
+				// 🐨 wrap these calls in a flushSync
+				setValue(inputRef.current?.value ?? '')
+				setEdit(false)
+				// 🐨 after flushSync, focus the button with the button ref
 			}}
 		>
 			<input
@@ -43,28 +41,28 @@ function EditableText({
 				defaultValue={value}
 				onKeyDown={event => {
 					if (event.key === 'Escape') {
-						flushSync(() => {
-							setEdit(false)
-						})
-						buttonRef.current?.focus()
+						// 🐨 wrap this in a flushSync
+						setEdit(false)
+						// 🐨 after the flushSync, focus the button
 					}
 				}}
 				onBlur={event => {
+					// 🐨 wrap these in a flushSync
 					setValue(event.currentTarget.value)
 					setEdit(false)
+					// 🐨 after the flushSync, focus the button
 				}}
 			/>
 		</form>
 	) : (
 		<button
 			aria-label={buttonLabel}
+			// 🐨 add a ref prop for the button
 			type="button"
-			ref={buttonRef}
 			onClick={() => {
-				flushSync(() => {
-					setEdit(true)
-				})
-				inputRef.current?.select()
+				// 🐨 wrap this in a flushSync
+				setEdit(true)
+				// 🐨 after the flushSync, select all the text of the input
 			}}
 		>
 			{value || 'Edit'}
