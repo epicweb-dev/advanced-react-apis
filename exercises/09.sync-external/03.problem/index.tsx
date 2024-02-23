@@ -27,9 +27,25 @@ function NarrowScreenNotifier() {
 }
 
 function App() {
-	return <NarrowScreenNotifier />
+	return (
+		<div>
+			<div>This is your narrow screen state:</div>
+			{/* 🐨 add a Suspense component around this with a fallback prop */}
+			<NarrowScreenNotifier />
+		</div>
+	)
 }
 
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
-ReactDOM.createRoot(rootEl).render(<App />)
+// 🦉 here's how we pretend we're server-rendering
+rootEl.innerHTML = (await import('react-dom/server')).renderToString(<App />)
+
+// 🦉 here's how we simulate a delay in hydrating with client-side js
+await new Promise(resolve => setTimeout(resolve, 1000))
+
+ReactDOM.hydrateRoot(rootEl, <App />, {
+	// 💯 if you want to silence the error add a onRecoverableError function here
+	// and if the error includes 'Missing getServerSnapshot' then return early
+	// otherwise log the error so you don't miss any other errors.
+})
