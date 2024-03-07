@@ -43,7 +43,10 @@
 Here are some resources you can read before taking the workshop to get you up to
 speed on some of the tools and concepts we'll be covering:
 
-- TODO: add resources
+- [Should I useState or useReducer?](https://kentcdodds.com/blog/should-i-usestate-or-usereducer)
+- [How to Implement useState with useReducer](https://kentcdodds.com/blog/how-to-implement-usestate-with-usereducer)
+- [useEffect vs useLayoutEffect](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect)
+- [Imperative vs Declarative Programming](https://ui.dev/imperative-vs-declarative-programming)
 
 ## System Requirements
 
