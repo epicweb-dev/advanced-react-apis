@@ -1,0 +1,27 @@
+# useLayoutEffect
+
+👨‍💼 Our tooltip is great, but we do need to make measurements when we display it.
+We do this in a `useEffect` hook now with code like this:
+
+```tsx
+useEffect(() => {
+	const rect = ref.current?.getBoundingClientRect()
+	if (!rect) return
+	const { height } = rect
+	setTooltipHeight(height)
+}, [])
+```
+
+That `height` is used to determine whether the tooltip should appear above or
+below the target element (the heart in our case).
+
+Kellie 🧝‍♂️ noticed on low-end devices, they're seeing a little flicker
+so <DiffLink app1={-1}>she's added</DiffLink> an arbitrary slowdown to our
+component to simulate that problem. To reproduce the problem, simply hover over
+a heart and you'll notice it starts at the bottom of the heart and then flickers
+to the top (if there's room on the top of the heart).
+
+So your job is simple. Change `useEffect` to `useLayoutEffect` and that should
+fix things.
+
+📜 Parts of this exercise was lifted from [the React docs](https://react.dev/reference/react/useLayoutEffect#measuring-layout-before-the-browser-repaints-the-screen)

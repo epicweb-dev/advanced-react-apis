@@ -22,7 +22,6 @@ export default function Tooltip({
 		if (!rect) return
 		const { height } = rect
 		setTooltipHeight(height)
-		console.log('Measured tooltip height: ' + height)
 	}, [])
 
 	let tooltipX = 0

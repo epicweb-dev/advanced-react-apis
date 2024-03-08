@@ -18,6 +18,8 @@ export default function Tooltip({
 	const ref = useRef<HTMLDivElement | null>(null)
 	const [tooltipHeight, setTooltipHeight] = useState(0)
 
+	// 🐨 change this to useLayoutEffect to ensure it runs synchronously after the
+	// DOM has been updated so the user doesn't see the tooltip jump around.
 	useEffect(() => {
 		const rect = ref.current?.getBoundingClientRect()
 		if (!rect) return

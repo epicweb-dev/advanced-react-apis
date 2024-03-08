@@ -1,0 +1,26 @@
+# Layout Computation
+
+Sometimes you need to compute the layout of some UI before it is actually
+displayed. This is often necessary if the size, position, or location of your UI
+depends on the size, position, or location of the other elements on the page or
+even itself (like the contents of a tooltip).
+
+The trouble is, sometimes you don't know the size, position, or location of the
+other elements on the page until the layout has been computed. So what happens
+is you render the UI, then you make your measurements, then you re-render the UI
+with the new measurements. This is inefficient and can cause flickering.
+
+To avoid this problem in React, you can use the `useLayoutEffect` hook. This
+hook is designed with this specific use case in mind and is not a hook you'll
+find yourself needing very often.
+
+It literally has the same API as `useEffect`, but it runs synchronously after
+the DOM has been updated. You may recall from the `useEffect` exercise, the
+[React flow diagram](https://github.com/donavon/hook-flow):
+
+![React Flow diagram showing mount, update, unmount](https://github-production-user-asset-6210df.s3.amazonaws.com/1500684/295689283-b9ecdd1d-ce28-446b-84ad-6b264d4be8e4.png)
+
+The `useLayoutEffect` hook runs after the DOM has been updated but before the
+browser has had a chance to paint the screen. This means you can make your
+measurements and then render the UI with the correct measurements before the
+user sees anything.
