@@ -1,1 +1,13 @@
 # Previous State
+
+👨‍💼 We want to change things a bit to have this API:
+
+```tsx
+const [count, changeCount] = useReducer(countReducer, initialCount)
+const increment = () => changeCount(step)
+const decrement = () => changeCount(-step)
+```
+
+How would you need to change your reducer to make this work?
+
+🦉 This step is just to show that you can pass anything as the action.

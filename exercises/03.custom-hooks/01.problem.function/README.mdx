@@ -1,1 +1,30 @@
 # Hook Function
+
+👨‍💼 We now want to create a reusable `useSearchParams` function which will handle
+the search params for us generally so we can use that logic in other components.
+
+<callout-info>
+	There's a much more complete version of this hook as a part of
+	[react-router](https://reactrouter.com/en/main/hooks/use-search-params) which
+	you'll likely want to use in a real application. This is just a simple
+	example.
+</callout-info>
+
+So your job is to take the logic from the `App` component that relates to the
+search params and put it in a new function called `useSearchParams`, then you'll
+use that function in the `App` component.
+
+```tsx
+const [searchParams, setSearchParams] = useSearchParams()
+```
+
+For the types of that tuple, you may find this article helpful:
+[Wrapping React.useState with TypeScript](https://kentcdodds.com/blog/wrapping-react-use-state-with-type-script)
+
+<callout-info class="aside">
+	There are actually not a lot of lines changed in this step of the exercise,
+	but we're going to be bringing in `useCallback` in the next step so keep
+	going!
+</callout-info>
+
+Good luck!

@@ -1,1 +1,21 @@
 # Context Provider
+
+🧝‍♂️ I was refactoring things a bit and decided we shouldn't need to pass
+the `query` and `setSearchParams` as props. Instead I just wanted to call
+`useSearchParams` in each of the components that need them (there's only one
+URL afterall).
+
+Well that didn't work. Turns out we now have multiple instances of the search
+params state and multiple subscriptions to the `popstate` event. That's not
+what we want at all. It's busted right now. Can you fix this with context?
+
+👨‍💼 No worries Kellie. We can fix this.
+
+So we want to create a context provider that will provide the `useSearchParams`
+hook to the rest of the app.
+
+We're going to take this in steps though. First we'll create the context
+provider, render it around the app, and then make a new `useSearchParams` hook
+that will use the context value.
+
+Good luck! When you're finished, the app should be working again!

@@ -1,1 +1,20 @@
 # Traditional Reducer
+
+👨‍💼 Now it's time to get to the actual convention for reducers in React apps.
+
+Update your reducer so I can do this:
+
+```javascript
+const [state, dispatch] = useReducer(countReducer, {
+	count: initialCount,
+})
+const { count } = state
+const increment = () => dispatch({ type: 'INCREMENT', step })
+const decrement = () => dispatch({ type: 'DECREMENT', step })
+```
+
+The key here is that the logic for updating the state is now in the reducer, and
+the component is just dispatching actions. This actually gives us a bit of a
+declarative API for updating state, which is nice. The component is just saying
+what it wants to happen, and the reducer is the one that decides how to make it
+happen.

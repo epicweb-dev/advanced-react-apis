@@ -1,1 +1,9 @@
 # useCallback
+
+👨‍💼 We only call the `setSearchParams` function inside event handlers, so we
+don't have any problems, but we're making a reusable hook and we want to make
+certain people don't have problems if they need to use it in a `useEffect` or
+other hook that requires a dependency array.
+
+So I want you to wrap our `setSearchParams` function in `useCallback` to memoize
+it and avoid issues with the dependency array.

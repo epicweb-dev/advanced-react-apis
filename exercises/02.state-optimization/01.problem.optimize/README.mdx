@@ -1,5 +1,11 @@
 # Optimize state updates
 
+{/* prettier-ignore */}
+<callout-info>
+We're going to be working with the URL, so you'll want to pull this one up in
+<a target="_blank" href="/app/playground">a separate tab</a>.
+</callout-info>
+
 👨‍💼 We're bringing back our search and card page. Now we are storing the entire
 `URLSearchParams` in state (not just the `query` param) and we want to make sure
 we don't rerender the page if the params are unchanged.

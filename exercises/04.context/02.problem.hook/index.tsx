@@ -11,10 +11,11 @@ type SearchParamsTuple = readonly [
 	URLSearchParams,
 	typeof setGlobalSearchParams,
 ]
-const QueryParamsContext = createContext<SearchParamsTuple>([
-	new URLSearchParams(),
-	() => new URLSearchParams(),
-])
+// 🦺 add "| null" to the type generic here
+const QueryParamsContext = createContext<SearchParamsTuple>(
+	// 🐨 remove this array and replace it with "null"
+	[new URLSearchParams(window.location.search), setGlobalSearchParams],
+)
 
 function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 	const [searchParams, setSearchParamsState] = useState(
@@ -56,21 +57,26 @@ function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 	)
 }
 
+function useSearchParams() {
+	const context = use(QueryParamsContext)
+	// 🐨 if there's no context value, the throw an error with a helpful error message
+	return context
+}
+
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 function App() {
 	return (
-		<QueryParamsProvider>
-			<div className="app">
-				<Form />
-				<MatchingPosts />
-			</div>
-		</QueryParamsProvider>
+		// 🐨 wrap this in the QueryParamsProvider again
+		<div className="app">
+			<Form />
+			<MatchingPosts />
+		</div>
 	)
 }
 
 function Form() {
-	const [searchParams, setSearchParams] = use(QueryParamsContext)
+	const [searchParams, setSearchParams] = useSearchParams()
 	const query = getQueryParam(searchParams)
 
 	const words = query.split(' ').map(w => w.trim())
@@ -132,7 +138,7 @@ function Form() {
 }
 
 function MatchingPosts() {
-	const [searchParams] = use(QueryParamsContext)
+	const [searchParams] = useSearchParams()
 	const query = getQueryParam(searchParams)
 	const matchingPosts = getMatchingPosts(query)
 
@@ -182,3 +188,8 @@ function Card({ post }: { post: BlogPost }) {
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
 ReactDOM.createRoot(rootEl).render(<App />)
+
+/*
+eslint
+	@typescript-eslint/no-unused-vars: "off",
+*/

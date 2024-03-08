@@ -7,6 +7,14 @@ import {
 } from '#shared/blog-posts'
 import { setGlobalSearchParams } from '#shared/utils'
 
+// 🦺 create a SearchParamsTuple type here that's a readonly array of two elements:
+// - the first element is a URLSearchParams instance
+// - the second element is typeof setGlobalSearchParams
+// 🐨 create a QueryParamsContext that is of this type
+// 💰 let's start with this as the default value (we'll improve it next):
+// [new URLSearchParams(window.location.search), setGlobalSearchParams]
+
+// 🐨 change this to QueryParamsProvider and accept children
 function useSearchParams() {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
@@ -38,30 +46,29 @@ function useSearchParams() {
 		[],
 	)
 
+	// 🐨 instead of returning this, render the QueryParamsContext.Provider and
+	// provide this tuple as the value
+	// 💰 make sure to render the children as well!
 	return [searchParams, setSearchParams] as const
 }
+
+// 🐨 create a useSearchParams hook here that returns use(QueryParamsProvider)
 
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 function App() {
-	const [searchParams, setSearchParams] = useSearchParams()
-	const query = getQueryParam(searchParams)
-
 	return (
+		// 🐨 wrap this in the QueryParamsProvider
 		<div className="app">
-			<Form query={query} setSearchParams={setSearchParams} />
-			<MatchingPosts query={query} />
+			<Form />
+			<MatchingPosts />
 		</div>
 	)
 }
 
-function Form({
-	query,
-	setSearchParams,
-}: {
-	query: string
-	setSearchParams: typeof setGlobalSearchParams
-}) {
+function Form() {
+	const [searchParams, setSearchParams] = useSearchParams()
+	const query = getQueryParam(searchParams)
 	const words = query.split(' ').map(w => w.trim())
 
 	const dogChecked = words.includes('dog')
@@ -120,7 +127,9 @@ function Form({
 	)
 }
 
-function MatchingPosts({ query }: { query: string }) {
+function MatchingPosts() {
+	const [searchParams] = useSearchParams()
+	const query = getQueryParam(searchParams)
 	const matchingPosts = getMatchingPosts(query)
 
 	return (

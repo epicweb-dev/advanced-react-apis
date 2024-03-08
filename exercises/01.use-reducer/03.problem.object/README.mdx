@@ -1,1 +1,35 @@
 # State Object
+
+👨‍💼 Back in the day, we had `this.setState` from class components? We're going to
+make the state updater (`dispatch` function) behave in a similar way by changing
+our `state` to an object (`{count: 0}`) and then calling the state updater with
+an object which merges with the current state.
+
+So here's how I want things to look now:
+
+```tsx
+const [state, setState] = useReducer(countReducer, {
+	count: initialCount,
+})
+const { count } = state
+const increment = () => setState({ count: count + step })
+const decrement = () => setState({ count: count - step })
+```
+
+How would you need to change the reducer to make this work?
+
+How would you make it support multiple state properties? For example:
+
+```tsx
+const [state, setState] = useReducer(countReducer, {
+	count: initialCount,
+	someOtherState: 'hello',
+})
+const { count } = state
+const increment = () => setState({ count: count + step })
+const decrement = () => setState({ count: count - step })
+```
+
+Calling `increment` or `decrement` in this case should only update the `count`
+property and leave the `someOtherState` property alone. So the `setState`
+function should merge the new state with the old state.

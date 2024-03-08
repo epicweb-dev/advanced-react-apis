@@ -1,1 +1,142 @@
-# Global State
+# Shared Context
+
+Let's say you have the following custom hook:
+
+```tsx
+function useCount() {
+	const [count, setCount] = useState(0)
+	const increment = () => setCount(c => c + 1)
+	return { count, increment }
+}
+```
+
+Then, you have two components, one to display the count and another to increment it:
+
+```tsx
+function DisplayCount() {
+	const { count } = useCount()
+	return <div>{count}</div>
+}
+
+function IncrementCount() {
+	const { increment } = useCount()
+	return <button onClick={increment}>Increment</button>
+}
+
+function App() {
+	return (
+		<div>
+			<DisplayCount />
+			<IncrementCount />
+		</div>
+	)
+}
+```
+
+If you tried that you'd find that clicking the increment button doesn't work.
+That's because each component is creating its own instance of the state in the
+`useCount` hook, so they're not sharing the same state. In fact, even if you
+call the hook multiple times in the same component, you'd still get different
+instances of the state.
+
+Often this is what you want. You want the isolation. But sometimes, you want to
+have that state be shared between the components.
+
+Often you solve this problem by
+[lifting state](https://react.dev/learn/sharing-state-between-components), but
+sometimes that's not very practical because you're many layers away from the
+components that need to share the state or perhaps there's a router involved and
+you aren't the one rendering the components and don't have an easy way to pass
+props down.
+
+Another situation where you would use this is if you wanted to implicitely share
+state between components so consumers of those components can use them without
+having to know about the state. This is a pattern known as "Compound Components"
+and we'll learn more about that in the Compound Components exercise of the
+Advanced React Patterns workshop.
+
+In these cases, you can use
+[context](https://react.dev/reference/react/createContext). React router
+actually has a built-in feature that allows you to pass state into context and
+access that value in child routes called
+[`outletContext`](https://reactrouter.com/en/main/hooks/use-outlet-context)
+and in my apps this is what I use most of the time. However, sometimes I do
+still reach for context.
+
+Here's how you would use context to share state between components:
+
+```tsx
+import { createContext, use } from 'react'
+
+type CountContextType = {
+	count: number
+	increment: () => void
+}
+const CountContext = createContext<CountContextType | null>(null)
+
+function CountProvider({ children }: { children: ReactNode }) {
+	const [count, setCount] = useState(0)
+	const increment = () => setCount(c => c + 1)
+	const value = { count, increment }
+	return <CountContext.Provider value={value}>{children}</CountContext.Provider>
+}
+
+function useCount() {
+	const context = use(CountContext)
+	if (!context) {
+		throw new Error('useCount must be used within a CountProvider')
+	}
+	return context
+}
+
+function DisplayCount() {
+	const { count } = useCount()
+	return <div>{count}</div>
+}
+
+function IncrementCount() {
+	const { increment } = useCount()
+	return <button onClick={increment}>Increment</button>
+}
+
+function App() {
+	return (
+		<CountProvider>
+			<div>
+				<DisplayCount />
+				<IncrementCount />
+			</div>
+		</CountProvider>
+	)
+}
+```
+
+The `CountProvider` component is a context provider. It's a component that
+handles the state and provides it to the components that need it. The `useCount`
+hook is a custom hook that uses the `use` hook to access the context. The
+`DisplayCount` and `IncrementCount` components are the consumers of the context.
+
+Whenever the `value` prop of the context provider changes, all the components
+that consume the context value will rerender to get those updates. And they will
+all be referencing the same state.
+
+Providers can be nested and the closest provider to the consuming component will
+be the one that provides the value. If there is no provider, the default value
+will be used. In this case, the default value is `null` and we throw an error if
+the hook is used without a provider. This is generally a good practice, but
+there are use cases where you might want to provide a default value. You'll know
+when you need to do that, but most of the time you'll want to require a context
+provider.
+
+<callout-warning>
+	The `use` hook we're using here is not officially released in React but will
+	soon be. For now, in a regular React app on `<= 18.2`, you'll use `useContext`.
+	In the workshop we're using an experimental version of React that has this
+	feature.
+</callout-warning>
+
+{/* prettier-ignore */}
+<callout-warning>
+Soon you'll be able to render `<CountContext />` rather than
+`<CountContext.Provider />` .
+</callout-warning>

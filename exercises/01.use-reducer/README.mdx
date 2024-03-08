@@ -16,7 +16,7 @@ help you learn the difference between the convention and the actual API.
 Here's an example of using `useReducer` to manage the value of a name in an
 input.
 
-```javascript
+```tsx
 function nameReducer(previousName, newName) {
 	return newName
 }
@@ -24,7 +24,7 @@ function nameReducer(previousName, newName) {
 const initialNameValue = 'Joe'
 
 function NameInput() {
-	const [name, setName] = React.useReducer(nameReducer, initialNameValue)
+	const [name, setName] = useReducer(nameReducer, initialNameValue)
 	const handleChange = event => setName(event.target.value)
 	return (
 		<>
@@ -43,3 +43,8 @@ above) is called with two arguments:
 1. the current state
 2. whatever it is that the dispatch function (called `setName` above) is called
    with. This is often called an "action."
+
+📜 Here are two really helpful blog posts comparing `useState` and `useReducer`:
+
+- [Should I useState or useReducer?](https://kentcdodds.com/blog/should-i-usestate-or-usereducer)
+- [How to implement useState with useReducer](https://kentcdodds.com/blog/how-to-implement-usestate-with-usereducer)

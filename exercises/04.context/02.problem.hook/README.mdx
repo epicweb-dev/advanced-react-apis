@@ -1,1 +1,17 @@
-# Context Provider
+# Context Hook
+
+🧝‍♂️ I was playing around with the app and I realized that we have a default value
+for our context provider. So I thought maybe we could remove the context
+provider. Unfortunately that didn't work. Do you know why?
+
+👨‍💼 Yeah, it's because even though the `searchParams` are shared, they're not
+updated when calling `setSearchParams`. This is because the `searchParams`
+object is no longer state. It's just a plain object. So when we call
+`setSearchParams`, nothing rerenders (and even if it did, it wouldn't have
+the updated `searchParams`).
+
+So having a default in our context is pretty meaningless. So why don't we
+default it to `null` and then in our `useSearchParams()` hook we can throw an
+error if the context is `null`? Go ahead and give it a try.
+
+When you're done, the app should be working again.

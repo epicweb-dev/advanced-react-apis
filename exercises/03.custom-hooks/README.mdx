@@ -1,3 +1,205 @@
 # Custom Hooks
 
 > [Custom hooks are functions that use other hooks.](https://twitter.com/kentcdodds/status/1763633880349987151)
+
+That's it. That's the entire idea behind custom hooks. So...
+
+```tsx
+function useCount() {
+	const [count, setCount] = useState(0)
+	const increment = () => setCount(c => c + 1)
+	return { count, increment }
+}
+
+function Counter() {
+	const { count, increment } = useCount()
+	return <button onClick={increment}>{count}</button>
+}
+```
+
+The `useCount` function is a custom hook. The `use` prefix is a convention to
+indicate that this function is a hook and has to follow all of the
+[rules of hooks](https://react.dev/warnings/invalid-hook-call-warning)
+
+Custom hooks are fantastic because they allow you to encapsulate complex logic
+and share that logic between components.
+
+However, all abstraction has a cost, and that's true of custom hooks as well.
+In particular, if you have a utility function you want to share and people call
+that function within a `useEffect` or other hook which has a dependency array
+you suddenly need to start worrying about identity and referential equality.
+
+For example, consider our `increment` function from the `useCount` hook. Let's
+pretend we're going to use it in a `useEffect`:
+
+```tsx
+function Counter() {
+	const { count, increment } = useCount()
+	React.useEffect(() => {
+		// set up a timer to increment the count every second or something...
+		const id = setInterval(() => {
+			increment()
+		}, 1000)
+		return () => clearInterval(id)
+	}, [increment]) // <-- we need to include increment in the dependency list
+	return <div>{count}</div>
+}
+```
+
+The problem with this is that `increment` is a new function every render as we
+currently have it defined. So every re-render of `Counter` will cause the
+`useEffect` cleanup to be run clearing the interval and setting up a new one.
+This is not what we want. So we have to make sure that the `increment` function
+never changes. We can do that with the `useCallback` hook.
+
+Before we get into `useCallback`, let's talk about memoization in general.
+
+### Memoization in general
+
+Memoization: a performance optimization technique which eliminates the need to
+recompute a value for a given input by storing the original computation and
+returning that stored value when the same input is provided. Memoization is a
+form of caching. Here's a simple implementation of memoization:
+
+```typescript
+const values = {}
+function addOne(num: number) {
+	if (values[num] === undefined) {
+		values[num] = num + 1 // <-- here's the computation
+	}
+	return values[num]
+}
+```
+
+One other aspect of memoization is value referential equality. For example:
+
+```typescript
+const dog1 = new Dog('sam')
+const dog2 = new Dog('sam')
+console.log(dog1 === dog2) // false
+```
+
+Even though those two dogs have the same name, they are not the same. However,
+we can use memoization to get the same dog:
+
+```typescript
+const dogs = {}
+function getDog(name: string) {
+	if (dogs[name] === undefined) {
+		dogs[name] = new Dog(name)
+	}
+	return dogs[name]
+}
+
+const dog1 = getDog('sam')
+const dog2 = getDog('sam')
+console.log(dog1 === dog2) // true
+```
+
+You might have noticed that our memoization examples look very similar.
+Memoization is something you can implement as a generic abstraction:
+
+```typescript
+function memoize<ArgType, ReturnValue>(cb: (arg: ArgType) => ReturnValue) {
+	const cache: Record<ArgType, ReturnValue> = {}
+	return function memoized(arg: ArgType) {
+		if (cache[arg] === undefined) {
+			cache[arg] = cb(arg)
+		}
+		return cache[arg]
+	}
+}
+
+const addOne = memoize((num: number) => num + 1)
+const getDog = memoize((name: string) => new Dog(name))
+```
+
+Our abstraction only supports one argument, if you want to make it work for any
+type/number of arguments, knock yourself out.
+
+### Memoization in React
+
+Luckily, in React we don't have to implement a memoization abstraction. They
+made two for us! `useMemo` and `useCallback`. For more on this read:
+[Memoization and React](https://epicreact.dev/memoization-and-react).
+
+So, going back to our earlier example, here's how you solve the problem:
+
+```tsx lines=3
+function useCount() {
+	const [count, setCount] = useState(0)
+	const increment = useCallback(() => setCount(c => c + 1), [])
+	return { count, increment }
+}
+
+function Counter() {
+	const { count, increment } = useCount()
+	useEffect(() => {
+		const id = setInterval(increment, 1000)
+		return () => clearInterval(id)
+	}, [increment])
+	return <div>{count}</div>
+}
+```
+
+What that does is we pass React a function and React gives that same function
+back to us... Sounds kinda useless right? Imagine:
+
+```tsx
+// this is not how React actually implements this function. We're just imagining!
+function useCallback(callback) {
+	return callback
+}
+```
+
+Uhhh... But there's a catch! On subsequent renders, if the elements in the
+dependency list are unchanged, instead of giving the same function back that we
+give to it, React will give us the same function it gave us last time. So
+imagine:
+
+```tsx
+// this is not how React actually implements this function. We're just imagining!
+let lastCallback
+function useCallback(callback, deps) {
+	if (depsChanged(deps)) {
+		lastCallback = callback
+		return callback
+	} else {
+		return lastCallback
+	}
+}
+```
+
+So while we still create a new function every render (to pass to `useCallback`),
+React only gives us the new one if the dependency list changes.
+
+In this exercise, we're going to be using `useCallback`, but `useCallback` is
+just a shortcut to using `useMemo` for functions:
+
+```typescript
+// the useMemo version:
+const increment = useMemo(() => () => setCount(c => c + 1), [])
+
+// the useCallback version
+const increment = useCallback(() => setCount(c => c + 1), [])
+```
+
+One other thing to note is that `useCallback` and `useMemo` also have dependency
+array and it functions the same way as the dependency array in `useEffect`. If
+you don't include all the dependencies, you'll have bugs. And if the things you
+include in the dependency array are not stable, then it'll undo the stability
+of the memoization as well. This is how dependency arrays can spider out into
+everything you do which is one reason why it's handy to avoid abstracting early.
+
+There's a strategy to help you avoid dependency arrays talked about in
+[Myths about `useEffect`](https://epicreact.dev/myths-about-useeffect).
+Additionally, there's a pattern you can use to help reduce the issue (with its
+own set of trade-offs) which we'll explore in the React Patterns workshop.
+
+🦉 A common question with this is: "Why don't we just wrap every function in
+`useCallback`?" You can read about this in my blog post
+[When to useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback).
+
+🦉 And if the concept of a "closure" is new or confusing to you, then
+[give this a read](https://mdn.io/closure). (Closures are one of the reasons
+it's important to keep dependency lists correct.)
