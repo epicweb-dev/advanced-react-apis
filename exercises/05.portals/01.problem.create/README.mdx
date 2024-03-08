@@ -1,0 +1,28 @@
+# createPortal
+
+👨‍💼 Some of our users find the heart icon to be unclear and would like to have a
+tooltip that explains what it's for.
+
+🧝‍♂️ I've moved things around a little bit to reduce the amount of code you need
+to work in. I've also added a simple tooltip component that's not working quite
+yet. The positioning is all funny because the tooltip is being rendered within
+the context of the card instead of at the root of the document.
+
+👨‍💼 Thanks Kellie. Now, let's see if you can make the tooltip component work
+properly with a portal.
+
+Note, the change you're making is pretty minimal. You'll also need to change
+some of the CSS to make the tooltip look a little better.
+
+🦉 Don't forget about the "Files" button in the bottom of this screen. It will
+show you which files are changed in this exercise step and allow you to click
+to open the relevant files.
+
+📜 Parts of this exercise was lifted from [the React docs](https://react.dev/reference/react/useLayoutEffect#measuring-layout-before-the-browser-repaints-the-screen)
+
+<callout-info>
+	Typically you'll want to use a library for tooltips which have been tested for
+	accessibility best practices. But they're likely using `createPortal` under
+	the hood and you'll very likely find yourself needing to use this API at some
+	point.
+</callout-info>

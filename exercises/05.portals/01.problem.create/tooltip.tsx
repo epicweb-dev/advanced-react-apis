@@ -38,6 +38,7 @@ export default function Tooltip({
 		tooltipY += window.scrollY
 	}
 
+	// 🐨 put this inside a createPortal call and append it to the document.body
 	return (
 		<TooltipContainer x={tooltipX} y={tooltipY} contentRef={ref}>
 			{children}

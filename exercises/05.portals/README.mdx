@@ -1,3 +1,58 @@
 # Portals
 
-📜 Parts of this exercise was lifted from [the React docs](https://react.dev/reference/react/useLayoutEffect#measuring-layout-before-the-browser-repaints-the-screen)
+There are a variety of UI patterns that require a component render some part of
+its UI that appears outside of the component's normal DOM hierarchy. For
+example, a modal dialog might need to render its contents at the root of the
+document, or a tooltip might need to render its contents at the end of the
+`body` element. Typically this is for the purpose of layering or positioning
+content above other content.
+
+You could imperatively add a `useEffect` that creates a DOM node yourself,
+appends it to the document, and then removes it when the component unmounts.
+However, this is a common enough pattern that React provides a built-in way to
+do this with the `ReactDOM.createPortal` method.
+
+```tsx lines=1,12-18
+import { createPortal } from 'react-dom'
+
+function Modal({
+	title,
+	content,
+	handleClose,
+}: {
+	title: string
+	content: string
+	handleClose: () => void
+}) {
+	return createPortal(
+		<div className="modal">
+			<h1>{title}</h1>
+			<p>{content}</p>
+		</div>,
+		document.body,
+	)
+}
+
+function App() {
+	const [showModal, setShowModal] = React.useState(false)
+
+	return (
+		<div>
+			<button onClick={() => setShowModal(true)}>Show Modal</button>
+			{showModal && (
+				<Modal
+					title="My Modal"
+					content="This is the content of the modal"
+					handleClose={() => setShowModal(false)}
+				/>
+			)}
+		</div>
+	)
+}
+```
+
+The first argument is the UI you want rendered (which has access to props,
+state, whatever) and the second argument is the DOM node you want to render it
+to. In this case, we're rendering the modal to the `body` element.
+
+📜 Learn more from [the `createPortal` docs](https://react.dev/reference/react-dom/createPortal)
