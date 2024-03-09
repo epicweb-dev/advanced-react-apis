@@ -1,1 +1,88 @@
 # Imperative Handles
+
+Sometimes you need to expose a method to the parent component that allows the
+parent to imperatively interact with the child component. This is done using
+a `ref` which you get from the `useRef` hook. You'll recall that the `useRef`
+hook allows you to have an object that's associated to a particular instance of
+a component which persists across renders and doesn't trigger rerenders when
+it's changed.
+
+So a parent component can pass a `ref` to a child component and then the child
+component can attach methods to that `ref` which the parent can then call:
+
+```tsx
+type InputAPI = { focusInput: () => void }
+
+function MyInput({
+	myInputRef,
+	...props
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+	myInputRef: React.RefObject<InputAPI>
+}) {
+	const inputRef = useRef()
+	myInputRef.current = {
+		focusInput: () => inputRef.current.focus(),
+	}
+	return <input ref={inputRef} {...props} />
+}
+
+function App() {
+	const myInputRef = useRef<InputAPI>(null)
+	return (
+		<div>
+			<MyInput myInputRef={myInputRef} placeholder="Enter your name" />
+			<button onClick={() => myInputRef.current.focusInput()}>
+				Focus the input
+			</button>
+		</div>
+	)
+}
+```
+
+This actually works, however there are some edge case bugs with this approach
+when applied in React's concurrent/suspense features (also it doesn't support
+callback refs). So instead, we'll use the `useImperativeHandle` hook to do this:
+
+```tsx
+type InputAPI = { focusInput: () => void }
+
+function MyInput({
+	myInputRef,
+	...props
+}: React.InputHTMLAttributes<HTMLInputElement> & {
+	myInputRef: React.RefObject<InputAPI>
+}) {
+	const inputRef = useRef()
+	useImperativeHandle(
+		myInputRef,
+		() => ({ focusInput: () => inputRef.current.focus() }),
+		[],
+	)
+	return <input ref={inputRef} {...props} />
+}
+```
+
+You'll notice that empty array. That's another dependency array. We don't
+include the `inputRef` in there even though it's used in the function because
+you actually don't need to include refs in the dependency array. Learn more
+about this in
+[Why you shouldn't put refs in a dependency array](https://epicreact.dev/why-you-shouldnt-put-refs-in-a-dependency-array).
+
+`useImperativeHandle` allows us to expose imperative methods to developers who
+pass a ref prop to our component which can be useful when you have something
+that needs to happen and is hard to deal with declaratively.
+
+> NOTE: most of the time you should not need `useImperativeHandle`. Before you
+> reach for it, really ask yourself whether there's any other way to accomplish
+> what you're trying to do. Imperative code can sometimes be really hard to
+> follow and it's much better to make your APIs declarative if possible. For
+> more on this, read
+> [Imperative vs Declarative Programming](https://tylermcginnis.com/imperative-vs-declarative-programming/)
+
+<callout-warning>
+	The typical way to handle refs for components is to use the `React.forwardRef`
+	API, however in the near future, React will remove the `React.forwardRef` API
+	and instead you'll receive the `ref` as a regular prop. Until that happens, if
+	you try to pass a `ref` prop without using `React.forwardRef`, you'll get an
+	error. So just name it something other than `ref`.
+</callout-warning>

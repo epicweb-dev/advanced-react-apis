@@ -8,7 +8,8 @@ import { allMessages } from './messages'
 // 	scrollToBottom: () => void
 // }
 
-// 🐨 wrap this in a forwardRef and accept `ref` as the second argument
+// 🐨 Accept `scrollableRef` as a prop here
+// 🦺 it's type should be React.RefObject<ScrollableImperativeAPI>
 function Scrollable({ children }: { children: React.ReactNode }) {
 	const containerRef = useRef<HTMLDivElement>(null)
 
@@ -16,19 +17,24 @@ function Scrollable({ children }: { children: React.ReactNode }) {
 		scrollToBottom()
 	})
 
-	// 💰 you're gonna want this as part of your imperative methods
-	// function scrollToTop() {
-	//   if (!containerRef.current) return
-	//   containerRef.current.scrollTop = 0
-	// }
+	function scrollToTop() {
+		if (!containerRef.current) return
+		containerRef.current.scrollTop = 0
+	}
 
 	function scrollToBottom() {
 		if (!containerRef.current) return
 		containerRef.current.scrollTop = containerRef.current.scrollHeight
 	}
 
-	// 🐨 call useImperativeHandle here with your ref and a callback function
+	// 🐨 call useImperativeHandle here with the scrollableRef and a callback function
 	// that returns an object with scrollToTop and scrollToBottom
+	// 🦉 you can omit the dependency array argument here. Re-assigning new
+	// functions to the ref object every render won't cause any issues in our case
+	// 💯 for extra credit, try adding the functions as dependencies and see how
+	// that spiders out into having to add useCallback around the functions. So
+	// annoying! Maybe you can think of another way we can have the dependency
+	// array without having to use useCallback. 🤔
 
 	return (
 		<div ref={containerRef} role="log">
@@ -38,7 +44,7 @@ function Scrollable({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-	// 🐨 create a scrollableRef with useRef that is a MessagesImperativeAPI type
+	// 🐨 create a scrollableRef with useRef that is a ScrollableImperativeAPI type (initialize it to null)
 	const [messages, setMessages] = useState(allMessages.slice(0, 8))
 	function addMessage() {
 		if (messages.length < allMessages.length) {
@@ -67,7 +73,7 @@ function App() {
 			<div>
 				<button onClick={scrollToTop}>scroll to top</button>
 			</div>
-			{/* 🐨 add ref prop here */}
+			{/* 🐨 add scrollableRef prop here */}
 			<Scrollable>
 				{messages.map((message, index, array) => (
 					<div key={message.id}>
@@ -86,3 +92,8 @@ function App() {
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
 ReactDOM.createRoot(rootEl).render(<App />)
+
+/*
+eslint
+	@typescript-eslint/no-unused-vars: "off",
+*/

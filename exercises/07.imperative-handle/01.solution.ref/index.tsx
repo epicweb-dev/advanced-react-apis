@@ -1,10 +1,4 @@
-import {
-	forwardRef,
-	useImperativeHandle,
-	useLayoutEffect,
-	useRef,
-	useState,
-} from 'react'
+import { useImperativeHandle, useLayoutEffect, useRef, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { allMessages } from './messages'
 
@@ -13,10 +7,12 @@ type ScrollableImperativeAPI = {
 	scrollToBottom: () => void
 }
 
-const Scrollable = forwardRef<
-	ScrollableImperativeAPI,
-	{ children: React.ReactNode }
->(function Scrollable({ children }, ref) {
+function Scrollable({
+	children,
+	scrollableRef,
+}: { children: React.ReactNode } & {
+	scrollableRef: React.RefObject<ScrollableImperativeAPI>
+}) {
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	useLayoutEffect(() => {
@@ -33,7 +29,7 @@ const Scrollable = forwardRef<
 		containerRef.current.scrollTop = containerRef.current.scrollHeight
 	}
 
-	useImperativeHandle(ref, () => ({
+	useImperativeHandle(scrollableRef, () => ({
 		scrollToTop,
 		scrollToBottom,
 	}))
@@ -43,10 +39,10 @@ const Scrollable = forwardRef<
 			{children}
 		</div>
 	)
-})
+}
 
 function App() {
-	const scrollableRef = useRef<ScrollableImperativeAPI | null>(null)
+	const scrollableRef = useRef<ScrollableImperativeAPI>(null)
 	const [messages, setMessages] = useState(allMessages.slice(0, 8))
 	function addMessage() {
 		if (messages.length < allMessages.length) {
@@ -72,7 +68,7 @@ function App() {
 			<div>
 				<button onClick={scrollToTop}>scroll to top</button>
 			</div>
-			<Scrollable ref={scrollableRef}>
+			<Scrollable scrollableRef={scrollableRef}>
 				{messages.map((message, index, array) => (
 					<div key={message.id}>
 						<strong>{message.author}</strong>: <span>{message.content}</span>
@@ -90,3 +86,8 @@ function App() {
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
 ReactDOM.createRoot(rootEl).render(<App />)
+
+/*
+eslint
+	@typescript-eslint/no-unused-vars: "off",
+*/
