@@ -2,6 +2,10 @@ import { useSyncExternalStore } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 const mediaQuery = '(max-width: 600px)'
+
+// 🐨 put getSnapshot and subscribe in a new function called makeMediaQueryStore
+// which accepts a mediaQuery and returns a hook that uses useSyncExternalStore
+// with the subscribe and getSnapshot functions.
 function getSnapshot() {
 	return window.matchMedia(mediaQuery).matches
 }
@@ -13,8 +17,13 @@ function subscribe(callback: () => void) {
 		mediaQueryList.removeEventListener('change', callback)
 	}
 }
+// 🐨 put everything above in the makeMediaQueryStore function
+
+// 🐨 call makeMediaQueryStore with '(max-width: 600px)' and assign the return
+// value to a variable called useNarrowMediaQuery
 
 function NarrowScreenNotifier() {
+	// 🐨 call useNarrowMediaQuery here instead of useSyncExternalStore
 	const isNarrow = useSyncExternalStore(subscribe, getSnapshot)
 	return isNarrow ? 'You are on a narrow screen' : 'You are on a wide screen'
 }

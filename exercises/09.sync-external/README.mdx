@@ -1,1 +1,101 @@
 # Sync External State
+
+Not everything we build on the web is built with React. There are libraries and
+platform APIs that are external to React. Bringing those things into React's
+component model and state management lifecycle is necessary for building
+full-featured applications.
+
+The task is to synchronize the external world with the internal state of a
+React component. To do this, we use the `useSyncExternalStore` hook.
+
+Let's take the example of a component that displays your current location via
+the geolocation API. The geolocation API is not a part of React, so we need to
+synchronize the external state of the geolocation API with the internal state of
+our component.
+
+```tsx lines=31-35
+import { useSyncExternalStore } from 'react'
+
+type LocationData =
+	| { status: 'unavailable'; geo?: never }
+	| { status: 'available'; geo: GeolocationPosition }
+// this variable is our external store!
+let location: LocationData = { status: 'unavailable' }
+
+function subscribeToGeolocation(callback: () => void) {
+	const watchId = navigator.geolocation.watchPosition(position => {
+		location = { status: 'available', geo: position }
+		callback()
+	})
+	return () => {
+		location = { status: 'unavailable' }
+		return navigator.geolocation.clearWatch(watchId)
+	}
+}
+
+function getGeolocationSnapshot() {
+	return location
+}
+
+function MyLocation() {
+	const location = useSyncExternalStore(
+		subscribeToGeolocation,
+		getGeolocationSnapshot,
+	)
+	return (
+		<div>
+			{location.status === 'unavailable' ? (
+				'Your location is unavailable'
+			) : (
+				<>
+					Your location is {location.geo.coords.latitude.toFixed(2)}
+					{'°, '}
+					{location.geo.coords.longitude.toFixed(2)}
+					{'°'}
+				</>
+			)}
+		</div>
+	)
+}
+
+function App() {
+	return (
+		<Suspense fallback="loading location...">
+			<MyLocation />
+		</Suspense>
+	)
+}
+```
+
+Here's the basic API:
+
+```tsx
+const snapshot = useSyncExternalStore(
+	subscribe,
+	getSnapshot,
+	getServerSnapshot, // optional
+)
+```
+
+- `subscribe` is a function that takes a callback and returns a cleanup function.
+  The callback is called whenever the external store changes to let React know
+  it should call `getSnapshot` to get the new value.
+- `getSnapshot` is a function that returns the current value of the external
+  store.
+- `getServerSnapshot` is an optional function that returns the current value of
+  the external store from the server. This is useful for server-side rendering
+  and rehydration. If you don't provide this function, then React will render
+  the nearest `Suspense` boundary `fallback` on the server and then when the
+  client hydrates, it will call `getSnapshot` to get the current value.
+
+<callout-success class="aside">
+	To learn more about server rendering React, check [the
+	docs](https://react.dev/reference/react-dom/server).
+</callout-success>
+
+The `Suspense` Component is something we'll get to in a future workshop. For
+now, think of it as a way to declaratively handle loading states in React
+(because that's what it is and that's all you need to know for now).
+
+Learn more about `useSyncExternalStore` in the
+[API documentation](https://react.dev/reference/react/useSyncExternalStore).

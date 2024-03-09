@@ -1,1 +1,33 @@
 # useSyncExternalStore
+
+🦉 When you have a design that needs to be responsive, you use
+[media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries)
+to change the layout of the page based on the size of the screen. Media queries
+can tell you a lot more than just the width of the page and sometimes you need
+to know whether a media query matches even outside of a CSS context.
+
+The browser supports a JavaScript API called `matchMedia` that allows you to
+query the current state of a media query:
+
+```tsx
+const prefersDarkModeQuery = window.matchMedia('(prefers-color-scheme: dark)')
+console.log(prefersDarkModeQuery.matches) // true if the user prefers dark mode
+```
+
+👨‍💼 Thanks for that Olivia. So yes, our users want a component that displays
+whether they're on a narrow screen. We're going to build this into a more
+generic hook that will allow us to determine any media query's match and also
+keep the state in sync with the media query. And you're going to need to use
+`useSyncExternalStore` to do it.
+
+Go ahead and follow the emoji instructions. You'll know you got it right when
+you resize your screen and the text changes.
+
+<callout-info class="aside">
+	🦉 If we really were just trying to display some different text based on the
+	screen size, we could use CSS media queries and not have to write any
+	JavaScript at all. But sometimes we need to know the state of a media query in
+	JavaScript for more complex interactions, so we're going to use a simple
+	example to demonstrate how to do this to handle those cases and we'll be using
+	`useSyncExternalStore` for that.
+</callout-info>
