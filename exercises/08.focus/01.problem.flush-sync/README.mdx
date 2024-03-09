@@ -1,4 +1,29 @@
 # flushSync
 
-This example was uses code from
-[trellix](https://github.com/remix-run/example-trellix/blob/3379b3d5e9c0173381031e4f062877e8a3696b2e/app/routes/board.%24id/components.tsx).
+🧝‍♂️ I've put together a new component we need. It's called `<EditableText />` and
+it allows users to edit a piece of text inline. We display it in a button and
+when the user clicks it, the button turns into a text input. When the user
+presses enter, blurs, or hits escape, the text input turns back into a button.
+
+Right now, when the user clicks the button, the button goes away and is replaced
+by the text input, but because their focus was on the button which is now gone,
+their focus returns to the `<body>` and the text input is not focused. This is
+not a good user experience.
+
+👨‍💼 Thanks Kellie. So now what we need is for you to properly manage focus for
+all of these cases.
+
+- When the user submits the form (by hitting "enter")
+- When the user cancels the form (by hitting "escape")
+- When the user blurs the input (by tabbing or clicking away)
+
+Additionally, when the user clicks the button, we want to select all the text so
+it's easy for them to edit.
+
+🧝‍♂️ I've added some buttons before and after the input so you have something to
+test tab focus with. Good luck!
+
+<callout-info class="aside">
+	This example was uses code from
+	[trellix](https://github.com/remix-run/example-trellix/blob/3379b3d5e9c0173381031e4f062877e8a3696b2e/app/routes/board.%24id/components.tsx).
+</callout-info>

@@ -1,1 +1,96 @@
 # Focus Management
+
+Helping the user's focus stay on the right place is a key part of the user
+experience. This is especially important for users who rely on screen readers or
+keyboard navigation. But even able users can benefit from a well-thought focus
+management experience.
+
+Sometimes, the element you want to focus on only becomes available after a state
+update. For example:
+
+```tsx
+function MyComponent() {
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [show, setShow] = useState(false)
+
+	return (
+		<div>
+			<button onClick={() => setShow(true)}>Show</button>
+			{show && <input ref={inputRef} />}
+		</div>
+	)
+}
+```
+
+Presumably after the user clicks "show" they will want to type something in the
+input there. Good focus management would focus the input after it becomes
+visible.
+
+It's important for you to know that in React state updates happen in batches.
+So state updates do not necessarily take place at the same time you
+call the state updater function.
+
+As a result of React state update batching, if you try to focus an element right
+after a state update, it might not work as expected. This is because the element
+you want to focus on might not be available yet.
+
+```tsx remove=10
+function MyComponent() {
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [show, setShow] = useState(false)
+
+	return (
+		<div>
+			<button
+				onClick={() => {
+					setShow(true)
+					inputRef.current?.focus() // This probably won't work
+				}}
+			>
+				Show
+			</button>
+			{show && <input ref={inputRef} />}
+		</div>
+	)
+}
+```
+
+The solution to this problem is to force React to run the state and DOM updates
+synchronously so that the element you want to focus on is available when you try
+to focus it.
+
+You do this by using the `flushSync` function from the `react-dom` package.
+
+```tsx
+import { flushSync } from 'react-dom'
+
+function MyComponent() {
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [show, setShow] = useState(false)
+
+	return (
+		<div>
+			<button
+				onClick={() => {
+					flushSync(() => {
+						setShow(true)
+					})
+					inputRef.current?.focus()
+				}}
+			>
+				Show
+			</button>
+			{show && <input ref={inputRef} />}
+		</div>
+	)
+}
+```
+
+What `flushSync` does is that it forces React to run the state update and DOM
+update synchronously. This way, the input element will be available when you try
+to focus it on the line following the `flushSync` call.
+
+In general you want to avoid this de-optimization, but in some cases (like focus
+management), it's the perfect solution.
+
+Learn more in [the `flushSync` docs](https://react.dev/reference/react-dom/flushSync).
