@@ -4,4 +4,43 @@
 We'll be refactoring the `useState` out of our tic-tac-toe game to use
 `useReducer` instead.
 
+Your reducer should enable the following actions:
+
+```tsx
+type GameAction =
+	| { type: 'SELECT_SQUARE'; index: number }
+	| { type: 'SELECT_STEP'; step: number }
+	| { type: 'RESTART' }
+
+function gameReducer(state: GameState, action: GameAction) {
+	// your code...
+}
+```
+
+Note that to do the lazy state initialization we need to provide three arguments
+to `useReducer`. Here's an example for a count reducer:
+
+```tsx
+// ...
+function getInitialState(initialCount: number) {
+	return { count: initialCount }
+}
+
+function Counter() {
+	const [count, dispatch] = useReducer(
+		countReducer,
+		props.initialCount,
+		getInitialState,
+	)
+	// ...
+}
+```
+
+Notice that the `getInitialState` function is called only once, when the
+component is first rendered and it's called with the `initialCount` prop which
+is passed to the `useReducer` hook as the second argument.
+
+If you don't need an argument to your initial state callback, you can just pass
+`null`.
+
 Good luck!

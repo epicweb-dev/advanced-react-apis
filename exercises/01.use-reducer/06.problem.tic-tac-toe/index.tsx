@@ -48,13 +48,25 @@ function Board({
 	)
 }
 
-const defaultState = {
+const defaultState: GameState = {
 	history: [Array(9).fill(null)],
 	currentStep: 0,
 }
 
 const localStorageKey = 'tic-tac-toe'
+
+// 🦺 Create a GameAction type here which supports all three types of state changes
+// that can happen for our reducer: SELECT_SQUARE, RESTART, and SELECT_STEP.
+
+// 🐨 Create a gameStateReducer function which accepts the GameState and GameAction
+// and handle all three types of state changes.
+// 💰 you can borrow lots of the logic from the component below in your implementation
+
+// 🐨 Create a getInitialGameState function here which returns the initial game
+// state (move this from the useState callback below)
+
 function App() {
+	// 🐨 change this to use useReducer with the gameStateReducer and the getInitialGameState function
 	const [state, setState] = useState<GameState>(() => {
 		let localStorageValue
 		try {
@@ -79,6 +91,8 @@ function App() {
 	}, [state])
 
 	function selectSquare(index: number) {
+		// 🐨 move this logic to the reducer
+		// then call the dispatch function with the proper type
 		if (winner || currentSquares[index]) return
 
 		setState(previousState => {
@@ -94,6 +108,7 @@ function App() {
 	}
 
 	function restart() {
+		// 🐨 update this to use the dispatch function with the proper type
 		setState(defaultState)
 	}
 
@@ -107,6 +122,7 @@ function App() {
 		return (
 			<li key={step}>
 				<button
+					// 🐨 update this to use the dispatch function with the proper type
 					onClick={() =>
 						setState(previousState => ({ ...previousState, currentStep: step }))
 					}
@@ -139,3 +155,8 @@ function App() {
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
 ReactDOM.createRoot(rootEl).render(<App />)
+
+/*
+eslint
+	@typescript-eslint/no-unused-vars: "off",
+*/
