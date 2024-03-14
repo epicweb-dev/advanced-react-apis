@@ -10,13 +10,12 @@ update. For example:
 
 ```tsx
 function MyComponent() {
-	const inputRef = useRef<HTMLInputElement>(null)
 	const [show, setShow] = useState(false)
 
 	return (
 		<div>
 			<button onClick={() => setShow(true)}>Show</button>
-			{show && <input ref={inputRef} />}
+			{show ? <input /> : null}
 		</div>
 	)
 }
@@ -49,7 +48,7 @@ function MyComponent() {
 			>
 				Show
 			</button>
-			{show && <input ref={inputRef} />}
+			{show ? <input ref={inputRef} /> : null}
 		</div>
 	)
 }
@@ -80,7 +79,7 @@ function MyComponent() {
 			>
 				Show
 			</button>
-			{show && <input ref={inputRef} />}
+			{show ? <input ref={inputRef} /> : null}
 		</div>
 	)
 }
@@ -93,4 +92,4 @@ to focus it on the line following the `flushSync` call.
 In general you want to avoid this de-optimization, but in some cases (like focus
 management), it's the perfect solution.
 
-Learn more in [the `flushSync` docs](https://react.dev/reference/react-dom/flushSync).
+Learn more in [📜 the `flushSync` docs](https://react.dev/reference/react-dom/flushSync).

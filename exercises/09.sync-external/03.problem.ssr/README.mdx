@@ -3,10 +3,10 @@
 👨‍💼 We don't currently do any server rendering, but in the future we may want to
 and this requires some special handling with `useSyncExternalStore`.
 
-🧝‍♂️ I've simulated a server rendering environment by adding some code to the
-bottom of our file. First, we render the `<App />` to a string, then we set that
-to the `innerHTML` of our `rootEl`. Then we call `hydrateRoot` to rehydrate our
-application.
+🧝‍♂️ <PrevDiffLink>I've simulated a server rendering environment</PrevDiffLink> by
+adding some code to the bottom of our file. First, we render the `<App />` to a
+string, then we set that to the `innerHTML` of our `rootEl`. Then we call
+`hydrateRoot` to rehydrate our application.
 
 👨‍💼 This is a bit of a hack, but it's a good way to simulate server rendering
 and ensure that our application works in a server rendering situation.

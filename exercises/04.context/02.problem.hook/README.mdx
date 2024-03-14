@@ -1,8 +1,9 @@
 # Context Hook
 
 🧝‍♂️ I was playing around with the app and I realized that we have a default value
-for our context provider. So I thought maybe we could remove the context
-provider. Unfortunately that didn't work. Do you know why?
+for our context provider. So I thought maybe we
+could <PrevDiffLink>remove the context</PrevDiffLink> provider. Unfortunately
+that didn't work. Do you know why?
 
 👨‍💼 Yeah, it's because even though the `searchParams` are shared, they're not
 updated when calling `setSearchParams`. This is because the `searchParams`
