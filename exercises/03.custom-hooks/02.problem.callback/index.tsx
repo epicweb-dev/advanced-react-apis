@@ -27,6 +27,7 @@ function useSearchParams() {
 		return () => window.removeEventListener('popstate', updateSearchParams)
 	}, [])
 
+	// 🐨 wrap this function in useCallback
 	function setSearchParams(...args: Parameters<typeof setGlobalSearchParams>) {
 		const searchParams = setGlobalSearchParams(...args)
 		setSearchParamsState(prevParams => {
@@ -36,6 +37,7 @@ function useSearchParams() {
 		})
 		return searchParams
 	}
+	// 💰 note, this function doesn't have any dependencies so you can use [] as the dependency array
 
 	return [searchParams, setSearchParams] as const
 }
