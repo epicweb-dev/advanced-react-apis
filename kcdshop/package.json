@@ -1,6 +1,6 @@
 {
   "type": "module",
   "dependencies": {
-    "@kentcdodds/workshop-app": "^3.12.2"
+    "@kentcdodds/workshop-app": "^3.13.0"
   }
 }
