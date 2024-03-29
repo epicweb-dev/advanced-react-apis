@@ -52,7 +52,7 @@ function useSearchParams() {
 	return [searchParams, setSearchParams] as const
 }
 
-// 🐨 create a useSearchParams hook here that returns use(QueryParamsProvider)
+// 🐨 create a useSearchParams hook here that returns use(QueryParamsContext)
 
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
