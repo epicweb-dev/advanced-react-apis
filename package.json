@@ -32,7 +32,6 @@
     "git": ">=2.18.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^15.0.4",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
