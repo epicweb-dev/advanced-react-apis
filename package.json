@@ -1,9 +1,9 @@
 {
-  "name": "advanced-react-hooks",
+  "name": "advanced-react-apis",
   "private": true,
   "epicshop": {
-    "title": "Advanced React Hooks 🔥",
-    "githubRoot": "https://github.com/epicweb-dev/advanced-react-hooks/blob/main"
+    "title": "Advanced React APIs 🔥",
+    "githubRoot": "https://github.com/epicweb-dev/advanced-react-apis/blob/main"
   },
   "type": "module",
   "imports": {

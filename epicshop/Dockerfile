@@ -16,6 +16,6 @@ ADD . .
 RUN npm install --omit=dev
 
 CMD rm -rf ${EPICSHOP_CONTEXT_CWD} && \
-    git clone https://github.com/epicweb-dev/advanced-react-hooks ${EPICSHOP_CONTEXT_CWD} && \
+    git clone https://github.com/epicweb-dev/advanced-react-apis ${EPICSHOP_CONTEXT_CWD} && \
     cd ${EPICSHOP_CONTEXT_CWD} && \
     npx epicshop start

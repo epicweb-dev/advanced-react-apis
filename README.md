@@ -1,14 +1,12 @@
 <div>
-  <h1 align="center"><a href="https://www.epicweb.dev/workshops">🔥 Advanced React Hooks</a></h1>
+  <h1 align="center"><a href="https://www.epicweb.dev/workshops">🔥 Advanced React APIs</a></h1>
   <strong>
-    Learn the more advanced React hooks and different patterns to enable great
-    developer APIs for custom hooks.
+    Learn the more advanced React APIs and different use cases to enable great
+    user experiences.
   </strong>
   <p>
-    We’ll look at some of the more advanced hooks and ways they can be used to
-    optimize your components and custom hooks. We’ll also look at several
-    patterns you can follow to make custom hooks that provide great APIs for
-    developers to be productive building applications.
+    We’ll look at some of the more advanced hooks and APIs and ways they can be used to
+    optimize your components and custom hooks. We'll consider each API with common use cases you'll run into in your applications.
   </p>
 </div>
 
@@ -17,7 +15,7 @@
 <div align="center">
   <a
     alt="Epic Web logo with the words Deployed Version"
-    href="https://advanced-react-hooks.epicweb.dev"
+    href="https://advanced-react-apis.epicweb.dev"
   >
     <img
       width="300px"
@@ -76,8 +74,8 @@ network connection before running the setup and grab a snack.
 Follow these steps to get this set up:
 
 ```sh nonumber
-git clone --depth 1 https://github.com/epicweb-dev/advanced-react-hooks.git
-cd advanced-react-hooks
+git clone --depth 1 https://github.com/epicweb-dev/advanced-react-apis.git
+cd advanced-react-apis
 npm run setup
 ```
 
@@ -95,13 +93,13 @@ Learn all about the workshop app on the
 [npm]: https://www.npmjs.com/
 [node]: https://nodejs.org
 [git]: https://git-scm.com/
-[build-badge]: https://img.shields.io/github/actions/workflow/status/epicweb-dev/advanced-react-hooks/validate.yml?branch=main&logo=github&style=flat-square
-[build]: https://github.com/epicweb-dev/advanced-react-hooks/actions?query=workflow%3Avalidate
+[build-badge]: https://img.shields.io/github/actions/workflow/status/epicweb-dev/advanced-react-apis/validate.yml?branch=main&logo=github&style=flat-square
+[build]: https://github.com/epicweb-dev/advanced-react-apis/actions?query=workflow%3Avalidate
 [license-badge]: https://img.shields.io/badge/license-GPL%203.0%20License-blue.svg?style=flat-square
-[license]: https://github.com/epicweb-dev/advanced-react-hooks/blob/main/LICENSE
+[license]: https://github.com/epicweb-dev/advanced-react-apis/blob/main/LICENSE
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://kentcdodds.com/conduct
 [win-path]: https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/
 [mac-path]: http://stackoverflow.com/a/24322978/971592
-[issue]: https://github.com/epicweb-dev/advanced-react-hooks/issues/new
+[issue]: https://github.com/epicweb-dev/advanced-react-apis/issues/new
 <!-- prettier-ignore-end -->

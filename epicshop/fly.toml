@@ -1,4 +1,4 @@
-app = "epicweb-dev-advanced-react-hooks"
+app = "epicweb-dev-advanced-react-apis"
 primary_region = "sjc"
 kill_signal = "SIGINT"
 kill_timeout = 5
