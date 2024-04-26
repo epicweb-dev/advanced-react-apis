@@ -46,7 +46,7 @@ function useSearchParams() {
 		[],
 	)
 
-	// 🐨 instead of returning this, render the QueryParamsContext.Provider and
+	// 🐨 instead of returning this, render the QueryParamsContext and
 	// provide this tuple as the value
 	// 💰 make sure to render the children as well!
 	return [searchParams, setSearchParams] as const

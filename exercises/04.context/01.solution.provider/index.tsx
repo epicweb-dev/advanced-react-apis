@@ -50,9 +50,9 @@ function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 	const searchParamsTuple = [searchParams, setSearchParams] as const
 
 	return (
-		<QueryParamsContext.Provider value={searchParamsTuple}>
+		<QueryParamsContext value={searchParamsTuple}>
 			{children}
-		</QueryParamsContext.Provider>
+		</QueryParamsContext>
 	)
 }
 

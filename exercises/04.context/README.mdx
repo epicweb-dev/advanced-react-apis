@@ -78,7 +78,7 @@ function CountProvider({ children }: { children: ReactNode }) {
 	const [count, setCount] = useState(0)
 	const increment = () => setCount(c => c + 1)
 	const value = { count, increment }
-	return <CountContext.Provider value={value}>{children}</CountContext.Provider>
+	return <CountContext value={value}>{children}</CountContext>
 }
 
 function useCount() {
@@ -129,14 +129,7 @@ when you need to do that, but most of the time you'll want to require a context
 provider.
 
 <callout-warning>
-	The `use` hook we're using here is not officially released in React but will
-	soon be. For now, in a regular React app on `<= 18.2`, you'll use `useContext`.
-	In the workshop we're using an experimental version of React that has this
-	feature.
-</callout-warning>
-
-{/* prettier-ignore */}
-<callout-warning>
-Soon you'll be able to render `<CountContext />` rather than
-`<CountContext.Provider />` .
+	If you work in a React app on `<= 18.2`, you'll use `useContext` instead of
+	the more vercitile `use` hook. In the workshop we're using an experimental
+	version of React that has this feature.
 </callout-warning>
