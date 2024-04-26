@@ -63,7 +63,7 @@ function TooltipContainer({
 	children: React.ReactNode
 	x: number
 	y: number
-	contentRef: React.RefObject<HTMLDivElement>
+	contentRef: React.RefObject<HTMLDivElement | null>
 }) {
 	return (
 		<div

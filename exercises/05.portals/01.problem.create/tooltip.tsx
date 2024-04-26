@@ -14,7 +14,7 @@ export default function Tooltip({
 	children: React.ReactNode
 	targetRect: Position | null
 }) {
-	const ref = useRef<HTMLDivElement | null>(null)
+	const ref = useRef<HTMLDivElement>(null)
 	const [tooltipHeight, setTooltipHeight] = useState(0)
 
 	useEffect(() => {
@@ -54,7 +54,7 @@ function TooltipContainer({
 	children: React.ReactNode
 	x: number
 	y: number
-	contentRef: React.RefObject<HTMLDivElement>
+	contentRef: React.RefObject<HTMLDivElement | null>
 }) {
 	return (
 		<div

@@ -14,13 +14,13 @@ component can attach methods to that `ref` which the parent can then call:
 type InputAPI = { focusInput: () => void }
 
 function MyInput({
-	myInputRef,
+	ref,
 	...props
 }: React.InputHTMLAttributes<HTMLInputElement> & {
-	myInputRef: React.RefObject<InputAPI>
+	ref: React.RefObject<InputAPI>
 }) {
 	const inputRef = useRef()
-	myInputRef.current = {
+	ref.current = {
 		focusInput: () => inputRef.current.focus(),
 	}
 	return <input ref={inputRef} {...props} />
@@ -47,14 +47,14 @@ callback refs). So instead, we'll use the `useImperativeHandle` hook to do this:
 type InputAPI = { focusInput: () => void }
 
 function MyInput({
-	myInputRef,
+	ref,
 	...props
 }: React.InputHTMLAttributes<HTMLInputElement> & {
-	myInputRef: React.RefObject<InputAPI>
+	ref: React.RefObject<InputAPI>
 }) {
 	const inputRef = useRef()
 	useImperativeHandle(
-		myInputRef,
+		ref,
 		() => ({ focusInput: () => inputRef.current.focus() }),
 		[],
 	)
@@ -78,11 +78,3 @@ that needs to happen and is hard to deal with declaratively.
 > follow and it's much better to make your APIs declarative if possible. For
 > more on this, read
 > [Imperative vs Declarative Programming](https://tylermcginnis.com/imperative-vs-declarative-programming/)
-
-<callout-warning>
-	The typical way to handle refs for components is to use the `React.forwardRef`
-	API, however in the near future, React will remove the `React.forwardRef` API
-	and instead you'll receive the `ref` as a regular prop. Until that happens, if
-	you try to pass a `ref` prop without using `React.forwardRef`, you'll get an
-	error. So just name it something other than `ref`.
-</callout-warning>

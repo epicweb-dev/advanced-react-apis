@@ -11,7 +11,7 @@ function Scrollable({
 	children,
 	scrollableRef,
 }: { children: React.ReactNode } & {
-	scrollableRef: React.RefObject<ScrollableImperativeAPI>
+	scrollableRef: React.RefObject<ScrollableImperativeAPI | null>
 }) {
 	const containerRef = useRef<HTMLDivElement>(null)
 
