@@ -8,14 +8,26 @@ adding some code to the bottom of our file. First, we render the `<App />` to a
 string, then we set that to the `innerHTML` of our `rootEl`. Then we call
 `hydrateRoot` to rehydrate our application.
 
+```tsx
+const rootEl = document.createElement('div')
+document.body.append(rootEl)
+// simulate server rendering
+rootEl.innerHTML = (await import('react-dom/server')).renderToString(<App />)
+
+// simulate taking a while for the JS to load...
+await new Promise(resolve => setTimeout(resolve, 1000))
+
+ReactDOM.hydrateRoot(rootEl, <App />)
+```
+
 👨‍💼 This is a bit of a hack, but it's a good way to simulate server rendering
 and ensure that our application works in a server rendering situation.
 
 Because the server won't know whether a media query matches, we can't use the
 `getServerSnapshot()` argument of `useSyncExternalStore`. Instead, we'll leave
-that argument off, and wrap our `<NarrowScreenNotifier />` in a `<Suspense />`
-component with a fallback of `""` (we won't show anything until the client
-hydrates).
+that argument off, and wrap our `<NarrowScreenNotifier />` in a
+[`<Suspense />`](https://react.dev/reference/react/Suspense) component with a
+fallback of `""` (we won't show anything until the client hydrates).
 
 With this, you'll notice there's an error in the console. Nothing's technically
 wrong, but React logs this in this situation (I honestly personally disagree
@@ -25,3 +37,13 @@ includes the string `'Missing getServerSnapshot'` then you can return,
 otherwise, log the error.
 
 Good luck!
+
+```tsx
+import { hydrateRoot } from 'react-dom/client'
+
+const root = hydrateRoot(document.getElementById('root'), <App />, {
+	onRecoverableError: (error, errorInfo) => {
+		console.error('Caught error', error, error.cause, errorInfo.componentStack)
+	},
+})
+```

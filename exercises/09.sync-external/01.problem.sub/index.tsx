@@ -8,7 +8,7 @@ import * as ReactDOM from 'react-dom/client'
 // 🐨 make a subscribe function here which takes a callback function
 // 🐨 create a matchQueryList variable here with the mediaQuery from above (📜 https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList)
 // 🐨 add a change listener to the mediaQueryList which calls the callback
-// 🐨 return a cleanup function whihc removes the change event listener for the callback
+// 🐨 return a cleanup function which removes the change event listener for the callback
 
 function NarrowScreenNotifier() {
 	// 🐨 assign this to useSyncExternalStore with the subscribe and getSnapshot functions above

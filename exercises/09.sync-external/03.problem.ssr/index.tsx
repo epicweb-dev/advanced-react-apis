@@ -30,7 +30,8 @@ function App() {
 	return (
 		<div>
 			<div>This is your narrow screen state:</div>
-			{/* 🐨 add a Suspense component around this with a fallback prop */}
+			{/* 🐨 wrap this in a Suspense component around this with a fallback prop of "" */}
+			{/* 📜 https://react.dev/reference/react/Suspense */}
 			<NarrowScreenNotifier />
 		</div>
 	)
