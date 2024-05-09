@@ -2,7 +2,7 @@ import { useReducer, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 type State = { count: number }
-type Action = State
+type Action = Partial<State>
 const countReducer = (state: State, action: Action) => ({ ...state, ...action })
 
 function Counter({ initialCount = 0, step = 1 }) {

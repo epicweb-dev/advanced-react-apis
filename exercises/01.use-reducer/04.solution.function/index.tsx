@@ -2,7 +2,7 @@ import { useReducer, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 type State = { count: number }
-type Action = State | ((currentState: State) => State)
+type Action = Partial<State> | ((currentState: State) => Partial<State>)
 const countReducer = (state: State, action: Action) => ({
 	...state,
 	...(typeof action === 'function' ? action(state) : action),

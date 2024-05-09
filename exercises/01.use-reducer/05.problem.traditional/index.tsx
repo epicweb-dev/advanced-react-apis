@@ -5,7 +5,7 @@ type State = { count: number }
 // 🐨 make it so the action is one of two objects:
 // - a type string with the value 'increment' and a step number with the value of the step
 // - a type string with the value 'decrement' and a step number with the value of the step
-type Action = State | ((currentState: State) => State)
+type Action = Partial<State> | ((currentState: State) => Partial<State>)
 // 🐨 update the countReducer to handle the new action type
 // 💯 handle situations where the action's type is neither increment nor decrement
 const countReducer = (state: State, action: Action) => ({

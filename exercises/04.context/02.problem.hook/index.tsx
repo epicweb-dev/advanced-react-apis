@@ -12,12 +12,12 @@ type SearchParamsTuple = readonly [
 	typeof setGlobalSearchParams,
 ]
 // 🦺 add "| null" to the type generic here
-const QueryParamsContext = createContext<SearchParamsTuple>(
+const SearchParamsContext = createContext<SearchParamsTuple>(
 	// 🐨 remove this array and replace it with "null"
 	[new URLSearchParams(window.location.search), setGlobalSearchParams],
 )
 
-function QueryParamsProvider({ children }: { children: React.ReactNode }) {
+function SearchParamsProvider({ children }: { children: React.ReactNode }) {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
 	)
@@ -51,14 +51,14 @@ function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 	const searchParamsTuple = [searchParams, setSearchParams] as const
 
 	return (
-		<QueryParamsContext value={searchParamsTuple}>
+		<SearchParamsContext value={searchParamsTuple}>
 			{children}
-		</QueryParamsContext>
+		</SearchParamsContext>
 	)
 }
 
 function useSearchParams() {
-	const context = use(QueryParamsContext)
+	const context = use(SearchParamsContext)
 	// 🐨 if there's no context value, the throw an error with a helpful error message
 	return context
 }
@@ -67,7 +67,7 @@ const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 function App() {
 	return (
-		// 🐨 wrap this in the QueryParamsProvider again
+		// 🐨 wrap this in the SearchParamsProvider again
 		<div className="app">
 			<Form />
 			<MatchingPosts />

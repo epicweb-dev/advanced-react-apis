@@ -10,11 +10,11 @@ import { setGlobalSearchParams } from '#shared/utils'
 // 🦺 create a SearchParamsTuple type here that's a readonly array of two elements:
 // - the first element is a URLSearchParams instance
 // - the second element is typeof setGlobalSearchParams
-// 🐨 create a QueryParamsContext that is of this type
+// 🐨 create a SearchParamsContext that is of this type
 // 💰 let's start with this as the default value (we'll improve it next):
 // [new URLSearchParams(window.location.search), setGlobalSearchParams]
 
-// 🐨 change this to QueryParamsProvider and accept children
+// 🐨 change this to SearchParamsProvider and accept children
 function useSearchParams() {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
@@ -46,19 +46,19 @@ function useSearchParams() {
 		[],
 	)
 
-	// 🐨 instead of returning this, render the QueryParamsContext and
+	// 🐨 instead of returning this, render the SearchParamsContext and
 	// provide this tuple as the value
 	// 💰 make sure to render the children as well!
 	return [searchParams, setSearchParams] as const
 }
 
-// 🐨 create a useSearchParams hook here that returns use(QueryParamsContext)
+// 🐨 create a useSearchParams hook here that returns use(SearchParamsContext)
 
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 function App() {
 	return (
-		// 🐨 wrap this in the QueryParamsProvider
+		// 🐨 wrap this in the SearchParamsProvider
 		<div className="app">
 			<Form />
 			<MatchingPosts />

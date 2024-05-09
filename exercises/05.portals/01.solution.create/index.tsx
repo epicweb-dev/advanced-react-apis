@@ -1,16 +1,16 @@
 import * as ReactDOM from 'react-dom/client'
 import { Form } from './form'
-import { QueryParamsProvider } from './params'
+import { SearchParamsProvider } from './params'
 import { MatchingPosts } from './posts'
 
 export function App() {
 	return (
-		<QueryParamsProvider>
+		<SearchParamsProvider>
 			<div className="app">
 				<Form />
 				<MatchingPosts />
 			</div>
-		</QueryParamsProvider>
+		</SearchParamsProvider>
 	)
 }
 

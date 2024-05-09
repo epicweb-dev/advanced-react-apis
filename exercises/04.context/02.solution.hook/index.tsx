@@ -11,9 +11,9 @@ type SearchParamsTuple = readonly [
 	URLSearchParams,
 	typeof setGlobalSearchParams,
 ]
-const QueryParamsContext = createContext<SearchParamsTuple | null>(null)
+const SearchParamsContext = createContext<SearchParamsTuple | null>(null)
 
-function QueryParamsProvider({ children }: { children: React.ReactNode }) {
+function SearchParamsProvider({ children }: { children: React.ReactNode }) {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
 	)
@@ -47,16 +47,18 @@ function QueryParamsProvider({ children }: { children: React.ReactNode }) {
 	const searchParamsTuple = [searchParams, setSearchParams] as const
 
 	return (
-		<QueryParamsContext value={searchParamsTuple}>
+		<SearchParamsContext value={searchParamsTuple}>
 			{children}
-		</QueryParamsContext>
+		</SearchParamsContext>
 	)
 }
 
 function useSearchParams() {
-	const context = use(QueryParamsContext)
+	const context = use(SearchParamsContext)
 	if (!context) {
-		throw new Error('useSearchParams must be used within a QueryParamsProvider')
+		throw new Error(
+			'useSearchParams must be used within a SearchParamsProvider',
+		)
 	}
 	return context
 }
@@ -65,12 +67,12 @@ const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 function App() {
 	return (
-		<QueryParamsProvider>
+		<SearchParamsProvider>
 			<div className="app">
 				<Form />
 				<MatchingPosts />
 			</div>
-		</QueryParamsProvider>
+		</SearchParamsProvider>
 	)
 }
 

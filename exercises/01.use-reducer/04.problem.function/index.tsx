@@ -2,8 +2,8 @@ import { useReducer, useState } from 'react'
 import * as ReactDOM from 'react-dom/client'
 
 type State = { count: number }
-// 🦺 make it so the action can be a function which accepts State and returns State
-type Action = State
+// 🦺 make it so the action can be a function which accepts State and returns Partial<State>
+type Action = Partial<State>
 const countReducer = (state: State, action: Action) => ({
 	...state,
 	// 🐨 if the action is a function, then call it with the state and spread the results,
