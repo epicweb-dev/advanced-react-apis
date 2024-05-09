@@ -17,7 +17,7 @@ Here's an example of using `useReducer` to manage the value of a name in an
 input.
 
 ```tsx
-function nameReducer(previousName, newName) {
+function nameReducer(previousName: string, newName: string) {
 	return newName
 }
 
@@ -25,14 +25,14 @@ const initialNameValue = 'Joe'
 
 function NameInput() {
 	const [name, setName] = useReducer(nameReducer, initialNameValue)
-	const handleChange = event => setName(event.target.value)
+	const handleChange = event => setName(event.currentTarget.value)
 	return (
-		<>
+		<div>
 			<label>
 				Name: <input defaultValue={name} onChange={handleChange} />
 			</label>
 			<div>You typed: {name}</div>
-		</>
+		</div>
 	)
 }
 ```
