@@ -2,6 +2,7 @@
 	"include": ["**/*.ts", "**/*.tsx", "**/*.js"],
 	"extends": ["@epic-web/config/typescript"],
 	"compilerOptions": {
+		"types": ["@epic-web/config/reset.d.ts"],
 		"paths": {
 			"#*": ["./*"]
 		}
