@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { getQueryParam, useSearchParams } from './params'
-import { ButtonWithTooltip } from './tooltip'
 import {
 	type BlogPost,
 	generateGradient,
 	getMatchingPosts,
 } from '#shared/blog-posts'
+import { getQueryParam, useSearchParams } from './params'
+import { ButtonWithTooltip } from './tooltip'
 
 export function MatchingPosts() {
 	const [searchParams] = useSearchParams()
