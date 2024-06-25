@@ -2,6 +2,6 @@
   "type": "module",
   "dependencies": {
     "@epic-web/config": "^1.5.4",
-    "@epic-web/workshop-app": "^4.5.1"
+    "@epic-web/workshop-app": "^4.6.0"
   }
 }
