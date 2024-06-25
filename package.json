@@ -3,7 +3,13 @@
   "private": true,
   "epicshop": {
     "title": "Advanced React APIs 🔥",
-    "githubRoot": "https://github.com/epicweb-dev/advanced-react-apis/blob/main"
+    "subtitle": "Learn the more advanced React APIs and different use cases to enable great user experiences.",
+    "githubRoot": "https://github.com/epicweb-dev/advanced-react-apis/blob/main",
+    "instructor": {
+      "name": "Kent C. Dodds",
+      "avatar": "/images/instructor.png",
+      "𝕏": "kentcdodds"
+    }
   },
   "type": "module",
   "imports": {
