@@ -38,7 +38,7 @@ function App() {
 						id="step-input"
 						type="number"
 						value={step}
-						onChange={e => setStep(Number(e.currentTarget.value))}
+						onChange={(e) => setStep(Number(e.currentTarget.value))}
 					/>
 				</div>
 			</form>

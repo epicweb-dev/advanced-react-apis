@@ -26,7 +26,7 @@ if (!process.env.SKIP_PLAYGROUND) {
 			() => {
 				console.log('✅ first problem app set up')
 			},
-			error => {
+			(error) => {
 				console.error(error)
 				throw new Error('❌  first problem app setup failed')
 			},

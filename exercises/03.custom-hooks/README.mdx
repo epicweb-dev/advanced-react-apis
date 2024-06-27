@@ -7,7 +7,7 @@ That's it. That's the entire idea behind custom hooks. So...
 ```tsx
 function useCount() {
 	const [count, setCount] = useState(0)
-	const increment = () => setCount(c => c + 1)
+	const increment = () => setCount((c) => c + 1)
 	return { count, increment }
 }
 
@@ -128,7 +128,7 @@ So, going back to our earlier example, here's how you solve the problem:
 ```tsx lines=3
 function useCount() {
 	const [count, setCount] = useState(0)
-	const increment = useCallback(() => setCount(c => c + 1), [])
+	const increment = useCallback(() => setCount((c) => c + 1), [])
 	return { count, increment }
 }
 
@@ -178,10 +178,10 @@ just a shortcut to using `useMemo` for functions:
 
 ```typescript
 // the useMemo version:
-const increment = useMemo(() => () => setCount(c => c + 1), [])
+const increment = useMemo(() => () => setCount((c) => c + 1), [])
 
 // the useCallback version
-const increment = useCallback(() => setCount(c => c + 1), [])
+const increment = useCallback(() => setCount((c) => c + 1), [])
 ```
 
 One other thing to note is that `useCallback` and `useMemo` also have dependency

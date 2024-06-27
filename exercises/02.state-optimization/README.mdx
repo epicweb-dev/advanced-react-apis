@@ -18,10 +18,10 @@ const [state, setState] = useState({ count: 0 })
 
 // ...
 setState({ count: 0 }) // <-- will trigger a rerender
-setState(previousState => ({
+setState((previousState) => ({
 	count: previousState.count,
 })) // <-- will trigger a rerender
-setState(previousState => previousState) // <-- will not trigger a rerender
+setState((previousState) => previousState) // <-- will not trigger a rerender
 ```
 
 So, with a little forethought, you can optimize your state updates by

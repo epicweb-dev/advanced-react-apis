@@ -34,6 +34,6 @@ export const allMessages: Array<Message> = [
 	`Luke: Threepio! Come in Threepio! Threepio! Where could he be?`,
 ].map((m, i) => ({
 	id: String(i),
-	author: m.split(': ')[0],
-	content: m.split(': ')[1],
+	author: m.split(': ')[0]!,
+	content: m.split(': ')[1]!,
 }))

@@ -25,7 +25,7 @@ const initialNameValue = 'Joe'
 
 function NameInput() {
 	const [name, setName] = useReducer(nameReducer, initialNameValue)
-	const handleChange = event => setName(event.currentTarget.value)
+	const handleChange = (event) => setName(event.currentTarget.value)
 	return (
 		<div>
 			<label>

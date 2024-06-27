@@ -18,7 +18,7 @@ export function SearchParamsProvider({
 
 	useEffect(() => {
 		function updateSearchParams() {
-			setSearchParamsState(prevParams => {
+			setSearchParamsState((prevParams) => {
 				const newParams = new URLSearchParams(window.location.search)
 				return prevParams.toString() === newParams.toString()
 					? prevParams
@@ -32,7 +32,7 @@ export function SearchParamsProvider({
 	const setSearchParams = useCallback(
 		(...args: Parameters<typeof setGlobalSearchParams>) => {
 			const searchParams = setGlobalSearchParams(...args)
-			setSearchParamsState(prevParams => {
+			setSearchParamsState((prevParams) => {
 				return prevParams.toString() === searchParams.toString()
 					? prevParams
 					: searchParams

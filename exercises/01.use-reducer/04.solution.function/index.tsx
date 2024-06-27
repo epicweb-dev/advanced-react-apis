@@ -14,9 +14,9 @@ function Counter({ initialCount = 0, step = 1 }) {
 	})
 	const { count } = state
 	const increment = () =>
-		setState(currentState => ({ count: currentState.count + step }))
+		setState((currentState) => ({ count: currentState.count + step }))
 	const decrement = () =>
-		setState(currentState => ({ count: currentState.count - step }))
+		setState((currentState) => ({ count: currentState.count - step }))
 	return (
 		<div className="counter">
 			<output>{count}</output>
@@ -41,7 +41,7 @@ function App() {
 						id="step-input"
 						type="number"
 						value={step}
-						onChange={e => setStep(Number(e.currentTarget.value))}
+						onChange={(e) => setStep(Number(e.currentTarget.value))}
 					/>
 				</div>
 			</form>

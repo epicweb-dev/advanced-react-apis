@@ -22,9 +22,9 @@ function Counter({ initialCount = 0, step = 1 }) {
 	// 🐨 the logic has now been moved back to the reducer, update these to pass
 	// the appropriate action object to the dispatch function
 	const increment = () =>
-		setState(currentState => ({ count: currentState.count + step }))
+		setState((currentState) => ({ count: currentState.count + step }))
 	const decrement = () =>
-		setState(currentState => ({ count: currentState.count - step }))
+		setState((currentState) => ({ count: currentState.count - step }))
 	return (
 		<div className="counter">
 			<output>{count}</output>
@@ -49,7 +49,7 @@ function App() {
 						id="step-input"
 						type="number"
 						value={step}
-						onChange={e => setStep(Number(e.currentTarget.value))}
+						onChange={(e) => setStep(Number(e.currentTarget.value))}
 					/>
 				</div>
 			</form>

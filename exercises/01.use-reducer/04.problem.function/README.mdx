@@ -11,7 +11,7 @@ const [state, setState] = useReducer(countReducer, {
 })
 const { count } = state
 const increment = () =>
-	setState(currentState => ({ count: currentState.count + step }))
+	setState((currentState) => ({ count: currentState.count + step }))
 const decrement = () =>
-	setState(currentState => ({ count: currentState.count - step }))
+	setState((currentState) => ({ count: currentState.count - step }))
 ```

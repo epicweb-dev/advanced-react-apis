@@ -43,7 +43,7 @@ document.body.append(rootEl)
 rootEl.innerHTML = (await import('react-dom/server')).renderToString(<App />)
 
 // 🦉 here's how we simulate a delay in hydrating with client-side js
-await new Promise(resolve => setTimeout(resolve, 1000))
+await new Promise((resolve) => setTimeout(resolve, 1000))
 
 ReactDOM.hydrateRoot(rootEl, <App />, {
 	// 💯 if you want to silence the error add a onRecoverableError function here

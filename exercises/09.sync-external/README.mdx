@@ -23,7 +23,7 @@ type LocationData =
 let location: LocationData = { status: 'unavailable' }
 
 function subscribeToGeolocation(callback: () => void) {
-	const watchId = navigator.geolocation.watchPosition(position => {
+	const watchId = navigator.geolocation.watchPosition((position) => {
 		location = { status: 'available', geo: position }
 		callback()
 	})

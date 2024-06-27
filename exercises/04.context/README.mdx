@@ -5,7 +5,7 @@ Let's say you have the following custom hook:
 ```tsx
 function useCount() {
 	const [count, setCount] = useState(0)
-	const increment = () => setCount(c => c + 1)
+	const increment = () => setCount((c) => c + 1)
 	return { count, increment }
 }
 ```
@@ -76,7 +76,7 @@ const CountContext = createContext<CountContextType | null>(null)
 
 function CountProvider({ children }: { children: ReactNode }) {
 	const [count, setCount] = useState(0)
-	const increment = () => setCount(c => c + 1)
+	const increment = () => setCount((c) => c + 1)
 	const value = { count, increment }
 	return <CountContext value={value}>{children}</CountContext>
 }

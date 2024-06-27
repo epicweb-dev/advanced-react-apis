@@ -16,7 +16,7 @@ function useSearchParams() {
 
 	useEffect(() => {
 		function updateSearchParams() {
-			setSearchParamsState(prevParams => {
+			setSearchParamsState((prevParams) => {
 				const newParams = new URLSearchParams(window.location.search)
 				return prevParams.toString() === newParams.toString()
 					? prevParams
@@ -29,7 +29,7 @@ function useSearchParams() {
 
 	function setSearchParams(...args: Parameters<typeof setGlobalSearchParams>) {
 		const searchParams = setGlobalSearchParams(...args)
-		setSearchParamsState(prevParams => {
+		setSearchParamsState((prevParams) => {
 			return prevParams.toString() === searchParams.toString()
 				? prevParams
 				: searchParams
@@ -59,14 +59,14 @@ function Form({
 	query: string
 	setSearchParams: typeof setGlobalSearchParams
 }) {
-	const words = query.split(' ').map(w => w.trim())
+	const words = query.split(' ').map((w) => w.trim())
 
 	const dogChecked = words.includes('dog')
 	const catChecked = words.includes('cat')
 	const caterpillarChecked = words.includes('caterpillar')
 
 	function handleCheck(tag: string, checked: boolean) {
-		const newWords = checked ? [...words, tag] : words.filter(w => w !== tag)
+		const newWords = checked ? [...words, tag] : words.filter((w) => w !== tag)
 		setSearchParams(
 			{ query: newWords.filter(Boolean).join(' ').trim() },
 			{ replace: true },
@@ -74,7 +74,7 @@ function Form({
 	}
 
 	return (
-		<form onSubmit={e => e.preventDefault()}>
+		<form onSubmit={(e) => e.preventDefault()}>
 			<div>
 				<label htmlFor="searchInput">Search:</label>
 				<input
@@ -82,7 +82,7 @@ function Form({
 					name="query"
 					type="search"
 					value={query}
-					onChange={e =>
+					onChange={(e) =>
 						setSearchParams({ query: e.currentTarget.value }, { replace: true })
 					}
 				/>
@@ -92,7 +92,7 @@ function Form({
 					<input
 						type="checkbox"
 						checked={dogChecked}
-						onChange={e => handleCheck('dog', e.currentTarget.checked)}
+						onChange={(e) => handleCheck('dog', e.currentTarget.checked)}
 					/>{' '}
 					🐶 dog
 				</label>
@@ -100,7 +100,7 @@ function Form({
 					<input
 						type="checkbox"
 						checked={catChecked}
-						onChange={e => handleCheck('cat', e.currentTarget.checked)}
+						onChange={(e) => handleCheck('cat', e.currentTarget.checked)}
 					/>{' '}
 					🐱 cat
 				</label>
@@ -108,7 +108,9 @@ function Form({
 					<input
 						type="checkbox"
 						checked={caterpillarChecked}
-						onChange={e => handleCheck('caterpillar', e.currentTarget.checked)}
+						onChange={(e) =>
+							handleCheck('caterpillar', e.currentTarget.checked)
+						}
 					/>{' '}
 					🐛 caterpillar
 				</label>
@@ -122,7 +124,7 @@ function MatchingPosts({ query }: { query: string }) {
 
 	return (
 		<ul className="post-list">
-			{matchingPosts.map(post => (
+			{matchingPosts.map((post) => (
 				<Card key={post.id} post={post} />
 			))}
 		</ul>
@@ -151,7 +153,7 @@ function Card({ post }: { post: BlogPost }) {
 			/>
 			<a
 				href={post.id}
-				onClick={event => {
+				onClick={(event) => {
 					event.preventDefault()
 					alert(`Great! Let's go to ${post.id}!`)
 				}}

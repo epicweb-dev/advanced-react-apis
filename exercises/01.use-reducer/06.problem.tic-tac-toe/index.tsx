@@ -95,7 +95,7 @@ function App() {
 		// then call the dispatch function with the proper type
 		if (winner || currentSquares[index]) return
 
-		setState(previousState => {
+		setState((previousState) => {
 			const { currentStep, history } = previousState
 			const newHistory = history.slice(0, currentStep + 1)
 			const squares = history[currentStep].with(index, nextValue)
@@ -124,7 +124,10 @@ function App() {
 				<button
 					// 🐨 update this to use the dispatch function with the proper type
 					onClick={() =>
-						setState(previousState => ({ ...previousState, currentStep: step }))
+						setState((previousState) => ({
+							...previousState,
+							currentStep: step,
+						}))
 					}
 					aria-disabled={isCurrentStep}
 					aria-label={label}

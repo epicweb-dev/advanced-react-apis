@@ -23,7 +23,7 @@ function EditableText({
 	return edit ? (
 		<form
 			method="post"
-			onSubmit={event => {
+			onSubmit={(event) => {
 				event.preventDefault()
 				flushSync(() => {
 					setValue(inputRef.current?.value ?? '')
@@ -40,7 +40,7 @@ function EditableText({
 				aria-label={inputLabel}
 				name={fieldName}
 				defaultValue={value}
-				onKeyDown={event => {
+				onKeyDown={(event) => {
 					if (event.key === 'Escape') {
 						flushSync(() => {
 							setEdit(false)
@@ -48,7 +48,7 @@ function EditableText({
 						buttonRef.current?.focus()
 					}
 				}}
-				onBlur={event => {
+				onBlur={(event) => {
 					flushSync(() => {
 						setValue(event.currentTarget.value)
 						setEdit(false)
