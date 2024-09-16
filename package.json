@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@epic-web/config": "^1.11.2",
-    "@epic-web/workshop-utils": "^4.24.1",
+    "@epic-web/workshop-utils": "^4.25.0",
     "@types/react": "npm:types-react@19.0.0-alpha.5",
     "@types/react-dom": "npm:types-react-dom@19.0.0-alpha.5",
     "eslint": "^9.2.0",
