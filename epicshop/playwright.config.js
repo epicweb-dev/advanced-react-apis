@@ -1,9 +1,18 @@
+import os from 'os'
+import path from 'path'
 import { defineConfig, devices } from '@playwright/test'
 
 const PORT = process.env.PORT || '5639'
+const tmpDir = path.join(os.tmpdir(), 'epicreact-server-components')
 
 export default defineConfig({
-	reporter: 'html',
+	outputDir: path.join(tmpDir, 'playwright-test-output'),
+	reporter: [
+		[
+			'html',
+			{ open: 'never', outputFolder: path.join(tmpDir, 'playwright-report') },
+		],
+	],
 	use: {
 		baseURL: `http://localhost:${PORT}/`,
 		trace: 'retain-on-failure',
