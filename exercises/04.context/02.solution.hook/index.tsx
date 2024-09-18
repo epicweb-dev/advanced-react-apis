@@ -53,7 +53,7 @@ function SearchParamsProvider({ children }: { children: React.ReactNode }) {
 	)
 }
 
-function useSearchParams() {
+export function useSearchParams() {
 	const context = use(SearchParamsContext)
 	if (!context) {
 		throw new Error(

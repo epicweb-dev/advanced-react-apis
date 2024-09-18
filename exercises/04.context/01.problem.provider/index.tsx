@@ -15,7 +15,7 @@ import { setGlobalSearchParams } from '#shared/utils'
 // [new URLSearchParams(window.location.search), setGlobalSearchParams]
 
 // 🐨 change this to SearchParamsProvider and accept children
-function useSearchParams() {
+export function useSearchParams() {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
 	)

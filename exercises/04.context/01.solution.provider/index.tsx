@@ -56,7 +56,7 @@ function SearchParamsProvider({ children }: { children: React.ReactNode }) {
 	)
 }
 
-function useSearchParams() {
+export function useSearchParams() {
 	return use(SearchParamsContext)
 }
 

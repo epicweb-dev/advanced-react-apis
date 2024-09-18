@@ -9,7 +9,7 @@ import { setGlobalSearchParams } from '#shared/utils'
 
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
-function useSearchParams() {
+export function useSearchParams() {
 	const [searchParams, setSearchParamsState] = useState(
 		() => new URLSearchParams(window.location.search),
 	)

@@ -10,7 +10,7 @@ import { setGlobalSearchParams } from '#shared/utils'
 const getQueryParam = (params: URLSearchParams) => params.get('query') ?? ''
 
 // 🐨 create a function called useSearchParams here and move much of what's
-// below into this hook
+// below into this hook.
 
 function App() {
 	// 🐨 move everything from here to the next 🐨 into the new function
