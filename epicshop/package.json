@@ -1,7 +1,11 @@
 {
   "type": "module",
+  "scripts": {
+    "test": "playwright test"
+  },
   "dependencies": {
     "@epic-web/config": "^1.11.2",
-    "@epic-web/workshop-app": "^4.27.0"
+    "@epic-web/workshop-app": "^4.27.0",
+    "@epic-web/workshop-utils": "^4.27.0"
   }
 }
