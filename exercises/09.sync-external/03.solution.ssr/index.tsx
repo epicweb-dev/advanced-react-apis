@@ -45,10 +45,13 @@ rootEl.innerHTML = (await import('react-dom/server')).renderToString(<App />)
 // 🦉 here's how we simulate a delay in hydrating with client-side js
 await new Promise((resolve) => setTimeout(resolve, 1000))
 
-ReactDOM.hydrateRoot(rootEl, <App />, {
+const root = ReactDOM.hydrateRoot(rootEl, <App />, {
 	onRecoverableError(error) {
 		if (String(error).includes('Missing getServerSnapshot')) return
 
 		console.error(error)
 	},
 })
+
+// @ts-expect-error 🚨 this is for the test
+window.__epicReactRoot = root

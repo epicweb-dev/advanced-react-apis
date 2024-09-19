@@ -5,7 +5,7 @@ import './index.tsx'
 
 await testStep('The portal is rendered to the body', async () => {
 	const [heartButton] = await screen.findAllByText('🤍')
-	heartButton.focus()
+	fireEvent.focusIn(heartButton)
 
 	const tooltip = await screen.findByText('Add favorite')
 	expect(tooltip).toBeTruthy()

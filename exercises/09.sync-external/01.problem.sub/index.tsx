@@ -22,4 +22,8 @@ function App() {
 
 const rootEl = document.createElement('div')
 document.body.append(rootEl)
-ReactDOM.createRoot(rootEl).render(<App />)
+const root = ReactDOM.createRoot(rootEl)
+root.render(<App />)
+
+// @ts-expect-error 🚨 this is for the test
+window.__epicReactRoot = root
