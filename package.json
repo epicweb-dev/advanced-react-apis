@@ -5,6 +5,9 @@
     "title": "Advanced React APIs 🔥",
     "subtitle": "Learn the more advanced React APIs and different use cases to enable great user experiences.",
     "githubRepo": "https://github.com/epicweb-dev/advanced-react-apis",
+    "stackBlitzConfig": {
+      "view": "editor"
+    },
     "product": {
       "host": "www.epicreact.dev",
       "slug": "advanced-react-apis",
