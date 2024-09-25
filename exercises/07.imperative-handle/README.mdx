@@ -32,7 +32,7 @@ function App() {
 	const myInputRef = useRef<InputAPI>(null)
 	return (
 		<div>
-			<MyInput myInputRef={myInputRef} placeholder="Enter your name" />
+			<MyInput ref={myInputRef} placeholder="Enter your name" />
 			<button onClick={() => myInputRef.current.focusInput()}>
 				Focus the input
 			</button>
