@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "@epic-web/config": "^1.11.2",
-    "@epic-web/workshop-app": "^5.0.3",
-    "@epic-web/workshop-utils": "^5.0.3"
+    "@epic-web/workshop-app": "^5.1.0",
+    "@epic-web/workshop-utils": "^5.1.0"
   }
 }
