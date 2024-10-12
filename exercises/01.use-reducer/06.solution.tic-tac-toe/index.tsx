@@ -77,10 +77,6 @@ function gameStateReducer(state: GameState, action: GameAction) {
 		case 'SELECT_SQUARE': {
 			const { currentStep, history } = state
 			const newHistory = history.slice(0, currentStep + 1)
-			const currentSquares = history[currentStep]
-			const winner = calculateWinner(currentSquares)
-
-			if (winner || currentSquares[action.index]) return state
 
 			const squares = currentSquares.with(
 				action.index,
@@ -121,6 +117,9 @@ function App() {
 	}, [state])
 
 	function selectSquare(index: number) {
+		// Skip dispatch and return early if we have a winner
+		if (winner || currentSquares[index]) return
+		
 		dispatch({ type: 'SELECT_SQUARE', index })
 	}
 
