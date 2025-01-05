@@ -59,7 +59,7 @@ function SearchParamsProvider({ children }: { children: React.ReactNode }) {
 
 export function useSearchParams() {
 	const context = use(SearchParamsContext)
-	// 🐨 if there's no context value, the throw an error with a helpful error message
+	// 🐨 if there's no context value, then throw an error with a helpful error message
 	return context
 }
 
