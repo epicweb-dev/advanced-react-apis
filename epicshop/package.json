@@ -6,8 +6,8 @@
   },
   "dependencies": {
     "@epic-web/config": "^1.16.3",
-    "@epic-web/workshop-app": "^6.84.5",
-    "@epic-web/workshop-utils": "^6.84.5",
-    "epicshop": "^6.84.5"
+    "@epic-web/workshop-app": "^6.84.6",
+    "@epic-web/workshop-utils": "^6.84.6",
+    "epicshop": "^6.84.6"
   }
 }
