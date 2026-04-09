@@ -165,10 +165,8 @@ let lastCallback
 function useCallback(callback, deps) {
 	if (depsChanged(deps)) {
 		lastCallback = callback
-		return callback
-	} else {
-		return lastCallback
 	}
+	return lastCallback
 }
 ```
 
